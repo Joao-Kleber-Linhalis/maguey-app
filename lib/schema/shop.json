@@ -1,0 +1,17 @@
+{
+    "id": "String", 
+    "name": "String", 
+    "image_url": "String",
+    "location": {
+        "town_name": "String", 
+        "latitude": "double",
+        "longitude": "double", 
+        "address": "String"
+    }, 
+    "timings": {
+        "opening_time": "DateTime",
+        "closing_time": "DateTime"
+    }, 
+    "description": "String", 
+    "create_date": "DateTime"
+}
