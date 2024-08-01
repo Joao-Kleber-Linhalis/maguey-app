@@ -62,21 +62,14 @@ class _SplashScreenState extends State<SplashScreen> {
         height: 100.percentHeight(context),
         child: Stack(
           children: [
-            Image.asset(
-              MyImages.splashBg,
-              fit: BoxFit.fitHeight,
-              height: 100.percentHeight(context),
-              // height: 131.pxV(context),
-              // width: 50.percentWidth(context),
-            ),
             Container(
               height: 100.percentHeight(context),
               width: 100.percentWidth(context),
-              color: MyColors.black000000.withOpacity(0.65),
+              color: const Color(0xFF2B2B2B),
             ),
             Center(
               child: Image.asset(
-                MyImages.logo,
+                MyIcons.brandIcon,
                 height: 131.pxV(context),
                 // width: 50.percentWidth(context),
               ),

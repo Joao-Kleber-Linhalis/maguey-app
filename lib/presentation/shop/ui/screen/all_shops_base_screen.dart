@@ -19,7 +19,14 @@ class AllShopsBaseScreen extends StatefulWidget {
   const AllShopsBaseScreen({super.key});
 
   @override
-  State<AllShopsBaseScreen> createState() => _AllShopsBaseScreenState();
+  State<AllShopsBaseScreen> createState() => NoneClasse();
+}
+
+class NoneClasse extends State<AllShopsBaseScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
 }
 
 class _AllShopsBaseScreenState extends State<AllShopsBaseScreen> {

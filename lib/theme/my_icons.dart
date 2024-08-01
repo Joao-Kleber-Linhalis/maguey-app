@@ -9,7 +9,8 @@ class MyIcons {
   static const String mailIcon = "$_socialIconsPath/mail.svg";
 
   // Brand Icon Without Background
-  static const String brandIcon = "$_otherIconsPath/brand_icon.png";
+  static const String brandIcon = "$_otherIconsPath/icon.png";
+  static const String backgroudHomeIcon = "$_otherIconsPath/backgroudHome.png";
 
   // Search Icon
   static const String searchIcon = "$_otherIconsPath/search.svg";
