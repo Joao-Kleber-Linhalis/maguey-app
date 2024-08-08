@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:magueyapp/presentation/home/model/home_category_model.dart';
 import 'package:magueyapp/presentation/home/ui/screen/item_list_widget.dart';
+import 'package:magueyapp/presentation/home/ui/widget/home_carousel.dart';
 import 'package:magueyapp/presentation/home/view_model/temp_home_category_json.dart';
 import 'package:flutter/material.dart';
 import 'package:magueyapp/presentation/home/view_model/home_view_model.dart';
@@ -49,12 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                children: [
+                children: const [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       children: [
-                        const Text(
+                        Text(
                           'Bienvenidos to a',
                           style: TextStyle(
                             color: Color(0xFFEDE6D8),
@@ -65,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const Wrap(
+                        Wrap(
                           alignment: WrapAlignment.center,
                           children: [
                             Text(
@@ -93,62 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 30),
-                        Center(
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Image.asset(
-                                  MyIcons.backgroudHomeIcon,
-                                  height: 381,
-                                  width: 381,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              const Positioned(
-                                bottom: 0,
-                                top: 0,
-                                right: 0,
-                                left: 0,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Mezcal',
-                                      style: TextStyle(
-                                        color: Color(0xFFE3FF0A),
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Positioned(
-                                bottom: 10,
-                                right: 0,
-                                left: 0,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.circle,
-                                        size: 10, color: Color(0xFFE6E54A)),
-                                    SizedBox(width: 5),
-                                    Icon(Icons.circle,
-                                        size: 10, color: Colors.grey),
-                                    SizedBox(width: 5),
-                                    Icon(Icons.circle,
-                                        size: 10, color: Colors.grey),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
+                        SizedBox(height: 30),
+                        HomeCarousel(), //Carrosel
+                        SizedBox(height: 30),
+                        Text(
                           'Search for the latest in Mezcal and Agave Spirits.',
                           style: TextStyle(
                             color: Color(0xFFE2D7C1),
@@ -159,8 +108,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 10),
-                        const Text(
+                        SizedBox(height: 10),
+                        Text(
                           'Explore bars, restaurants and retailers near you.',
                           style: TextStyle(
                             color: Color(0xFFE2D7C1),
@@ -171,11 +120,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                       ],
                     ),
                   ),
-                  const ItemListWidget(),
+                  ItemListWidget(),
                 ],
               ),
             ),
