@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:magueyapp/presentation/home/model/home_category_model.dart';
 import 'package:magueyapp/presentation/home/ui/screen/item_list_widget.dart';
+import 'package:magueyapp/presentation/home/ui/widget/category_list_widget.dart';
 import 'package:magueyapp/presentation/home/ui/widget/home_carousel.dart';
 import 'package:magueyapp/presentation/home/view_model/temp_home_category_json.dart';
 import 'package:flutter/material.dart';
@@ -125,6 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ItemListWidget(),
+                  CategoryListWidget(),
+                  SizedBox(height: 12),
                 ],
               ),
             ),
