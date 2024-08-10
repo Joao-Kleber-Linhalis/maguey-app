@@ -1,0 +1,71 @@
+name: Analyze Commits and Send Metrics
+
+on:
+  push:
+    branches:
+      - '**'  # Monitora todas as branches
+
+jobs:
+  analyze-and-send-metrics:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # Garante que todo o histórico seja clonado
+
+    - name: Get the Diff of Commits
+      run: |
+        # Get the latest commit hash
+        COMMIT_HASH=$(git log -1 --pretty=format:"%H")
+        echo "Commit Hash: $COMMIT_HASH"
+
+        # Get the username of the committer
+        COMMIT_USER=$(git log -1 --pretty=format:"%an")
+        echo "Commit User: $COMMIT_USER"
+
+        # Get the commit message
+        COMMIT_MSG=$(git log -1 --pretty=format:"%s")
+        echo "Commit Message: $COMMIT_MSG"
+
+        # Get the commit date
+        COMMIT_DATE=$(git log -1 --pretty=format:"%ci")
+        echo "Commit Date: $COMMIT_DATE"
+
+        COMMIT_DIFF=$(git log -p -1 | sed 's/"/\\"/g' | awk '{printf "%s\\n", $0}' | jq -aRs .)
+
+        # Chamar a API do ChatGPT
+        RESPONSE=$(curl --location 'https://api.openai.com/v1/chat/completions' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}' \
+          --data '{"model": "gpt-3.5-turbo", "messages": [{"role": "user", "content": "Diga quantos pontos de funcao tem nesse dif retornando o seguinte json com a quantidade de pontos de funcao calculado { pontos } sem comentario."
+          }, {"role": "user", "content":'"${COMMIT_DIFF}"'}], "temperature": 0}'| jq -r '.choices[0].message.content')  
+          
+        # Print the raw response for debugging
+        echo "Response from ChatGPT API: $RESPONSE"
+
+        # Try to extract the points from the response
+        POINTS=$RESPONSE
+        echo "Points Extracted: $POINTS"
+
+        # If points is null or empty, provide a fallback
+        if [ -z "$POINTS" ] || [ "$POINTS" = "null" ]; then
+          POINTS="0"  # Or handle it as you see fit
+        fi
+
+        # Create JSON body for POST request
+        JSON_BODY=$(jq -n \
+          --arg user "$COMMIT_USER" \
+          --arg desc "$COMMIT_MSG" \
+          --arg points "$POINTS" \
+          --arg date "$COMMIT_DATE" \
+          --arg title "$COMMIT_MSG" \
+          '{username: $user, description: $desc, points: $points, date: $date, title: $title}')
+
+        echo "JSON Body: $JSON_BODY"
+
+        # Send the metrics to the API endpoint
+        curl -X POST https://7e43-2804-46cc-8392-0-a03f-c34c-348-7cbc.ngrok-free.app \
+        -H "Content-Type: application/json" \
+        -d "$JSON_BODY"
