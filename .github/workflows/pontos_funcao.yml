@@ -78,7 +78,7 @@ jobs:
               "messages": [
                   {
                       "role": "user",
-                      "content": "Diga quantos pontos de funcao tem nesse dif retornando o seguinte json com a quantidade de pontos de funcao calculado { pontos } sem comentario."
+                      "content": "Sabendo que voce é um bot que analisa a complexidade de algoritmos desenvolvidos baseado em diff entre commits, Diga quantos pontos de funcao tem nesse dif retornando o seguinte json com a quantidade de pontos de funcao calculado de acordo com a complexidade do que foi desenvolvido na diferenca entre os commits { pontos } sem comentario."
                   },
                   {
                       "role": "user",
