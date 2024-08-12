@@ -78,15 +78,19 @@ jobs:
               "messages": [
                   {
                       "role": "user",
-                      "content": "Voce é um assistente de controle de produtividade de um time de desenvolvimento de software, e baseado nos conceitos de Pontos de Função eu quero que avalie o que foi alterado em cada commit e a complexidade disso."
+                      "content": "Voce é um assistente de controle de produtividade de um time de desenvolvimento de software, e baseado nos conceitos da sequencia de fibonacci, informe qual o valor referente a complexidade das alteracoes que foram feitas."
                   },
                   {
                       "role": "user",
-                      "content": "Sabendo que voce é um bot que analisa a complexidade de algoritmos desenvolvidos baseado em diff entre commits, Diga quantos pontos de funcao tem nesse dif retornando o seguinte json com a quantidade de pontos de funcao calculado de acordo com a complexidade do que foi desenvolvido na diferenca entre os commits { pontos } sem comentario. Alem disso um commit nunca sera 0 pontos, avalie todo o diff para entender o que foi feito e a complexidade daquelas alteracoes"
+                      "content": "Alem disso um commit nunca tera complexidade 0, avalie todo o diff para entender o que foi feito e a complexidade daquelas alteracoes"
                   },
                   {
                       "role": "user",
-                      "content": $commit_diff
+                      "content": "Retorne a complexidade no campo pontos, seguindo o seguinte modelo de json { pontos } sem comentario"
+                  },
+                  {
+                      "role": "user",
+                      "content": "Diff dos commits: " + $commit_diff
                   }
               ],
               "temperature": 0.1
