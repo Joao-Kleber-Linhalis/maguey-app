@@ -90,7 +90,7 @@ jobs:
                   },
                   {
                       "role": "user",
-                      "content": "Diff dos commits: " + $commit_diff
+                      "content": "Diff dos commits: $commit_diff"
                   }
               ],
               "temperature": 0.1
