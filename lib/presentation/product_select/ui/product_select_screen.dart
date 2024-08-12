@@ -17,7 +17,7 @@ class ProductSelectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF2B2B2B),
+      backgroundColor: MyColors.black2B2B2B,
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -75,7 +75,7 @@ class ProductSelectScreen extends StatelessWidget {
                         Text(
                           'Enchanted Ensamble',
                           style: textStyles.font_28w700Black.copyWith(
-                            color: const Color(0xFFE3FF0A),
+                            color: MyColors.greenE3FF0A,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -162,8 +162,8 @@ class ProductSelectScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Text(
                           'An award-winning and ultra-premium sipping mezcal handcrafted from 7-15 year old agaves, that offers a crisp, smooth, and flavorful experience, inspiring the palate with its complex layers.',
-                          style: textStyles.font_15w700.copyWith(
-                            color: const Color(0xFFE2D7C1),
+                          style: textStyles.font_12w400.copyWith(
+                            color: MyColors.yellowE2D7C1,
                             fontWeight: FontWeight.w500,
                             height: 1.5,
                           ),
@@ -171,8 +171,8 @@ class ProductSelectScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Text(
                           'Nose: Unique blend of cooked maguey, with vague notes of smoke, bananas, and almonds.',
-                          style: textStyles.font_15w700.copyWith(
-                            color: const Color(0xFFE2D7C1),
+                          style: textStyles.font_12w400.copyWith(
+                            color: MyColors.yellowE2D7C1,
                             fontWeight: FontWeight.w500,
                             height: 1.5,
                           ),
@@ -180,8 +180,8 @@ class ProductSelectScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Text(
                           'Taste: Smooth on the palate. Feels fresh with a slightly spicy flavor, as if drinking water from the river. Sweet notes with clove, caramel, banana, almonds, and peach essence.',
-                          style: textStyles.font_15w700.copyWith(
-                            color: const Color(0xFFE2D7C1),
+                          style: textStyles.font_12w400.copyWith(
+                            color: MyColors.yellowE2D7C1,
                             fontWeight: FontWeight.w500,
                             height: 1.5,
                           ),
@@ -259,7 +259,7 @@ class ProductSelectScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 26),
+                        const SizedBox(height: 40),
                         buildSpecification(
                             specification: 'Region',
                             value: 'San Juan del Rio, Oaxaca'),
@@ -288,7 +288,7 @@ class ProductSelectScreen extends StatelessWidget {
                             value: '80 (40% Alc. Vol.)'),
                         buildSpecification(
                             specification: 'Year', value: '2020'),
-                        const SizedBox(height: 26),
+                        const SizedBox(height: 30),
                         Center(
                           child: SvgPicture.string(
                             '''
@@ -323,41 +323,47 @@ class ProductSelectScreen extends StatelessWidget {
     required final String specification,
     required final String value,
   }) {
-    return Row(
-      children: [
-        Text(
-          specification,
-          textAlign: TextAlign.start,
-          style: textStyles.font_15w700.copyWith(
-            color: const Color(0xFFE2D7C1),
-            fontWeight: FontWeight.w500,
-            height: 1.5,
-          ),
-        ),
-        const SizedBox(width: 20),
-        Text(
-          '......................',
-          textAlign: TextAlign.center,
-          style: textStyles.font_15w700.copyWith(
-            color: const Color(0xFFE3FF0A),
-            fontWeight: FontWeight.w500,
-            height: 1.5,
-          ),
-        ),
-        const SizedBox(width: 20),
-        Expanded(
-          child: Text(
-            value,
-            textAlign: TextAlign.end,
-            style: textStyles.font_15w700.copyWith(
-              color: const Color(0xFFE2D7C1),
-              fontWeight: FontWeight.w500,
-              height: 1.5,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 10),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              specification,
+              textAlign: TextAlign.start,
+              style: textStyles.font_12w400.copyWith(
+                color: MyColors.yellowE2D7C1,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+              ),
             ),
-            overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+          const Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: Divider(
+                color: MyColors.greenE3FF0A,
+                thickness: 0.5,
+                indent: 10,
+                endIndent: 10,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: textStyles.font_12w400.copyWith(
+                color: MyColors.yellowE2D7C1,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
