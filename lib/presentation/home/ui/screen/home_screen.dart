@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(showDivider: false),
       backgroundColor: MyColors.black2B2B2B,
       body: ValueListenableBuilder(
         valueListenable: navbarService.currentIndexNotifier,
