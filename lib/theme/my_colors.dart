@@ -28,6 +28,7 @@ class MyColors {
   static const Color green658F7B = Color(0xff658F7B);
   static const Color green667085 = Color(0xff667085);
   static const Color green908C00 = Color(0xff908C00);
+  static const Color greenE3FF0A = Color(0xffE3FF0A);
   static const Color transparent = Colors.transparent;
   static const Color white = Colors.white;
   static const Color redD85229 = Color(0xffD85229);

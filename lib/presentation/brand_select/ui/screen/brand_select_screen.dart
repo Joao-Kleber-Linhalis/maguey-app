@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magueyapp/presentation/product_select/ui/product_select_screen.dart';
+import 'package:magueyapp/presentation/product/product_select/ui/product_select_screen.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 import '../../../../theme/my_icons.dart';
 

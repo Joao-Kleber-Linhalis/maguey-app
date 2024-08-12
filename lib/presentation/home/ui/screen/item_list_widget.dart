@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magueyapp/presentation/product/product_list/product_list_screen.dart';
 
 import '../../../brand_select/ui/screen/brand_select_screen.dart';
 
@@ -28,7 +29,11 @@ class ItemListWidget extends StatelessWidget {
             'ROSALUNA',
             'BANHEZ',
           ],
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ProductListScreen(),
+            ));
+          },
         ),
         _buildDivider(),
         ListItemWidget(

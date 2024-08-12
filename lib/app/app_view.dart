@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: getIt<String>(instanceName: 'f1'),
         primarySwatch: MaterialColor(100, MyColors.primarySwatch),
-        primaryColor: MyColors.black0D0D0D,
+        primaryColor: const Color(0xFF2B2B2B),
         colorScheme: ColorScheme.fromSeed(seedColor: MyColors.black0D0D0D),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.transparent,
