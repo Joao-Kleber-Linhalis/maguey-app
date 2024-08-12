@@ -23,11 +23,16 @@ class MyColors {
   static const Color grey212121 = Color(0xff212121);
   static const Color greyE0E0E0 = Color(0xffE0E0E0);
   static const Color grey989898 = Color(0xff989898);
+  static const Color grey3F3F3F = Color(0xff3F3F3F);
+  static const Color greyEBEBEB = Color(0xffEBEBEB);
   static const Color green658F7B = Color(0xff658F7B);
   static const Color green667085 = Color(0xff667085);
+  static const Color green908C00 = Color(0xff908C00);
   static const Color transparent = Colors.transparent;
   static const Color white = Colors.white;
   static const Color redD85229 = Color(0xffD85229);
+  static const Color brown97805F = Color(0xFF97805F);
+  static const Color orangeFD5944 = Color(0xFFFD5944);
 
   static Map<int, Color> get primarySwatch => {
         100: black0D0D0D,

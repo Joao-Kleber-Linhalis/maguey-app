@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magueyapp/presentation/product_select/ui/product_select_screen.dart';
+import 'package:magueyapp/theme/my_colors.dart';
 import '../../../../theme/my_icons.dart';
 
 import '../../../../theme/text_styling.dart';
@@ -6,10 +8,10 @@ import '../../../widgets/custom_bottom_navigation_bar.dart';
 
 final textStyles = TextStyleCustom();
 
-class BrandSelectPage extends StatelessWidget {
+class BrandSelectScreen extends StatelessWidget {
   static const String route = 'brand-select';
 
-  const BrandSelectPage({Key? key}) : super(key: key);
+  const BrandSelectScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,23 +40,27 @@ class BrandSelectPage extends StatelessWidget {
                       children: [
                         Text(
                           'MEZCAL',
-                          style: textStyles.font_13w700.copyWith(
-                            color: const Color(0xFFE3FF0A), // Yellow text color
+                          style: textStyles.font_10w400Black.copyWith(
+                            color: MyColors.brown97805F,
+                            fontWeight: FontWeight.w500,
                             letterSpacing: 1.5,
+                            decoration: TextDecoration.underline,
+                            decorationColor: MyColors.brown97805F,
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 20),
                         Text(
                           'Agua Magica',
-                          style: textStyles.font_32w700.copyWith(
-                            color: const Color(0xFFEDE6D8),
+                          style: textStyles.font_28w700Black.copyWith(
+                            color: const Color(0xFFE3FF0A), // Yellow text color
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(height: 20),
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
-                            'assets/your_image.png', // Replace with your actual image
+                            'assets/images/temp/agua_magica.jpeg', // Replace with your actual image
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -62,7 +68,8 @@ class BrandSelectPage extends StatelessWidget {
                         Text(
                           'San Juan del Río, Oaxaca, Mexico',
                           style: textStyles.font_13w300.copyWith(
-                            color: const Color(0xFFE2D7C1),
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.brown97805F,
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -90,17 +97,27 @@ class BrandSelectPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        TextButton(
-                          onPressed: () {
-                            // Handle the 'View Products' button press
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const ProductSelectScreen(),
+                              ),
+                            );
                           },
                           child: Text(
                             'View Products',
-                            style: textStyles.font_15w700.copyWith(
-                              color: const Color(0xFFE3FF0A),
+                            style: textStyles.font_13w300.copyWith(
+                              color: MyColors.brown97805F,
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.underline,
+                              decorationColor: MyColors.brown97805F,
                             ),
                           ),
                         ),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),

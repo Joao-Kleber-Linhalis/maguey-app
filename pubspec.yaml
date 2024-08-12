@@ -76,6 +76,7 @@ dependencies:
   skeletonizer: ^1.0.1
   google_sign_in_ios: ^5.7.3
   url_launcher: ^6.2.3
+  animated_rating_stars: ^1.0.1
 
 dev_dependencies:
   flutter_test:
