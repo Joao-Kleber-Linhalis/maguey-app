@@ -78,7 +78,11 @@ jobs:
               "messages": [
                   {
                       "role": "user",
-                      "content": "Sabendo que voce é um bot que analisa a complexidade de algoritmos desenvolvidos baseado em diff entre commits, Diga quantos pontos de funcao tem nesse dif retornando o seguinte json com a quantidade de pontos de funcao calculado de acordo com a complexidade do que foi desenvolvido na diferenca entre os commits { pontos } sem comentario."
+                      "content": "Voce é um assistente de controle de produtividade de um time de desenvolvimento de software, e baseado nos conceitos de Pontos de Função eu quero que avalie o que foi alterado em cada commit e a complexidade disso."
+                  },
+                  {
+                      "role": "user",
+                      "content": "Sabendo que voce é um bot que analisa a complexidade de algoritmos desenvolvidos baseado em diff entre commits, Diga quantos pontos de funcao tem nesse dif retornando o seguinte json com a quantidade de pontos de funcao calculado de acordo com a complexidade do que foi desenvolvido na diferenca entre os commits { pontos } sem comentario. Alem disso um commit nunca sera 0 pontos, avalie todo o diff para entender o que foi feito e a complexidade daquelas alteracoes"
                   },
                   {
                       "role": "user",
