@@ -57,12 +57,14 @@ class ProductListScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  _productItemList(),
-                  _productItemList(),
-                  _productItemList(),
-                  _productItemList(),
-                  _productItemList(),
-                  _productItemList(),
+                  _productItemList("Enchanted"),
+                  _productItemList("Magia Negra"),
+                  _productItemList("Potion Nº 9"),
+                  _productItemList("Abracadabra"),
+                  _productItemList("Enchanted"),
+                  _productItemList("Magia Negra"),
+                  _productItemList("Potion Nº 9"),
+                  _productItemList("Abracadabra"),
                 ],
               ),
             )
@@ -77,7 +79,7 @@ class ProductListScreen extends StatelessWidget {
   }
 }
 
-Widget _productItemList() {
+Widget _productItemList(String itemName) {
   return Column(
     children: [
       const Divider(
@@ -89,9 +91,9 @@ Widget _productItemList() {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              "Enchanted",
-              style: TextStyle(
+            Text(
+              itemName,
+              style: const TextStyle(
                   color: MyColors.greenE3FF0A,
                   fontFamily: "CircularAirPro",
                   fontSize: 32,
