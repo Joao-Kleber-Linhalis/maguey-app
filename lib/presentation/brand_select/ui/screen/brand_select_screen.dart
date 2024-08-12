@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../../theme/my_icons.dart';
-import 'package:magueyapp/service/di.dart';
 
 import '../../../../theme/text_styling.dart';
 import '../../../widgets/custom_bottom_navigation_bar.dart';
 
-final textStyles = getIt<TextStyleCustom>();
+final textStyles = TextStyleCustom();
 
 class BrandSelectPage extends StatelessWidget {
   static const String route = 'brand-select';

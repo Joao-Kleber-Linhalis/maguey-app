@@ -7,11 +7,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:magueyapp/common/widget/my_toast.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/get_started.dart';
 import 'package:magueyapp/presentation/auth/modals/user_model.dart';
-import 'package:magueyapp/presentation/auth/repository/auth_repository.dart';
-import 'package:magueyapp/service/di.dart';
 import 'package:magueyapp/service/firestore_service/firestore_service.dart';
 import 'package:magueyapp/utils/connectivity_service/connectivity_service.dart';
 import 'package:magueyapp/utils/extensions/route_extension.dart';
+
+import '../di.dart';
 
 FirebaseSerice myFirebaseService = getIt<FirebaseSerice>();
 FirestoreService myFirestoreService = getIt<FirestoreService>();
@@ -229,55 +229,37 @@ class FirebaseSerice {
 
     return refreshedUser;
   }
+}
 
-  void deleteUser(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.currentUser?.delete();
-      await getIt<AuthRepository>().logoutUser().then(
-        (value) {
-          if (value) {
-            // StoreProvider.of<FlashcardState>(context)
-            //     .dispatch(ActionDelete(type: FlashCardEnum.logout));
-            context.pushNamedAndRemoveUntil(GetStartedScreen.route);
-          }
-        },
-      );
-    } catch (e) {
-      debugPrint('e: $e');
-      logoutUser();
-    }
-  }
+Future<void> logoutUser() async {
+  await FirebaseAuth.instance.signOut();
+}
 
-  Future<void> logoutUser() async {
-    await FirebaseAuth.instance.signOut();
-  }
+Future<void> addUserdataToFirestore(
+  String nativeLang,
+  String appLang,
+  String learningLang,
+  String hearAboutUs,
+) async {
+  Map<String, dynamic> data = {};
 
-  Future<void> addUserdataToFirestore(
-    String nativeLang,
-    String appLang,
-    String learningLang,
-    String hearAboutUs,
-  ) async {
-    Map<String, dynamic> data = {};
+  data = {
+    'nativeLanguage': nativeLang,
+    'appLanguage': appLang,
+    'learningLanguage': learningLang,
+    'hearAboutUs': hearAboutUs,
+  };
 
-    data = {
-      'nativeLanguage': nativeLang,
-      'appLanguage': appLang,
-      'learningLanguage': learningLang,
-      'hearAboutUs': hearAboutUs,
-    };
+  await FirebaseFirestore.instance.collection('userData').add(data);
+}
 
-    await FirebaseFirestore.instance.collection('userData').add(data);
-  }
-
-  Future<bool> signOutWithGoogle() async {
-    bool isSuccess = false;
-    try {
-      await GoogleSignIn().signOut().then((value) => isSuccess = true);
-      return isSuccess;
-    } catch (e) {
-      MyToast.simple("Operation couldn't be completed");
-      return isSuccess;
-    }
+Future<bool> signOutWithGoogle() async {
+  bool isSuccess = false;
+  try {
+    await GoogleSignIn().signOut().then((value) => isSuccess = true);
+    return isSuccess;
+  } catch (e) {
+    MyToast.simple("Operation couldn't be completed");
+    return isSuccess;
   }
 }

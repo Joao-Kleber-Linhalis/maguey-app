@@ -6,7 +6,7 @@ import 'package:magueyapp/common/widget/my_buttons/my_text_button.dart';
 import 'package:magueyapp/common/widget/my_text_field.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/get_started/divider_with_text_widget.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_up/background_image_greeting_widget.dart';
-import 'package:magueyapp/presentation/auth/repository/auth_repository.dart';
+//import 'package:magueyapp/presentation/auth/repository/auth_repository.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/reset_password.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_in/text_button_view.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/sign_up.dart';
@@ -44,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  var authRepo = getIt<AuthRepository>();
+  //var authRepo = getIt<AuthRepository>();
   bool showPassword = false;
   bool loader = false;
   @override
@@ -144,17 +144,17 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _onGoogleLogin(BuildContext context) async {
     primaryFocus!.unfocus();
-    await authRepo.signInWithGoogle(context);
+    //await authRepo.signInWithGoogle(context);
   }
 
   Future<void> _signIn(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loader = true);
-    await authRepo.signIn(
+    /*await authRepo.signIn(
       context,
       email: emailController!.text,
       password: passwordController!.text,
-    );
+    );*/
 
     setState(() => loader = false);
   }

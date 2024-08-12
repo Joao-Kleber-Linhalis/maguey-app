@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/get_started.dart';
-import 'package:magueyapp/presentation/home/ui/screen/base_screen.dart';
-import 'package:magueyapp/service/di.dart';
 import 'package:magueyapp/service/firestore_service/firestore_service.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 import 'package:magueyapp/theme/my_icons.dart';
 import 'package:magueyapp/utils/extensions/media_query.dart';
 import 'package:magueyapp/utils/extensions/route_extension.dart';
 import 'package:magueyapp/utils/shared_pref_manager/shared_pref.dart';
+
+import '../../../home/ui/screen/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String route = "/";
@@ -20,12 +20,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SharedPrefsManager pref = getIt<SharedPrefsManager>();
-  FirestoreService myFirestoreService = getIt<FirestoreService>();
+  //SharedPrefsManager pref = new SharedPrefsManager();
+  //FirestoreService myFirestoreService = new FirestoreService();
 
   getUserLastLoginStatus() async {
-    bool isLogin = pref.isUserLogin();
-    String route = isLogin ? BaseScreen.route : GetStartedScreen.route;
+    //bool isLogin = pref.isUserLogin();
+    String route = MyHomePage.route;
     // String route = UploadProductsScreen.route;
     await Future.delayed(const Duration(milliseconds: 2500), () {
       context.pushReplacementNamed(route);

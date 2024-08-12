@@ -5,7 +5,6 @@ import 'package:magueyapp/common/widget/my_buttons/my_outline_button.dart';
 import 'package:magueyapp/common/widget/my_text_field.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/get_started/divider_with_text_widget.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_up/background_image_greeting_widget.dart';
-import 'package:magueyapp/presentation/auth/repository/auth_repository.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/sign_in.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_in/text_button_view.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_up/show_password_widget.dart';
@@ -30,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       passwordController,
       confirmPasswordController;
   bool showPassword = false, loader = false;
-  var authRepo = getIt<AuthRepository>();
+  //var authRepo = getIt<AuthRepository>();
 
   @override
   void initState() {
@@ -136,18 +135,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     primaryFocus!.unfocus();
     setState(() => loader = true);
 
-    await authRepo.createAnAccount(
+    /*await authRepo.createAnAccount(
       context,
       email: emailController!.text.trim(),
       password: passwordController!.text.trim(),
       confirmPassword: confirmPasswordController!.text.trim(),
-    );
+    );*/
 
     setState(() => loader = false);
   }
 
   _signUpWithGoogle() async {
     primaryFocus!.unfocus();
-    await authRepo.signUpWithGoogle(context);
+    //await authRepo.signUpWithGoogle(context);
   }
 }

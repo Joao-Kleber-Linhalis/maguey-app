@@ -4,8 +4,6 @@ import 'package:magueyapp/presentation/home/ui/screen/item_list_widget.dart';
 import 'package:magueyapp/presentation/home/ui/widget/category_list_widget.dart';
 import 'package:magueyapp/presentation/home/ui/widget/home_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:magueyapp/presentation/home/view_model/home_view_model.dart';
-import 'package:magueyapp/service/di.dart';
 import 'package:magueyapp/theme/my_icons.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,8 +17,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool loader = false;
-
-  final model = getIt<HomeViewModel>();
 
   @override
   void initState() {

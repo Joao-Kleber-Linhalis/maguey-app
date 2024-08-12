@@ -15,7 +15,6 @@ import 'package:magueyapp/utils/extensions/media_query.dart';
 import 'package:magueyapp/utils/extensions/padding.dart';
 import 'package:magueyapp/utils/extensions/route_extension.dart';
 import 'package:magueyapp/utils/extensions/sized_box.dart';
-import 'package:magueyapp/presentation/auth/repository/auth_repository.dart';
 
 class GetStartedScreen extends StatefulWidget {
   static const String route = "get_started_screen";
@@ -26,7 +25,7 @@ class GetStartedScreen extends StatefulWidget {
 }
 
 class _GetStartedScreenState extends State<GetStartedScreen> {
-  var authRepo = getIt<AuthRepository>();
+  // var authRepo = getIt<AuthRepository>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +80,6 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   }
 
   _signUpWithGoogle() async {
-    await authRepo.signUpWithGoogle(context);
+    //await authRepo.signUpWithGoogle(context);
   }
 }

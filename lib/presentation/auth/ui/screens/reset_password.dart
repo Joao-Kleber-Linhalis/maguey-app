@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:magueyapp/common/widget/my_buttons/my_loader_elevated_button.dart';
 import 'package:magueyapp/common/widget/my_text_field.dart';
-import 'package:magueyapp/presentation/auth/repository/auth_repository.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/reset_password/password_confirmation_dialog.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_up/background_image_greeting_widget.dart';
 import 'package:magueyapp/service/di.dart';
@@ -34,7 +33,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     super.dispose();
   }
 
-  var authRepo = getIt<AuthRepository>();
+  //var authRepo = getIt<AuthRepository>();
   bool showPassword = false;
   bool loader = false;
   @override
@@ -79,12 +78,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Future<void> _forgotPassword(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loader = true);
-    bool emailSent = await authRepo.forgotPassword(
+    /* bool emailSent = await authRepo.forgotPassword(
       context,
       email: emailController!.text,
-    );
+    );*/
     setState(() => loader = false);
 
-    if (emailSent) confirmationDialog(context, emailController!.text);
+    //if (emailSent) confirmationDialog(context, emailController!.text);
   }
 }

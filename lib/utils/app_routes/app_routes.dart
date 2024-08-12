@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/get_started.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/sign_up.dart';
 import 'package:magueyapp/presentation/folder_structure_boiler_plate/ui/screen/upload_products.dart';
-import 'package:magueyapp/presentation/home/ui/screen/base_screen.dart';
 import 'package:magueyapp/presentation/home/ui/screen/home_screen.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/reset_password.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/sign_in.dart';
@@ -16,7 +15,6 @@ class AppRoutes {
     SignInScreen.route: (_) => const SignInScreen(),
     SignUpScreen.route: (_) => const SignUpScreen(),
     MyHomePage.route: (_) => const MyHomePage(),
-    BaseScreen.route: (_) => const BaseScreen(),
     ResetPasswordScreen.route: (_) => const ResetPasswordScreen(),
   };
 
@@ -42,10 +40,6 @@ class AppRoutes {
       // For Homepage screen
       case MyHomePage.route:
         return const MyHomePage();
-
-      // For Base screen
-      case BaseScreen.route:
-        return const BaseScreen();
 
       default:
         return Scaffold(

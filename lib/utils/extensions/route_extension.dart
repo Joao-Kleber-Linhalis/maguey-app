@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:magueyapp/service/di.dart';
 import 'package:magueyapp/utils/app_routes/app_routes.dart';
 import 'package:magueyapp/utils/app_routes/page_trasnsitions.dart';
 
+import '../../service/di.dart';
+
 const int duration = 150;
+
 extension RouteContext on BuildContext {
-  
   //for routes
   pop<T>({T? result}) => Navigator.pop(this, result);
 
