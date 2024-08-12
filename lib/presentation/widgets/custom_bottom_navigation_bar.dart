@@ -18,7 +18,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       valueListenable: store.currentIndexNotifier,
       builder: (context, currentIndex, child) {
         return BottomNavigationBar(
-          currentIndex: currentIndex, //store.state.currentBtmIndex,
+          currentIndex: currentIndex,
           onTap: store.setCurrentIndex,
           items: const [
             BottomNavigationBarItem(
@@ -47,6 +47,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             letterSpacing: 0.2,
             color: Color(0xFFE6E54A),
             decoration: TextDecoration.underline,
+            decorationColor: Color(0xFFE6E54A),
           ),
           unselectedLabelStyle: const TextStyle(
             fontFamily: 'CircularXXMono',

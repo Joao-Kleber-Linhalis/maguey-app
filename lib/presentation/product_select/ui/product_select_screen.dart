@@ -1,10 +1,9 @@
 import 'package:animated_rating_stars/animated_rating_stars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:magueyapp/presentation/widgets/custom_bottom_navigation_bar.dart';
+import 'package:magueyapp/presentation/widgets/custom_app_bar.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 
-import '../../../../theme/my_icons.dart';
 import '../../../../theme/text_styling.dart';
 
 final textStyles = TextStyleCustom();
@@ -17,19 +16,12 @@ class ProductSelectScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppBar(),
       backgroundColor: MyColors.black2B2B2B,
       body: SafeArea(
         bottom: false,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Image.asset(
-                MyIcons.brandIcon, // Replace with your logo
-                height: 50,
-              ),
-            ),
-            const SizedBox(height: 20),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
@@ -186,7 +178,7 @@ class ProductSelectScreen extends StatelessWidget {
                             height: 1.5,
                           ),
                         ),
-                        const SizedBox(height: 26),
+                        const SizedBox(height: 20),
                         Center(
                           child: SvgPicture.string(
                             '''
@@ -203,7 +195,7 @@ class ProductSelectScreen extends StatelessWidget {
                             ''',
                           ),
                         ),
-                        const SizedBox(height: 26),
+                        const SizedBox(height: 20),
                         Center(
                           child: Text(
                             'FLAVOR PROFILE',
@@ -315,7 +307,6 @@ class ProductSelectScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 
