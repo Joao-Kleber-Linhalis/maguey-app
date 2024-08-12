@@ -91,7 +91,7 @@ jobs:
                   {
                       "role": "user",
                       "content": Diff dos commits: 
-                  }
+                  },
                   {
                       "role": "user",
                       "content": $commit_diff
