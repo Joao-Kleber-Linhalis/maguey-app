@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/get_started.dart';
 import 'package:magueyapp/presentation/home/ui/screen/base_screen.dart';
-import 'package:magueyapp/presentation/search/view_model/search_storage_manager.dart';
 import 'package:magueyapp/service/di.dart';
 import 'package:magueyapp/service/firestore_service/firestore_service.dart';
 import 'package:magueyapp/theme/my_colors.dart';
@@ -36,7 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     getUserLastLoginStatus();
-    SearchStorageManager().getSearchHistory();
     super.initState();
   }
 
