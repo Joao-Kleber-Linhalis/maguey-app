@@ -6,8 +6,12 @@ class MyColors {
   static const Color black0D0D0D = Color(0xff0D0D0D);
   static const Color black000000 = Color(0xff000000);
   static const Color black25p = Colors.black26;
+  static const Color black2B2B2B = Color(0xff2B2B2B);
+
   static const Color tapSplashColor = Color.fromARGB(62, 167, 167, 167);
+
   static const Color whiteFFFFFF = Color(0xffFFFFFF);
+
   static const Color greyF6F8FA = Color(0xffF6F8FA);
   static const Color grey8F8F8F = Color(0xff8F8F8F);
   static const Color greyD9D9D9 = Color(0xffD9D9D9);
@@ -25,15 +29,22 @@ class MyColors {
   static const Color grey989898 = Color(0xff989898);
   static const Color grey3F3F3F = Color(0xff3F3F3F);
   static const Color greyEBEBEB = Color(0xffEBEBEB);
+
   static const Color green658F7B = Color(0xff658F7B);
   static const Color green667085 = Color(0xff667085);
   static const Color green908C00 = Color(0xff908C00);
   static const Color greenE3FF0A = Color(0xffE3FF0A);
   static const Color transparent = Colors.transparent;
+
   static const Color white = Colors.white;
+
   static const Color redD85229 = Color(0xffD85229);
+
   static const Color brown97805F = Color(0xFF97805F);
+
   static const Color orangeFD5944 = Color(0xFFFD5944);
+
+  static const Color yellowE2D7C1 = Color(0xffE2D7C1);
 
   static Map<int, Color> get primarySwatch => {
         100: black0D0D0D,
