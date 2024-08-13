@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magueyapp/theme/my_icons.dart';
+import 'package:magueyapp/utils/responsive/responsive.dart';
 
 class HomeCarousel extends StatefulWidget {
   const HomeCarousel({super.key});
@@ -8,7 +9,8 @@ class HomeCarousel extends StatefulWidget {
   State<HomeCarousel> createState() => _HomeCarouselState();
 }
 
-final List<Map<String, String>> imagePaths = [ //List de Map com Path e Title mockados
+final List<Map<String, String>> imagePaths = [
+  //List de Map com Path e Title mockados
   {
     'path': MyIcons.backgroudHomeIcon,
     'title': 'Título 1',
@@ -55,13 +57,15 @@ class _HomeCarouselState extends State<HomeCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    double widthOfScreen = Responsive.widthOfScreen(context);
+    double heightOfScreen = Responsive.heightOfScreen(context);
     return Column(
       children: [
         Stack(
           children: [
             SizedBox(
-              width: 381,
-              height: 381,
+              width: widthOfScreen * 0.929640,
+              height: heightOfScreen * 0.444500,
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: imagePaths.length,
@@ -72,7 +76,7 @@ class _HomeCarouselState extends State<HomeCarousel> {
                 },
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    padding:  EdgeInsets.symmetric(horizontal: heightOfScreen * 0.0035),
                     child: _pages[index],
                   );
                 },
@@ -89,8 +93,8 @@ class _HomeCarouselState extends State<HomeCarousel> {
                   children: List<Widget>.generate(
                       _pages.length,
                       (index) => Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: heightOfScreen * 0.005833),
                             child: InkWell(
                               onTap: () {
                                 _pageController.animateToPage(index,
@@ -98,7 +102,7 @@ class _HomeCarouselState extends State<HomeCarousel> {
                                     curve: Curves.easeIn);
                               },
                               child: CircleAvatar(
-                                  radius: _activePage == index ? 6 : 4,
+                                  radius: _activePage == index ? heightOfScreen * 0.007 : heightOfScreen * 0.004667,
                                   backgroundColor: const Color(0xFFE6E54A)),
                             ),
                           )),
