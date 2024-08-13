@@ -14,12 +14,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
+    return ValueListenableBuilder<int>(
       valueListenable: store.currentIndexNotifier,
       builder: (context, currentIndex, child) {
         return BottomNavigationBar(
           currentIndex: currentIndex,
-          onTap: store.setCurrentIndex,
           items: const [
             BottomNavigationBarItem(
               icon: SizedBox.shrink(),
@@ -38,6 +37,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               label: 'ME',
             ),
           ],
+          onTap: (index) {
+            store.setCurrentIndex(index);
+          },
           backgroundColor: const Color(0xFF2B2B2B),
           selectedItemColor: const Color(0xFFE3FF0A),
           unselectedItemColor: const Color(0xFF908C00),

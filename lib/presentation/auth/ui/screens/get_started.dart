@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:magueyapp/common/widget/my_buttons/my_outline_button.dart';
+import 'package:magueyapp/presentation/auth/ui/screens/sign_in.dart';
+import 'package:magueyapp/presentation/auth/ui/screens/sign_up.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/get_started/divider_with_text_widget.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/get_started/instructions_widget.dart';
-import 'package:magueyapp/presentation/auth/ui/widgets/sign_up/background_image_greeting_widget.dart';
-import 'package:magueyapp/presentation/auth/ui/screens/sign_in.dart';
 import 'package:magueyapp/presentation/auth/ui/widgets/sign_in/text_button_view.dart';
-import 'package:magueyapp/presentation/auth/ui/screens/sign_up.dart';
-import 'package:magueyapp/service/di.dart';
+import 'package:magueyapp/presentation/auth/ui/widgets/sign_up/background_image_greeting_widget.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 import 'package:magueyapp/theme/my_icons.dart';
 import 'package:magueyapp/theme/text_styling.dart';

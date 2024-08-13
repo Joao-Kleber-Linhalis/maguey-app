@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:magueyapp/presentation/main_screen.dart';
 import 'package:magueyapp/service/di.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 import 'package:magueyapp/utils/app_constants/app_context.dart';
-import 'package:magueyapp/utils/app_routes/app_routes.dart';
-import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.light,
-      routes: getIt<AppRoutes>().routes,
+      home: const MainScreen(),
+      // routes: getIt<AppRoutes>().routes,
     );
   }
 }

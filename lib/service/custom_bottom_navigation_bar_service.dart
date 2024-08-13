@@ -12,6 +12,8 @@ class CustomBottomNavigationBarService {
   final ValueNotifier<int> currentIndexNotifier = ValueNotifier(0);
 
   void setCurrentIndex(index) {
+    if(currentIndexNotifier.value == index) currentIndexNotifier.value = -1;
     currentIndexNotifier.value = index;
   }
+
 }

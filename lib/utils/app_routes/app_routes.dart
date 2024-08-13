@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/get_started.dart';
+import 'package:magueyapp/presentation/auth/ui/screens/reset_password.dart';
+import 'package:magueyapp/presentation/auth/ui/screens/sign_in.dart';
 import 'package:magueyapp/presentation/auth/ui/screens/sign_up.dart';
 import 'package:magueyapp/presentation/folder_structure_boiler_plate/ui/screen/upload_products.dart';
 import 'package:magueyapp/presentation/home/ui/screen/home_screen.dart';
-import 'package:magueyapp/presentation/auth/ui/screens/reset_password.dart';
-import 'package:magueyapp/presentation/auth/ui/screens/sign_in.dart';
 import 'package:magueyapp/presentation/splash/ui/screen/splash_screen.dart';
 
 class AppRoutes {
