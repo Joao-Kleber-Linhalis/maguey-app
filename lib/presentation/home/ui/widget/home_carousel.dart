@@ -60,6 +60,7 @@ class _HomeCarouselState extends State<HomeCarousel> {
     double widthOfScreen = Responsive.widthOfScreen(context);
     double heightOfScreen = Responsive.heightOfScreen(context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Stack(
           children: [
@@ -76,7 +77,8 @@ class _HomeCarouselState extends State<HomeCarousel> {
                 },
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: heightOfScreen * 0.0035),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: heightOfScreen * 0.0035),
                     child: _pages[index],
                   );
                 },
@@ -102,7 +104,9 @@ class _HomeCarouselState extends State<HomeCarousel> {
                                     curve: Curves.easeIn);
                               },
                               child: CircleAvatar(
-                                  radius: _activePage == index ? heightOfScreen * 0.007 : heightOfScreen * 0.004667,
+                                  radius: _activePage == index
+                                      ? heightOfScreen * 0.007
+                                      : heightOfScreen * 0.004667,
                                   backgroundColor: const Color(0xFFE6E54A)),
                             ),
                           )),
@@ -123,14 +127,16 @@ class ImagePlaceHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthOfScreen = Responsive.widthOfScreen(context);
+    double heightOfScreen = Responsive.heightOfScreen(context);
     return Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Image.asset(
             imagePath!,
-            height: 381,
-            width: 381,
+            width: widthOfScreen * 0.929640,
+            height: heightOfScreen * 0.444500,
             fit: BoxFit.fill,
           ),
         ),

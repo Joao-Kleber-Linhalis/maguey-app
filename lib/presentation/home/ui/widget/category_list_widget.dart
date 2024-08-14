@@ -60,23 +60,27 @@ class CategoryListWidget extends StatelessWidget {
               title,
               style: TextStyle(
                 fontFamily: 'CircularAirPro',
-                fontSize: heightOfScreen* 0.04,
+                fontSize: heightOfScreen * 0.04,
                 height: heightOfScreen * 0.001750,
                 fontWeight: FontWeight.w400,
                 color: const Color(0xFFE3FF0A),
               ),
             ),
           ),
-          AutoSizeText(
-            // "subtitle" on left
-            "A BLURB ABOUT ${title.toUpperCase()} HERE",
-            style: TextStyle(
-              fontFamily: 'CircularXXMono',
-              fontSize: heightOfScreen * 0.000962,
-              height: heightOfScreen * 0.001517,
-              fontWeight: FontWeight.w400,
-              letterSpacing: 0.04,
-              color: const Color(0xFFE2D7C1),
+          Expanded(
+            child: AutoSizeText(
+              // "subtitle" on left
+              "A BLURB ABOUT ${title.toUpperCase()} HERE",
+              style: TextStyle(
+                fontFamily: 'CircularXXMono',
+                fontSize: heightOfScreen * 0.000962,
+                height: heightOfScreen * 0.001517,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.04,
+                color: const Color(0xFFE2D7C1),
+              ),
+              overflow: TextOverflow.visible,
+              textAlign: TextAlign.right,
             ),
           ),
         ],
