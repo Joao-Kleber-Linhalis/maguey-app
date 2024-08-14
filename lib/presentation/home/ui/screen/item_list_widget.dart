@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:magueyapp/presentation/product/product_list/product_list_screen.dart';
+import 'package:magueyapp/utils/responsive/responsive.dart';
 
 import '../../../brand_select/ui/screen/brand_select_screen.dart';
 
@@ -39,7 +41,7 @@ class ItemListWidget extends StatelessWidget {
         ListItemWidget(
           title: 'Raicilla',
           subtitle: 'Distinct as a cactus flower in the desert',
-          brands: [
+          brands: const [
             '400 CONEJOS',
             'PAPALOTE',
             'BOZAL',
@@ -60,7 +62,7 @@ class ItemListWidget extends StatelessWidget {
         ListItemWidget(
           title: 'Sotol',
           subtitle: 'A visit from the ancestral spirits',
-          brands: [
+          brands: const [
             '400 CONEJOS',
             'PAPALOTE',
             'BOZAL',
@@ -106,14 +108,21 @@ class ListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double heightOfScreen = Responsive.heightOfScreen(context);
+    List<String> brandList = brands.map(
+      (brand) {
+        return '$brand   ';
+      },
+    ).toList();
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+      padding: EdgeInsets.symmetric(horizontal: heightOfScreen * 0.046667),
       child: InkWell(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BrandSelectScreen(),
+              builder: (context) => const BrandSelectScreen(),
             ),
           );
         },
@@ -125,67 +134,73 @@ class ListItemWidget extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {},
-                  child: Text(
+                  child: AutoSizeText(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'CircularAirPro',
                       fontSize: 30,
-                      height: 1.5,
+                      height: heightOfScreen * 0.0011,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFFE3FF0A),
+                      color: const Color(0xFFE3FF0A),
                     ),
                   ),
                 ),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontFamily: 'InstrumentSerif',
-                    fontSize: 13,
-                    height: 1.3,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF908C00),
+                Expanded(
+                  child: AutoSizeText(
+                    subtitle,
+                    style: TextStyle(
+                      fontFamily: 'InstrumentSerif',
+                      fontSize: 13,
+                      height: heightOfScreen * 0.001517,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF908C00),
+                    ),
+                    // maxLines: 1,
+                    overflow: TextOverflow.visible,
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: heightOfScreen * 0.0175),
             Align(
-              alignment: Alignment.centerLeft,
-              child: Wrap(
-                spacing: 13.5,
-                runSpacing: 8.0,
-                children: brands
-                    .map(
-                      (brand) => Text(
-                        brand,
-                        style: const TextStyle(
-                          fontFamily: 'CircularXXMono',
-                          fontSize: 13,
-                          height: 1.5,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 0.05,
-                          color: Color(0xFFE2D7C1),
+              alignment: Alignment.center,
+              child: RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                  style: const TextStyle(
+                    fontFamily: 'CircularXXMono',
+                    fontSize: 13,
+                    height: 2.5,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.05,
+                    color:Color(0xFFE2D7C1),
+                  ),
+                  children: brandList
+                      .map(
+                        (brand) => TextSpan(
+                          text: brand 
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: heightOfScreen * 0.0175),
             Align(
               alignment: Alignment.centerLeft,
               child: GestureDetector(
                 onTap: onTap,
-                child: Text(
+                child: AutoSizeText(
                   'View All $title Brands',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'InstrumentSerif',
                     fontSize: 15,
-                    height: 2.0,
+                    height: heightOfScreen * 0.002333,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF97805F),
+                    color: const Color(0xFF97805F),
                     decorationThickness: 1,
-                    decorationColor: Color(0xFF97805F),
+                    decorationColor: const Color(0xFF97805F),
                     decoration: TextDecoration.underline,
                   ),
                 ),
@@ -196,4 +211,5 @@ class ListItemWidget extends StatelessWidget {
       ),
     );
   }
+
 }

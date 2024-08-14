@@ -8,6 +8,7 @@ import 'package:magueyapp/presentation/me_section/ui/screen/me_screen.dart';
 import 'package:magueyapp/presentation/widgets/custom_app_bar.dart';
 import 'package:magueyapp/service/custom_bottom_navigation_bar_service.dart';
 import 'package:magueyapp/theme/my_colors.dart';
+import 'package:magueyapp/utils/responsive/responsive.dart';
 
 class MyHomePage extends StatefulWidget {
   static const String route = 'home-screen';
@@ -49,6 +50,8 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthOfScreen = Responsive.widthOfScreen(context);
+    double heightOfScreen = Responsive.heightOfScreen(context);
     return SafeArea(
       bottom: false,
       child: Column(
@@ -57,21 +60,25 @@ class HomeContent extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: widthOfScreen * 0.05), //20
                   child: Column(
                     children: [
                       Text(
                         'Bienvenidos to a',
                         style: TextStyle(
-                          color: Color(0xFFEDE6D8),
+                          color: const Color(0xFFEDE6D8),
                           fontSize: 40,
                           fontWeight: FontWeight.w400,
-                          height: 45 / 40,
+                          height: heightOfScreen * 0.001313,
                           fontFamily: 'CircularAirPro',
                         ),
                         textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: heightOfScreen *0.01,
                       ),
                       Wrap(
                         alignment: WrapAlignment.center,
@@ -79,11 +86,11 @@ class HomeContent extends StatelessWidget {
                           Text(
                             'brand',
                             style: TextStyle(
-                              color: Color(0xFFEDE6D8),
+                              color: const Color(0xFFEDE6D8),
                               fontSize: 40,
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.italic,
-                              height: 45 / 40,
+                              height: heightOfScreen * 0.001813,
                               fontFamily: 'Ogg',
                             ),
                             textAlign: TextAlign.center,
@@ -91,49 +98,49 @@ class HomeContent extends StatelessWidget {
                           Text(
                             ' new day.',
                             style: TextStyle(
-                              color: Color(0xFFEDE6D8),
+                              color: const Color(0xFFEDE6D8),
                               fontSize: 40,
                               fontWeight: FontWeight.w400,
-                              height: 45 / 40,
+                              height: heightOfScreen * 0.001313,
                               fontFamily: 'CircularAirPro',
                             ),
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
-                      SizedBox(height: 30),
-                      HomeCarousel(), // Carrossel
-                      SizedBox(height: 30),
+                      SizedBox(height: heightOfScreen * 0.035),
+                      const HomeCarousel(), // image carousel
+                      SizedBox(height: heightOfScreen * 0.035),
                       Text(
                         'Search for the latest in Mezcal and Agave Spirits.',
                         style: TextStyle(
-                          color: Color(0xFFE2D7C1),
+                          color: const Color(0xFFE2D7C1),
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
-                          height: 24 / 20,
+                          height: heightOfScreen * 0.0014,
                           fontFamily: 'CircularAirPro',
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: heightOfScreen * 0.011667),
                       Text(
                         'Explore bars, restaurants and retailers near you.',
                         style: TextStyle(
-                          color: Color(0xFFE2D7C1),
+                          color: const Color(0xFFE2D7C1),
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
-                          height: 24 / 20,
+                          height: heightOfScreen * 0.0014,
                           fontFamily: 'CircularAirPro',
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: heightOfScreen * 0.014),
                     ],
                   ),
                 ),
-                ItemListWidget(),
+                const ItemListWidget(),
                 CategoryListWidget(),
-                SizedBox(height: 12),
+                SizedBox(height: heightOfScreen * 0.014),
               ],
             ),
           ),
