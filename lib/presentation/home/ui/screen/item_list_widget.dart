@@ -109,6 +109,12 @@ class ListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double heightOfScreen = Responsive.heightOfScreen(context);
+    List<String> brandList = brands.map(
+      (brand) {
+        return '$brand   ';
+      },
+    ).toList();
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: heightOfScreen * 0.046667),
       child: InkWell(
@@ -133,45 +139,51 @@ class ListItemWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'CircularAirPro',
                       fontSize: 30,
-                      height: heightOfScreen * 0.00175,
+                      height: heightOfScreen * 0.0011,
                       fontWeight: FontWeight.w400,
                       color: const Color(0xFFE3FF0A),
                     ),
                   ),
                 ),
-                AutoSizeText(
-                  subtitle,
-                  style: TextStyle(
-                    fontFamily: 'InstrumentSerif',
-                    fontSize: heightOfScreen * 0.001,
-                    height: heightOfScreen * 0.001517,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF908C00),
+                Expanded(
+                  child: AutoSizeText(
+                    subtitle,
+                    style: TextStyle(
+                      fontFamily: 'InstrumentSerif',
+                      fontSize: 13,
+                      height: heightOfScreen * 0.001517,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF908C00),
+                    ),
+                    // maxLines: 1,
+                    overflow: TextOverflow.visible,
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ],
             ),
             SizedBox(height: heightOfScreen * 0.0175),
             Align(
-              alignment: Alignment.centerLeft,
-              child: Wrap(
-                spacing: heightOfScreen * 0.021,
-                runSpacing: 8.0,
-                children: brands
-                    .map(
-                      (brand) => AutoSizeText(
-                        brand,
-                        style: TextStyle(
-                          fontFamily: 'CircularXXMono',
-                          fontSize: 13,
-                          height: heightOfScreen * 0.00175,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 0.05,
-                          color: const Color(0xFFE2D7C1),
+              alignment: Alignment.center,
+              child: RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                  style: const TextStyle(
+                    fontFamily: 'CircularXXMono',
+                    fontSize: 13,
+                    height: 2.5,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.05,
+                    color:Color(0xFFE2D7C1),
+                  ),
+                  children: brandList
+                      .map(
+                        (brand) => TextSpan(
+                          text: brand 
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
             ),
             SizedBox(height: heightOfScreen * 0.0175),
@@ -199,4 +211,5 @@ class ListItemWidget extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -138,7 +138,7 @@ class HomeContent extends StatelessWidget {
                     ],
                   ),
                 ),
-                ItemListWidget(),
+                const ItemListWidget(),
                 CategoryListWidget(),
                 SizedBox(height: heightOfScreen * 0.014),
               ],
