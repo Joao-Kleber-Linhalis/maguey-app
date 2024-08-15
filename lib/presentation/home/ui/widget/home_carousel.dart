@@ -150,7 +150,7 @@ class ImagePlaceHolder extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                title!, //Trocar para o nome de categorias certo.
+                title!, 
                 style: const TextStyle(
                   color: Color(0xFFE3FF0A),
                   fontSize: 40,
