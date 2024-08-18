@@ -5,6 +5,15 @@ import 'package:magueyapp/theme/my_colors.dart';
 class MeTerms extends StatelessWidget {
   const MeTerms({super.key});
 
+  static void navigateTo(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MeTerms(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
