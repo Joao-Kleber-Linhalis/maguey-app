@@ -9,6 +9,7 @@ import 'package:magueyapp/presentation/widgets/custom_bottom_navigation_bar.dart
 import 'package:magueyapp/service/custom_bottom_navigation_bar_service.dart';
 
 class MainScreen extends StatefulWidget {
+  static const String route = 'main-screen';
   const MainScreen({Key? key}) : super(key: key);
 
   @override

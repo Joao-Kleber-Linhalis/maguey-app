@@ -29,7 +29,7 @@ setupDI() async {
   // ApiServices
   getIt.registerLazySingleton(() => ApiService(getIt.get()));
 
-  getIt.registerLazySingleton<FirebaseSerice>(() => FirebaseSerice());
+  getIt.registerLazySingleton<FirebaseService>(() => FirebaseService());
 
   getIt.registerLazySingleton<FirestoreService>(
       () => FirestoreService(getIt.get()));

@@ -22,44 +22,45 @@ class MeScreen extends StatefulWidget {
   State<MeScreen> createState() => _MeScreenState();
 }
 
-final List<Map<String, dynamic>> subScreens = [ //Map with option name and screen.
-  {
-    "option": "Reviews",
-    "screen": const MeReviews(),
-  },
-  {
-    "option": "Favorites",
-    "screen": const MeFavorites(),
-  },
-  {
-    "option": "Events",
-    "screen": const MeEvents(),
-  },
-  {
-    "option": "Submit a Product",
-    "screen": const MeSubmitProduct(),
-  },
-  {
-    "option": "Account Settings",
-    "screen": const MeSettings(),
-  },
-  {
-    "option": "Terms & Conditions",
-    "screen": const MeTerms(),
-  },
-  {
-    "option": "Support",
-    "screen": const MeSupport(),
-  },
-  {
-    "option": "Logout",
-    "screen": const MeLogout(),
-  },
-];
-
 class _MeScreenState extends State<MeScreen> {
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> subScreens = [
+      //Map with option name and function to navi.
+      //Its works
+      {
+        "option": "Reviews",
+        "onTap": () => MeReviews.navigateTo(context),
+      },
+      {
+        "option": "Favorites",
+        "onTap": () => MeFavorites.navigateTo(context),
+      },
+      {
+        "option": "Events",
+        "onTap": () => MeEvents.navigateTo(context),
+      },
+      {
+        "option": "Submit a Product",
+        "onTap": () => MeSubmitProduct.navigateTo(context),
+      },
+      {
+        "option": "Account Settings",
+        "onTap": () => MeSettings.navigateTo(context),
+      },
+      {
+        "option": "Terms & Conditions",
+        "onTap": () => MeTerms.navigateTo(context),
+      },
+      {
+        "option": "Support",
+        "onTap": () => MeSupport.navigateTo(context),
+      },
+      {
+        "option": "Logout",
+        "onTap": () => MeLogout.showLogoutDialog(context),
+      },
+    ];
     double widthOfScreen = Responsive.widthOfScreen(context);
     double heightOfScreen = Responsive.heightOfScreen(context);
     return SafeArea(
@@ -171,18 +172,20 @@ class _MeScreenState extends State<MeScreen> {
                   ),
                 ),
                 _buildDivider(),
-                ...List.generate( //List of subscreen
+                ...List.generate(
+                  //List of subscreen
                   subScreens.length,
                   (index) {
                     return Column(
                       children: [
                         _buildSubScreen(
                             title: subScreens[index]["option"],
-                            screen: subScreens[index]["screen"],
+                            onTap: subScreens[index]["onTap"],
                             heightOfScreen: heightOfScreen,
                             widthOfScreen: widthOfScreen,
                             context: context),
-                        if (index != subScreens.length - 1) _buildDivider(), //dont build divider in the last subscreen , Maybe remove
+                        if (index != subScreens.length - 1)
+                          _buildDivider(), //dont build divider in the last subscreen , Maybe remove
                       ],
                     );
                   },
@@ -198,20 +201,13 @@ class _MeScreenState extends State<MeScreen> {
 
 Widget _buildSubScreen({
   required String title,
-  required Widget screen, //Maybe
+  required VoidCallback onTap, //Maybe
   required double heightOfScreen,
   required double widthOfScreen,
   required BuildContext context,
 }) {
   return InkWell(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => screen,
-        ),
-      );
-    },
+    onTap: onTap,
     child: SizedBox(
       width: widthOfScreen,
       child: Padding(
@@ -233,7 +229,8 @@ Widget _buildSubScreen({
   );
 }
 
-Widget _buildDivider() { //to make a dotted line, can try dotted_line 3.2.2.
+Widget _buildDivider() {
+  //to make a dotted line, can try dotted_line 3.2.2.
   return const Divider(
     color: Color(0xFF908C00),
     thickness: 0.5,

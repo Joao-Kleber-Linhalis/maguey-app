@@ -13,11 +13,11 @@ import 'package:magueyapp/utils/extensions/route_extension.dart';
 
 import '../di.dart';
 
-FirebaseSerice myFirebaseService = getIt<FirebaseSerice>();
+FirebaseService myFirebaseService = getIt<FirebaseService>();
 FirestoreService myFirestoreService = getIt<FirestoreService>();
 
-class FirebaseSerice {
-  FirebaseSerice();
+class FirebaseService {
+  FirebaseService();
   Future<UserModel?> registerUsingEmailPassword({
     required String email,
     required String password,
@@ -228,6 +228,22 @@ class FirebaseSerice {
     User? refreshedUser = auth.currentUser;
 
     return refreshedUser;
+  }
+
+  Future<void> globalLogout() async {
+    try {
+      final User? user = FirebaseAuth.instance.currentUser;
+      final googleSignIn = GoogleSignIn();
+      if (await googleSignIn.isSignedIn()) {
+        await googleSignIn.signOut();
+      } else if (user != null) {
+        await logoutUser();
+      } else {
+        print("No logged");
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 }
 

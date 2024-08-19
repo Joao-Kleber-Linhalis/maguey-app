@@ -4,6 +4,15 @@ import 'package:magueyapp/theme/my_colors.dart';
 class MeFavorites extends StatelessWidget {
   const MeFavorites({super.key});
 
+  static void navigateTo(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MeFavorites(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
