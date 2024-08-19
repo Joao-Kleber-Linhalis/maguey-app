@@ -4,6 +4,7 @@ import 'package:magueyapp/presentation/widgets/custom_app_bar.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 
 import '../../../../theme/text_styling.dart';
+import '../../../product/product_list/product_list_screen.dart';
 
 final textStyles = TextStyleCustom();
 
@@ -95,7 +96,7 @@ class BrandSelectScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute<void>(
                                 builder: (BuildContext context) =>
-                                    const ProductSelectScreen(),
+                                    const ProductListScreen(),
                               ),
                             );
                           },

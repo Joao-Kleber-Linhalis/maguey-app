@@ -5,6 +5,7 @@ import 'package:magueyapp/presentation/widgets/custom_app_bar.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 
 import '../../../../theme/text_styling.dart';
+import '../../../review/ui/leave_a_review.dart';
 
 final textStyles = TextStyleCustom();
 
@@ -96,12 +97,23 @@ class ProductSelectScreen extends StatelessWidget {
                                     decorationColor: MyColors.brown97805F,
                                   ),
                                 ),
-                                Text(
-                                  'Leave A Review',
-                                  style: textStyles.font_14w400.copyWith(
-                                    color: MyColors.brown97805F,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: MyColors.brown97805F,
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            const ReviewsPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Leave A Review',
+                                    style: textStyles.font_14w400.copyWith(
+                                      color: MyColors.brown97805F,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: MyColors.brown97805F,
+                                    ),
                                   ),
                                 ),
                               ],

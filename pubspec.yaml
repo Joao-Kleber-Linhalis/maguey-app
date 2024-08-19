@@ -78,6 +78,7 @@ dependencies:
   url_launcher: ^6.2.3
   animated_rating_stars: ^1.0.1
   auto_size_text: ^3.0.0
+  win32: ^5.2.1
 
 dev_dependencies:
   flutter_test:

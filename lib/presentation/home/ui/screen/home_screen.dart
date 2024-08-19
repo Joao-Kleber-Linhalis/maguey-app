@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(showDivider: false),
+      appBar: const CustomAppBar(showDivider: true),
       backgroundColor: MyColors.black2B2B2B,
       body: ValueListenableBuilder(
         valueListenable: navbarService.currentIndexNotifier,
@@ -78,7 +78,7 @@ class HomeContent extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
-                        height: heightOfScreen *0.01,
+                        height: heightOfScreen * 0.01,
                       ),
                       Wrap(
                         alignment: WrapAlignment.center,

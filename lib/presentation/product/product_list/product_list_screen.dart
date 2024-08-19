@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:magueyapp/theme/my_colors.dart';
 import 'package:magueyapp/theme/my_icons.dart';
 
+import '../product_select/ui/product_select_screen.dart';
+
 class ProductListScreen extends StatelessWidget {
   static const String route = 'product-list-screen';
 
@@ -57,14 +59,14 @@ class ProductListScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  _productItemList("Enchanted"),
-                  _productItemList("Magia Negra"),
-                  _productItemList("Potion Nº 9"),
-                  _productItemList("Abracadabra"),
-                  _productItemList("Enchanted"),
-                  _productItemList("Magia Negra"),
-                  _productItemList("Potion Nº 9"),
-                  _productItemList("Abracadabra"),
+                  _productItemList("Enchanted", context),
+                  _productItemList("Magia Negra", context),
+                  _productItemList("Potion Nº 9", context),
+                  _productItemList("Abracadabra", context),
+                  _productItemList("Enchanted", context),
+                  _productItemList("Magia Negra", context),
+                  _productItemList("Potion Nº 9", context),
+                  _productItemList("Abracadabra", context),
                 ],
               ),
             )
@@ -79,37 +81,47 @@ class ProductListScreen extends StatelessWidget {
   }
 }
 
-Widget _productItemList(String itemName) {
-  return Column(
-    children: [
-      const Divider(
-        color: MyColors.greenE3FF0A,
-        thickness: 1.15,
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              itemName,
-              style: const TextStyle(
-                  color: MyColors.greenE3FF0A,
-                  fontFamily: "CircularAirPro",
-                  fontSize: 32,
-                  fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 68,
-              width: 98,
-              child: Image.asset(
-                "assets/images/temp/enchanted_ensamble.jpeg",
-                fit: BoxFit.cover,
-              ),
-            )
-          ],
+Widget _productItemList(String itemName, BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const ProductSelectScreen(),
         ),
-      )
-    ],
+      );
+    },
+    child: Column(
+      children: [
+        const Divider(
+          color: MyColors.greenE3FF0A,
+          thickness: 1.15,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                itemName,
+                style: const TextStyle(
+                    color: MyColors.greenE3FF0A,
+                    fontFamily: "CircularAirPro",
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 68,
+                width: 98,
+                child: Image.asset(
+                  "assets/images/temp/enchanted_ensamble.jpeg",
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
   );
 }
