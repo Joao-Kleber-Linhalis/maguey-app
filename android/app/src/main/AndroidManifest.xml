@@ -3,6 +3,8 @@
         android:label="magueyapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -29,5 +31,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBrR_yt0Km8QK6dje9tn8R-8rjIeJb-zFI"/>
     </application>
 </manifest>

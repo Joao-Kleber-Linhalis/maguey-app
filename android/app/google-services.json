@@ -1,0 +1,78 @@
+{
+  "project_info": {
+    "project_number": "584611625768",
+    "project_id": "maguey-all-day-app",
+    "storage_bucket": "maguey-all-day-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584611625768:android:d8713a514ec8ac61326e1d",
+        "android_client_info": {
+          "package_name": "com.magueyallday.magueyapp.magueyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584611625768-0f8fs0lmiahkbeh2s0ou7ljbq10ummpq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.magueyallday.magueyapp.magueyapp",
+            "certificate_hash": "0dd145fba151c30f7f42553ed0361af08fc47549"
+          }
+        },
+        {
+          "client_id": "584611625768-dpqkjpod9aq3f3id2e4i1l6r1vr751q8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.magueyallday.magueyapp.magueyapp",
+            "certificate_hash": "d93fd49eb50d930f910f98eafd5d46c6b6704f26"
+          }
+        },
+        {
+          "client_id": "584611625768-fr35v9jldk7el05cmnlhvdmrsoj3jijr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.magueyallday.magueyapp.magueyapp",
+            "certificate_hash": "6b1b6a502921e47fc8e1d8fd3685bd86849240b2"
+          }
+        },
+        {
+          "client_id": "584611625768-p0v6io7sbkr1pg097jp75gj7ens2a3vt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.magueyallday.magueyapp.magueyapp",
+            "certificate_hash": "d512b15f2212842fe7ccb91f5ab27663ae25730e"
+          }
+        },
+        {
+          "client_id": "584611625768-0puhae09kok4gbee1qhorsudslh901r9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxgzG_QH5pkgcO9rLU5LAcUaLUkoshT_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584611625768-0puhae09kok4gbee1qhorsudslh901r9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584611625768-haphfukfq7lho41s9dehqltfc6nufl11.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.magueyallday.magueyapp.magueyapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:magueyapp/service/di.dart';
+import 'package:get_it/get_it.dart';
+
 import 'my_colors.dart';
 import 'text_styling.dart';
 
 final myLightThemeData = ThemeData(
   canvasColor: Colors.transparent,
-  fontFamily: getIt<String>(instanceName: "f1"),
+  fontFamily: 'monserrat',
   // primaryColor: MyColors.white,
   // scaffoldBackgroundColor: MyColors.bgPageColor,
-  textTheme: TextStyleCustom(),
+  textTheme: GetIt.instance.get<TextStyleCustom>(),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      textStyle: myTextStyle.font_13w700,
+      textStyle: const TextStyle(
+        fontFamily: 'monserrat',
+        color: MyColors.whiteFFFFFF,
+      ),
       elevation: 0,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -29,7 +33,10 @@ final myLightThemeData = ThemeData(
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      textStyle: myTextStyle.font_13w700,
+      textStyle: const TextStyle(
+        fontFamily: 'monserrat',
+        color: MyColors.whiteFFFFFF,
+      ),
       shadowColor: MyColors.transparent,
       backgroundColor: MyColors.transparent,
       shape: const RoundedRectangleBorder(

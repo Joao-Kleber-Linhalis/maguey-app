@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:magueyapp/service/di.dart';
-import 'package:magueyapp/utils/app_constants/app_context.dart';
-import 'package:magueyapp/utils/extensions/media_query.dart';
+import 'package:magueyapp/utils/extention.dart';
 
+import '../main.dart';
 import 'my_colors.dart';
 
-final myTextStyle = getIt.get<TextStyleCustom>();
-
 class TextStyleCustom extends TextTheme {
-  final TextStyle _textStyle = TextStyle(
-    fontFamily: getIt<String>(instanceName: 'f1'),
+  final TextStyle _textStyle = const TextStyle(
+    fontFamily: "montserrat",
     color: MyColors.whiteFFFFFF,
   );
 

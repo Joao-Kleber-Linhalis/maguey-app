@@ -6,9 +6,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   animated_rating_stars
   cloud_firestore
   connectivity_plus
+  file_selector_windows
   firebase_auth
   firebase_core
-  geolocator_windows
+  firebase_storage
   share_plus
   url_launcher_windows
 )
