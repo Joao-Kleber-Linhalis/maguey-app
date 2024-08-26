@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>584611625768-haphfukfq7lho41s9dehqltfc6nufl11.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.584611625768-haphfukfq7lho41s9dehqltfc6nufl11</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>584611625768-0f8fs0lmiahkbeh2s0ou7ljbq10ummpq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBN-uiQXRxc0nups5ufXfQflhFRz7x0Cfo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>584611625768</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.magueyallday.magueyapp.magueyapp</string>
+	<key>PROJECT_ID</key>
+	<string>maguey-all-day-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>maguey-all-day-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:584611625768:ios:51eb1c29a96d134c326e1d</string>
+</dict>
+</plist>

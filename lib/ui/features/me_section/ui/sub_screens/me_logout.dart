@@ -58,7 +58,7 @@ class MeLogout extends StatelessWidget {
           ),
           onTap: () async {
             await FirebaseManager().signOut(context: context);
-            Navigator.of(context).pop();
+            // Navigator.of(context).pop();
             AppRoutes.replace(context, const LogInScreen());
           },
         ),

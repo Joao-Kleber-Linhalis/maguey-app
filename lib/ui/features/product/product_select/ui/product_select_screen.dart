@@ -21,20 +21,10 @@ class ProductSelectScreen extends StatefulWidget {
 
 class _ProductSelectScreenState extends State<ProductSelectScreen> {
   TextStyleCustom textStyles = TextStyleCustom();
-  List<Text> flavors = [];
+
   @override
   void initState() {
-    for (String productFlavor in widget.product.listFlavors) {
-      flavors.add(Text(
-        productFlavor,
-        textAlign: TextAlign.center,
-        style: textStyles.font_17w400Black.copyWith(
-          color: MyColors.green908C00,
-          fontWeight: FontWeight.w500,
-        ),
-      ));
-    }
-
+    widget.product.listFlavors = ['Floral', 'Fruity', 'Herbal'];
     super.initState();
   }
 
@@ -220,24 +210,27 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                           ),
                         ),
                         const SizedBox(height: 26),
-                        GridView.builder(
-                          padding: const EdgeInsets.all(8),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                        SizedBox(
+                          height: (widget.product.listFlavors.length / 3) * 44,
+                          child: GridView.builder(
+                            padding: const EdgeInsets.all(8),
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemCount: widget.product.listFlavors.length,
+                            itemBuilder: (context, index) {
+                              return Text(
+                                widget.product.listFlavors[index],
+                                textAlign: TextAlign.center,
+                                style: textStyles.font_17w400Black.copyWith(
+                                  color: MyColors.redD85229,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              );
+                            },
                           ),
-                          itemCount: flavors.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: flavors[index],
-                            );
-                          },
                         ),
                         const SizedBox(height: 26),
                         Center(

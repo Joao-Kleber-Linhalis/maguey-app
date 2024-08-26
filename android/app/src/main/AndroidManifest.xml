@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="magueyapp"
+        android:label="Maguey All Day"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
@@ -32,6 +33,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBrR_yt0Km8QK6dje9tn8R-8rjIeJb-zFI"/>
+            android:value="AIzaSyBN-uiQXRxc0nups5ufXfQflhFRz7x0Cfo"/>
     </application>
 </manifest>

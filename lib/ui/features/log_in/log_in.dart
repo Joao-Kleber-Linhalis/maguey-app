@@ -5,6 +5,7 @@ import 'package:magueyapp/widgets/global_padding.dart';
 import 'package:magueyapp/widgets/sized_box.dart';
 import 'package:provider/provider.dart';
 
+import '../../../provider/google_sign_in_provider.dart';
 import '../../../provider/log_in_sign_up_provider.dart';
 import '../../../theme/my_colors.dart';
 import '../../../theme/my_icons.dart';
@@ -46,6 +47,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   bool showPassword = false;
   bool loader = false;
+  bool loaderGoogle = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -149,13 +151,16 @@ class _LogInScreenState extends State<LogInScreen> {
 
   Future<void> _onGoogleLogin(BuildContext context) async {
     primaryFocus!.unfocus();
-    //await authRepo.signInWithGoogle(context);
+    setState(() => loaderGoogle = true);
+    print("aaaaa");
+    await GoogleSignInProvider().signInWithGoogle();
+    setState(() => loaderGoogle = false);
   }
 
   Future<void> _signIn(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loader = true);
-    await logInSignUpProvider!.checkConditionsLogInUser(
+    await logInSignUpProvider.checkConditionsLogInUser(
       context,
     );
 

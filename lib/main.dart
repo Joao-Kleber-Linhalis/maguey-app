@@ -18,7 +18,12 @@ import 'theme/my_colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // addBrands();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    print('Failed to initialize Firebase: $e');
+  }
+
   runApp(
     MultiProvider(
       providers: [
@@ -41,6 +46,11 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+/*
+mudar a api key do google maps
+
+
+*/
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
@@ -59,17 +69,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         child: FutureBuilder<bool>(
           future: checkInternetConnection(),
           builder: (context, snapshot) {
-            if (snapshot.data == false) {
-              return const NoInternetReload(
-                reloadScreen: MyApp(),
-              );
-            } else {
-              if (FirebaseAuth.instance.currentUser != null) {
-                return const MyHomePage();
-              } else {
-                return const LogInScreen();
-              }
+            if (!snapshot.hasData || snapshot.data == false) {
+              return const NoInternetReload(reloadScreen: MyApp());
             }
+            return StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, authSnapshot) {
+                if (authSnapshot.connectionState == ConnectionState.active) {
+                  return authSnapshot.hasData ? const MyHomePage() : const LogInScreen();
+                }
+                return CircularProgressIndicator();
+              },
+            );
           },
         ),
       ),
