@@ -22,13 +22,13 @@ class DividerWithText extends StatelessWidget {
         Container(
           color: MyColors.greyD9D9D9,
           height: 2.pxV(context),
-          width: 66.pxH(context),
+          width: 130.pxH(context),
         ),
         TextView(text, style: style),
         Container(
           color: MyColors.greyD9D9D9,
           height: 2.pxV(context),
-          width: 66.pxH(context),
+          width: 130.pxH(context),
         ),
       ],
     );

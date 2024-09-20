@@ -3,10 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:magueyapp/provider/log_in_sign_up_provider.dart';
 import 'package:magueyapp/widgets/global_padding.dart';
-import 'package:magueyapp/widgets/sized_box.dart';
 import 'package:provider/provider.dart';
 
-import '../../../theme/my_icons.dart';
 import '../../../theme/text_styling.dart';
 import '../../../widgets/LoaderElevatedButton.dart';
 import '../../../widgets/image_background_greetings_widget.dart';
@@ -48,15 +46,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         body: Form(
           key: logInSignUpProvider.formKeyAuthenticationResetPassword,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const SizedBox(height: 100),
               const ImagedBackgroundGreetingsWidget(
-                imageUrl: MyImages.startingScreenShape,
-                heading: "Reset Password", //"Welcome Back",
-                description: "For reset password, enter an email and verify the otp.",
-                height: 33.25,
+                heading: "Confirm your email",
+                description: "A reset password email will be\nsent to the email you enter below.",
               ),
-              const Spacer(),
               MyTextFormField(
                 title: "Email",
                 margin: 16.paddingH(context),
@@ -65,7 +62,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 controller: logInSignUpProvider.resetPasswordEmail,
                 validator: logInSignUpProvider.validateEmailResetPassword,
               ),
-              32.vSpace(context),
+              const SizedBox(height: 20),
               MyLoaderElvButton(
                 text: "Send Email",
                 loader: loader,
@@ -73,7 +70,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 padding: 16.paddingH(context),
                 textStyle: TextStyleCustom().font_14w400,
               ),
-              const Spacer(flex: 7),
             ],
           ),
         ),

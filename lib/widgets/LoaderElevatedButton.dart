@@ -33,7 +33,7 @@ class MyLoaderElvButton extends StatelessWidget {
     this.width,
     this.padding = EdgeInsets.zero,
     this.iconSpacing = 10,
-    this.borderRadius = 40,
+    this.borderRadius = 12,
     this.boxShadow,
   }) : super(key: key);
 
@@ -91,11 +91,7 @@ class MyLoaderElvButton extends StatelessWidget {
                         loader ? "" : text,
                         textAlign: TextAlign.center,
                         maxLine: 1,
-                        style: textStyle ??
-                            const TextStyle(
-                              fontFamily: "monserrat",
-                              color: MyColors.whiteFFFFFF,
-                            ),
+                        style: const TextStyle(fontFamily: "monserrat", color: MyColors.whiteFFFFFF, fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                       if (suffixIcon != null) ...[
                         SizedBox(width: iconSpacing.pxH(context)),

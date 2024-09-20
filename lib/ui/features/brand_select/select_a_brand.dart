@@ -34,7 +34,7 @@ class _SelectABrandState extends State<SelectABrand> {
   void initState() {
     dashboardProvider = Provider.of<DashboardProvider>(context, listen: false);
     brands = dashboardProvider.brands;
-    filteredBrands = brands;
+    filteredBrands = brands.where((element) => element.categoryId == widget.category.id).toList();
     super.initState();
   }
 

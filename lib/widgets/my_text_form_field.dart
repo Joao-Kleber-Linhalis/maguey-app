@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:magueyapp/utils/extention.dart';
 import 'package:magueyapp/widgets/text_styling.dart';
-import 'package:magueyapp/widgets/text_view.dart';
 
 import '../theme/my_colors.dart';
 
@@ -86,18 +85,6 @@ class MyTextFormField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (showTitle ?? true)
-            Row(
-              children: [
-                TextView(
-                  title,
-                  maxLine: 3,
-                  style: TextStyleCustom().font_13w300.copyWith(
-                        color: titleColor ?? MyColors.green667085,
-                      ),
-                ),
-              ],
-            ),
           TextFormField(
             onTap: onTap,
             readOnly: readOnly ?? false,
@@ -113,50 +100,50 @@ class MyTextFormField extends StatelessWidget {
             focusNode: focusNode,
             maxLines: maxLines,
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: borderColor ?? MyColors.transparent,
+                  color: Color(0xff908c00),
+                  width: 1.0, // Width of the underline
                 ),
-                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xff908c00),
+                  width: 2.0,
+                ),
+              ),
+              errorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xff908c00),
+                  width: 1.0,
+                ),
+              ),
+              focusedErrorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xff908c00),
+                  width: 2.0,
+                ),
               ),
               counterText: '',
               prefixIcon: prefixIcon,
               prefixIconConstraints: prefixConstraints,
               suffixIcon: suffixIcon,
               filled: true,
-              errorStyle: TextStyleCustom().font_13w300Black.copyWith(color: MyColors.redD85229),
-              fillColor: filledColor ?? MyColors.greyEAECF0,
+              fillColor: Colors.transparent,
               hintText: hintText,
               hintStyle: hintStyle ??
-                  TextStyleCustom().font_14w500.copyWith(
+                  TextStyleCustom().font_16w400Black.copyWith(
                         color: hintColor ?? MyColors.black0D0D0D,
-                        // MyThemeColor.textColor(
-                        //   context,
-                        //   darkColor: MyColors.white600,
-                        //   lightColor: MyColors.white400,
-                        // ),
                       ),
               prefix: prefix ??
                   Padding(
                     padding: EdgeInsets.only(left: prefixIcon == null ? 15 : 0),
                   ),
               contentPadding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(borderRadius),
-              ),
-              focusedBorder: OutlineInputBorder(
+              border: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: focusColorEnable!
-                      ? MyColors.black0D0D0D
-                      // MyThemeColor.textFieldBorderColor(
-                      //     context,
-                      //     lightColor: MyColors.black,
-                      //     darkColor: MyColors.white,
-                      //   )
-                      : MyColors.transparent,
-                  width: focusedBorderWidth,
+                  color: borderColor ?? MyColors.transparent,
                 ),
-                borderRadius: BorderRadius.circular(borderRadius),
               ),
             ),
             validator: validator,

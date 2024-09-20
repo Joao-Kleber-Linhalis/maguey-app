@@ -30,10 +30,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
   void initState() {
     dashboardProvider = Provider.of<DashboardProvider>(context, listen: false);
     products = dashboardProvider.products.where((element) => element.brandId == widget.brandId).toList();
-    print(widget.brandId);
+    /*print(widget.brandId);
     for (var product in products) {
       print(product.brandId);
-    }
+    }*/
     filteredProducts = products;
     super.initState();
   }

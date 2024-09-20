@@ -50,9 +50,8 @@ class DashboardProvider with ChangeNotifier {
       events = await eventController.searchAllEvents();
       shops = await shopController.searchAllShops();
       categories = await categoryController.searchAllCategories();
-      print('categories: ${categories.length}');
-      products = await productsController.searchAllProducts();
       brands = await brandController.searchAllBrand();
+      products = await productsController.searchAllProducts();
       currentUser = newUser;
       initializeShopEventList();
       return newUser;

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magueyapp/widgets/global_padding.dart';
-import 'package:magueyapp/widgets/text_styling.dart';
 import 'package:magueyapp/widgets/text_view.dart';
-
-import '../theme/my_colors.dart';
 
 class TextButtonRow extends StatelessWidget {
   final String message, buttonText;
@@ -22,11 +19,11 @@ class TextButtonRow extends StatelessWidget {
       children: [
         TextView(
           message,
-          style: TextStyleCustom().font_13w700Black,
+          style: const TextStyle(fontSize: 16, color: Color(0xff838383)),
         ),
         TextView(
           buttonText,
-          style: TextStyleCustom().font_13w700.copyWith(color: MyColors.green658F7B),
+          style: const TextStyle(fontSize: 16, color: Color(0xff908c00), fontWeight: FontWeight.w600),
           padding: 4.paddingH(context),
           onTap: onTap,
         )

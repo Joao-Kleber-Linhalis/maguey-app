@@ -57,17 +57,14 @@ class _LogInScreenState extends State<LogInScreen> {
         body: Form(
           key: logInSignUpProvider.formKeyAuthenticationLogIn,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const ImagedBackgroundGreetingsWidget(
-                imageUrl: MyImages.signInScreenShape,
-                heading: "Sign In", //"Welcome Back",
-                description: "Enter your registered email and correct password for sign in",
-                height: 30.17,
+                heading: "Welcome Back!",
+                description: "Please enter your details to login.",
               ),
-              const Spacer(),
               MyTextFormField(
-                title: "Email",
+                title: "",
                 margin: 16.paddingH(context),
                 hintText: "Enter your email",
                 bottomSpace: 21,
@@ -75,7 +72,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 validator: logInSignUpProvider.validateEmailLogIn,
               ),
               MyTextFormField(
-                title: "Password",
+                title: "",
                 margin: 16.paddingH(context),
                 hintText: "Enter password",
                 obscure: !showPassword,
@@ -100,11 +97,11 @@ class _LogInScreenState extends State<LogInScreen> {
                     text: "Forgot Password?",
                     underlineText: true,
                     splashColor: null,
-                    underlineColor: MyColors.green658F7B,
+                    underlineColor: MyColors.black2B2B2B,
                     space: 16,
-                    style: TextStyleCustom().font_12w400.copyWith(
-                          color: MyColors.green658F7B,
-                          fontSize: 10.pxV(context),
+                    style: TextStyleCustom().font_14w500Black.copyWith(
+                          color: MyColors.black2B2B2B,
+                          fontSize: 13.pxV(context),
                         ),
                     onTap: () {
                       AppRoutes.replace(context, const ResetPasswordScreen());
@@ -123,20 +120,20 @@ class _LogInScreenState extends State<LogInScreen> {
               32.vSpace(context),
               DividerWithText(
                 style: TextStyleCustom().font_14w500Black,
-                text: "Or sign in with",
+                text: "Or",
               ),
               32.vSpace(context),
               MyOutlineButton(
                 iconSpacing: 33.pxH(context),
                 prefixIcon: SvgPicture.asset(MyIcons.googleIcon),
-                text: "Sign in with Google",
+                text: "Continue with Google",
                 onPressed: () async => await _onGoogleLogin(context),
                 padding: 16.paddingH(context),
               ),
-              const Spacer(flex: 5),
+              const SizedBox(height: 16),
               TextButtonRow(
-                buttonText: "Register Now",
-                message: "Not Registered Yet?",
+                buttonText: "Register",
+                message: "Don't have an account?",
                 onTap: () {
                   AppRoutes.replace(context, const SignUpScreen());
                 },

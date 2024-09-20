@@ -11,7 +11,9 @@ class MyIcons {
   // Brand Icon Without Background
   static const String brandIcon = "$_otherIconsPath/icon.jpeg";
   static const String backgroudHomeIcon = "$_otherIconsPath/backgroudHome.png";
-  static const String backgroudHomeIcon2 = "$_otherIconsPath/backgroudHome.png";
+  static const String backgroudHomeIcon2 = "$_otherIconsPath/the_plant.jpeg";
+  static const String backgroudHomeIcon3 = "$_otherIconsPath/the_process.jpeg";
+  static const String backgroudHomeIcon4 = "$_otherIconsPath/the_pattern.jpeg";
 
   // Search Icon
   static const String searchIcon = "$_otherIconsPath/search.svg";

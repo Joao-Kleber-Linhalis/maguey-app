@@ -28,10 +28,10 @@ class MyOutlineButton extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.textStyle,
-    this.outlineWidth = 2,
+    this.outlineWidth = 1,
     this.padding = EdgeInsets.zero,
     this.iconSpacing = 10,
-    this.buttonRadius = 8,
+    this.buttonRadius = 16,
   }) : super(key: key);
 
   @override
@@ -66,7 +66,7 @@ class MyOutlineButton extends StatelessWidget {
               side: MaterialStateProperty.all(
                 BorderSide(
                   width: outlineWidth,
-                  color: onPressed != null ? textColor ?? MyColors.black0D0D0D : Colors.transparent,
+                  color: onPressed != null ? textColor ?? Color(0xffededed) : Colors.transparent,
                   style: BorderStyle.solid,
                 ),
               ),
@@ -81,7 +81,7 @@ class MyOutlineButton extends StatelessWidget {
                     text,
                     textAlign: TextAlign.center,
                     maxLine: 1,
-                    style: textStyle ?? TextStyleCustom().font_13w700.copyWith(color: MyColors.black0D0D0D),
+                    style: textStyle ?? TextStyleCustom().font_16w700.copyWith(color: MyColors.black0D0D0D),
                   ),
                   SizedBox(width: iconSpacing),
                   suffixIcon ?? const SizedBox(),

@@ -213,6 +213,8 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                         SizedBox(
                           height: (widget.product.listFlavors.length / 3) * 44,
                           child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.all(8),
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
@@ -251,7 +253,7 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                         buildSpecification(specification: 'Agave', value: widget.product.agave),
                         buildSpecification(specification: 'Age', value: widget.product.age),
                         buildSpecification(specification: 'Fermentation', value: widget.product.fermentation),
-                        buildSpecification(specification: 'Grind', value: widget.product.grind),
+                        buildSpecification(specification: 'Grind', value: ''),
                         buildSpecification(specification: 'Distillation', value: widget.product.distillation),
                         buildSpecification(specification: 'Proof', value: '(${widget.product.abv} Alc. Vol.)'),
                         buildSpecification(specification: 'Year', value: widget.product.year),

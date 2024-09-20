@@ -17,7 +17,6 @@ import '../../../../widgets/my_outline_button.dart';
 import '../../../../widgets/my_text_form_field.dart';
 import '../../../../widgets/show_password_button.dart';
 import '../../../../widgets/text_button_row.dart';
-import '../../../theme/my_colors.dart';
 import '../../../widgets/text_view.dart';
 import '../log_in/log_in.dart';
 import '../me_section/ui/sub_screens/me_terms.dart';
@@ -65,18 +64,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: Form(
           key: logInSignUpProvider.formKeyAuthenticationSignUp,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const ImagedBackgroundGreetingsWidget(
-                imageUrl: MyImages.signUpScreenShape,
-                heading: "Welcome Back",
-                description: "Enter a new email and set password for registration.",
-                height: 26.48,
+                heading: "Register to join us",
+                description: "Please enter your details to sign up.",
               ),
-              const Spacer(),
+              const SizedBox(height: 20),
               MyTextFormField(
-                title: "Email",
+                title: "",
                 margin: 16.paddingH(context),
                 hintText: "Enter your email",
                 controller: logInSignUpProvider.signUpEmail,
@@ -84,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 validator: logInSignUpProvider.validateEmailSignUp,
               ),
               MyTextFormField(
-                title: "Password",
+                title: "",
                 margin: 16.paddingH(context),
                 hintText: "Enter password",
                 obscure: !showPassword,
@@ -132,9 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                           child: TextView(
                             'Terms & conditions',
-                            style: TextStyleCustom().font_12w400.copyWith(
-                                  color: MyColors.green658F7B,
-                                ),
+                            style: TextStyleCustom().font_14w500Black.copyWith(),
                           ),
                         ),
                       ],
@@ -144,7 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               14.vSpace(context),
               MyLoaderElvButton(
-                text: "Sign Up",
+                text: "Register",
                 loader: loader,
                 onPressed: () async {
                   await _signUp(logInSignUpProvider);
@@ -152,23 +147,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: 16.paddingH(context),
                 textStyle: TextStyleCustom().font_14w400,
               ),
-              16.vSpace(context),
+              const SizedBox(height: 32),
               DividerWithText(
                 style: TextStyleCustom().font_14w500Black,
-                text: "Or sign in with",
+                text: "Or",
               ),
-              16.vSpace(context),
+              const SizedBox(height: 32),
               MyOutlineButton(
                 iconSpacing: 33.pxH(context),
                 prefixIcon: SvgPicture.asset(MyIcons.googleIcon),
-                text: "Sign up with Google",
+                text: "Continue with Google",
                 onPressed: _signUpWithGoogle,
                 padding: 16.paddingH(context),
               ),
-              const Spacer(flex: 7),
+              const SizedBox(height: 16),
               TextButtonRow(
-                buttonText: "Sign In",
-                message: "Already Registered?",
+                buttonText: "Login",
+                message: "Have an account?",
                 onTap: () {
                   AppRoutes.replace(context, const LogInScreen());
                 },

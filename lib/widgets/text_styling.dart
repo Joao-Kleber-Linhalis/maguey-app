@@ -154,6 +154,11 @@ class TextStyleCustom extends TextTheme {
         fontSize: 16.pxV(GlobalContext.currentContext!),
         color: MyColors.black0D0D0D,
       );
+  TextStyle get font_16w400Black => titleLarge.copyWith(
+        fontWeight: FontWeight.w400,
+        fontSize: 16.pxV(GlobalContext.currentContext!),
+        color: MyColors.black0D0D0D,
+      );
   TextStyle get font_16w500Black => titleLarge.copyWith(
         fontWeight: FontWeight.w500,
         height: 0,

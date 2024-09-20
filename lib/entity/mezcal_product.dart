@@ -15,7 +15,6 @@ class Product extends Entity {
   String mezcalero;
   String maguey;
   String agave;
-  String grind;
   String fermentation;
   String milling;
   String distillation;
@@ -44,7 +43,6 @@ class Product extends Entity {
     required this.mezcalero,
     required this.maguey,
     required this.agave,
-    required this.grind,
     required this.fermentation,
     required this.milling,
     required this.distillation,
@@ -60,33 +58,36 @@ class Product extends Entity {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'],
-      productToScrapUrl: json['productToScrapUrl'],
-      brandUrl: json['brandUrl'],
-      brandName: json['brandName'],
-      brandImageUrl: json['brandImageUrl'],
-      productName: json['productName'],
-      productImageUrl: json['productImageUrl'],
-      productNewImageName: json['productNewImageName'],
-      productDescription: json['productDescription'],
-      categoryId: json['categoryId'],
-      cost: json['cost'],
-      brandId: json['brandId'],
-      mezcalero: json['mezcalero'],
-      maguey: json['maguey'],
-      agave: json['agave'],
-      grind: json['grind'],
-      fermentation: json['fermentation'],
-      milling: json['milling'],
-      distillation: json['distillation'],
-      style: json['style'],
-      state: json['state'],
-      town: json['town'],
-      abv: json['abv'],
-      website: json['website'],
-      age: json['age'],
-      year: json['year'],
-      listFlavors: json['listFlavors'],
+      id: json['id'] ?? '',
+      productToScrapUrl: json['productToScrapUrl'] ?? '',
+      brandUrl: json['brandUrl'] ?? '',
+      brandName: json['brandName'] ?? '',
+      brandImageUrl: json['brandImageUrl'] ?? '',
+      productName: json['productName'] ?? '',
+      productImageUrl: json['productImageUrl'] ?? '',
+      productNewImageName: json['productNewImageName'] ?? '',
+      productDescription: json['productDescription'] ?? '',
+      categoryId: json['categoryId'] ?? '',
+      cost: json['cost'] ?? '',
+      brandId: json['brandId'] ?? '',
+      mezcalero: json['mezcalero'] ?? '',
+      maguey: json['maguey'] ?? '',
+      agave: json['agave'] ?? '',
+      fermentation: json['fermentation'] ?? '',
+      milling: json['milling'] ?? '',
+      distillation: json['distillation'] ?? '',
+      style: json['style'] ?? '',
+      state: json['state'] ?? '',
+      town: json['town'] ?? '',
+      abv: json['abv'] ?? '',
+      website: json['website'] ?? '',
+      age: json['age'] ?? '',
+      year: json['year'] ?? '',
+      listFlavors: json['listFlavors'] is List
+          ? json['listFlavors']
+          : json['listFlavors'] != null && json['listFlavors'] is String
+              ? json['listFlavors'].split(',').map((e) => e.trim()).toList()
+              : [], // Ensure it's always a list
     );
   }
   Map<String, dynamic> toJson() {
@@ -106,7 +107,6 @@ class Product extends Entity {
       'mezcalero': mezcalero,
       'maguey': maguey,
       'agave': agave,
-      'grind': grind,
       'fermentation': fermentation,
       'milling': milling,
       'distillation': distillation,
@@ -166,7 +166,6 @@ class Product extends Entity {
       mezcalero: mezcalero ?? this.mezcalero,
       maguey: maguey ?? this.maguey,
       agave: agave ?? this.agave,
-      grind: grind ?? this.grind,
       fermentation: fermentation ?? this.fermentation,
       milling: milling ?? this.milling,
       distillation: distillation ?? this.distillation,

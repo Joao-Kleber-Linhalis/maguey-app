@@ -43,10 +43,12 @@ class CheckBoxWithText extends StatelessWidget {
                 fillColor: MaterialStateProperty.all(
                   value ? MyColors.green658F7B : MyColors.transparent,
                 ),
-                activeColor: MyColors.green658F7B,
-                focusColor: MyColors.green658F7B,
+                activeColor: const Color(0xFF908c00),
+                focusColor: Color(0xFF908c00),
                 checkColor: MyColors.white,
-                overlayColor: MaterialStateProperty.all(MyColors.green658F7B),
+                overlayColor: MaterialStateProperty.all(
+                  Color(0xFF908c00),
+                ),
                 shape: RoundedRectangleBorder(
                   side: BorderSide.none,
                   borderRadius: BorderRadius.circular(4.pxV(context)),
@@ -56,8 +58,8 @@ class CheckBoxWithText extends StatelessWidget {
             8.hSpace(context),
             TextView(
               text,
-              style: TextStyleCustom().font_12w400.copyWith(
-                    color: MyColors.green658F7B,
+              style: TextStyleCustom().font_14w500Black.copyWith(
+                    color: MyColors.black2B2B2B,
                   ),
             ),
           ],

@@ -10,26 +10,21 @@ class HomeCarousel extends StatefulWidget {
 }
 
 final List<Map<String, String>> imagePaths = [
-  //List de Map com Path e Title mockados
   {
     'path': MyIcons.backgroudHomeIcon,
     'title': 'Mezcal',
   },
   {
-    'path': MyIcons.backgroudHomeIcon,
-    'title': 'Mezcal',
+    'path': MyIcons.backgroudHomeIcon2,
+    'title': 'The Plant',
   },
   {
-    'path': MyIcons.backgroudHomeIcon,
-    'title': 'Mezcal',
+    'path': MyIcons.backgroudHomeIcon3,
+    'title': 'The Process',
   },
   {
-    'path': MyIcons.backgroudHomeIcon,
-    'title': 'Mezcal',
-  },
-  {
-    'path': MyIcons.backgroudHomeIcon,
-    'title': 'Mezcal',
+    'path': MyIcons.backgroudHomeIcon4,
+    'title': 'The Pattern',
   },
 ];
 
