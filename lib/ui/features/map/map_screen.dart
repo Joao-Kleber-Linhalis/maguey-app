@@ -49,7 +49,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng currentLocation = const LatLng(34.42059167840114, -118.5637471625157);
+    LatLng currentLocation = const LatLng(33.99788550112016, -118.2565948739648);
 
     if (dashboardProvider.shopEventList.isNotEmpty) {
       currentLocation = LatLng(dashboardProvider.shopEventList[0].latitude!, dashboardProvider.shopEventList[0].longitude!);
@@ -99,15 +99,21 @@ class _MapPageState extends State<MapPage> {
                     Container(
                       height: 88,
                       width: 88,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                        image: DecorationImage(
-                          image: NetworkImage(currentShopEvent.imageUrl),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      decoration: currentShopEvent.imageUrl == ''
+                          ? const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                            )
+                          : BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                              image: DecorationImage(
+                                image: NetworkImage(currentShopEvent.imageUrl),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                     ),
                     const SizedBox(width: 16),
                     SizedBox(

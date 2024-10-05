@@ -49,7 +49,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           child: Column(
             children: [
               CustomTextFormField(
-                hintText: 'Search within, let the Spirits speak to you',
+                hintText: 'search brand, agave, mezcalero + more',
                 controller: controller,
                 validator: (value) {
                   return null;
@@ -57,7 +57,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 onChanged: (value) {
                   setState(() {
                     filteredProducts = products.where((product) {
-                      return product.productName.toLowerCase().contains(value.toLowerCase());
+                      return product.productName.toLowerCase().contains(value.toLowerCase()) ||
+                          product.brandName.toLowerCase().contains(value.toLowerCase()) ||
+                          product.mezcalero.toLowerCase().contains(value.toLowerCase()) ||
+                          product.agave.toLowerCase().contains(value.toLowerCase()) ||
+                          product.fermentation.toLowerCase().contains(value.toLowerCase()) ||
+                          product.milling.toLowerCase().contains(value.toLowerCase()) ||
+                          product.distillation.toLowerCase().contains(value.toLowerCase()) ||
+                          product.style.toLowerCase().contains(value.toLowerCase()) ||
+                          product.state.toLowerCase().contains(value.toLowerCase()) ||
+                          product.town.toLowerCase().contains(value.toLowerCase()) ||
+                          product.abv.toLowerCase().contains(value.toLowerCase()) ||
+                          product.website.toLowerCase().contains(value.toLowerCase());
                     }).toList();
                   });
                 },

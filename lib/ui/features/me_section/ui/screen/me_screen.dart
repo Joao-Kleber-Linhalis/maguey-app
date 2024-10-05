@@ -9,8 +9,6 @@ import '../../../../../theme/text_styling.dart';
 import '../../../../../utils/app_route.dart';
 import '../../../product/suggest_product.dart';
 import '../sub_screens/me_delete_account.dart';
-import '../sub_screens/me_events.dart';
-import '../sub_screens/me_favorites.dart';
 import '../sub_screens/me_logout.dart';
 import '../sub_screens/me_support.dart';
 import '../sub_screens/me_terms.dart';
@@ -33,14 +31,14 @@ class _MeScreenState extends State<MeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> subScreens = [
-      {
+/*      {
         "option": "Favorites products",
         "onTap": () => MeFavoritesProducts.navigateTo(context),
       },
       {
         "option": "Favorites events",
         "onTap": () => MeEventsEvents.navigateTo(context),
-      },
+      },*/
       {
         "option": "Suggest a Product",
         "onTap": () => AppRoutes.push(context, const SuggestAProduct()),

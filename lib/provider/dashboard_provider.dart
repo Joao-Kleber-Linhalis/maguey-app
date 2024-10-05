@@ -62,23 +62,6 @@ class DashboardProvider with ChangeNotifier {
   }
 
   void initializeShopEventList() {
-    for (var event in events) {
-      shopEventList.add(ShopEventEntity(
-        name: event.name,
-        id: event.id,
-        imageUrl: event.imageUrl,
-        createDate: event.createDate,
-        description: event.description,
-        townName: event.townName,
-        latitude: event.latitude,
-        longitude: event.longitude,
-        address: event.address,
-        //link: event.link,
-        type: 'event',
-        link: '',
-      ));
-    }
-
     for (var shop in shops) {
       shopEventList.add(ShopEventEntity(
         name: shop.name,
@@ -92,6 +75,22 @@ class DashboardProvider with ChangeNotifier {
         address: shop.address,
         //link: shop.link,
         type: 'shop',
+        link: '',
+      ));
+    }
+    for (var event in events) {
+      shopEventList.add(ShopEventEntity(
+        name: event.name,
+        id: event.id,
+        imageUrl: event.imageUrl,
+        createDate: event.createDate,
+        description: event.description,
+        townName: event.townName,
+        latitude: event.latitude,
+        longitude: event.longitude,
+        address: event.address,
+        //link: event.link,
+        type: 'event',
         link: '',
       ));
     }

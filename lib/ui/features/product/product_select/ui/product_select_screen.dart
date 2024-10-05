@@ -1,7 +1,8 @@
-import 'package:animated_rating_stars/animated_rating_stars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:magueyapp/entity/mezcal_product.dart';
+import 'package:magueyapp/ui/features/product/product_select/ui/reviews_info.dart';
+import 'package:magueyapp/ui/features/product/product_select/ui/reviews_list.dart';
 
 import '../../../../../custom_app_bar.dart';
 import '../../../../../theme/my_colors.dart';
@@ -87,11 +88,16 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width - 100,
-                          width: MediaQuery.of(context).size.width - 40,
-                          child: Image.network(widget.product.productImageUrl, fit: BoxFit.contain),
-                        ),
+                        Container(
+                            height: MediaQuery.of(context).size.width - 100,
+                            width: MediaQuery.of(context).size.width - 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: NetworkImage(widget.product.productImageUrl),
+                                fit: BoxFit.contain,
+                              ),
+                            )),
                         const SizedBox(height: 20),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,25 +107,27 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                               spacing: 15,
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
-                                Text(
+                                /* Text(
                                   'Add to Favorites',
                                   style: textStyles.font_14w400.copyWith(
                                     color: MyColors.brown97805F,
                                     decoration: TextDecoration.underline,
                                     decorationColor: MyColors.brown97805F,
                                   ),
-                                ),
+                                ),*/
                                 InkWell(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute<void>(
-                                        builder: (BuildContext context) => const ReviewsPage(),
+                                        builder: (BuildContext context) => ReviewsPage(
+                                          productId: widget.product.id,
+                                        ),
                                       ),
                                     );
                                   },
                                   child: Text(
-                                    'Leave A Review',
+                                    'LEAVE A REVIEW',
                                     style: textStyles.font_14w400.copyWith(
                                       color: MyColors.brown97805F,
                                       decoration: TextDecoration.underline,
@@ -130,7 +138,7 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                               ],
                             ),
                             Text(
-                              '\$\$\$',
+                              widget.product.cost,
                               style: textStyles.font_14w400.copyWith(
                                 color: MyColors.green908C00,
                               ),
@@ -138,40 +146,7 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Wrap(
-                          spacing: 10,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            AnimatedRatingStars(
-                              initialRating: 4,
-                              minRating: 0.0,
-                              maxRating: 5.0,
-                              filledColor: MyColors.orangeFD5944,
-                              emptyColor: MyColors.grey3F3F3F,
-                              filledIcon: Icons.star,
-                              halfFilledIcon: Icons.star_half,
-                              emptyIcon: Icons.star,
-                              onChanged: (double rating) {},
-                              displayRatingValue: true,
-                              interactiveTooltips: true,
-                              customFilledIcon: Icons.star,
-                              customHalfFilledIcon: Icons.star_half,
-                              customEmptyIcon: Icons.star,
-                              starSize: 20.0,
-                              animationDuration: const Duration(milliseconds: 100),
-                              animationCurve: Curves.easeInOut,
-                              readOnly: false,
-                            ),
-                            Text(
-                              'REVIEWS (200+)',
-                              style: textStyles.font_12w500.copyWith(
-                                color: MyColors.greyEBEBEB.withOpacity(0.2),
-                                decoration: TextDecoration.underline,
-                                decorationColor: MyColors.greyEBEBEB.withOpacity(0.2),
-                              ),
-                            ),
-                          ],
-                        ),
+                        ReviewsInfo(productId: widget.product.id),
                         const SizedBox(height: 20),
                         Text(
                           widget.product.productDescription,
@@ -248,7 +223,7 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                         const SizedBox(height: 40),
                         buildSpecification(specification: 'Region', value: widget.product.town + widget.product.state),
                         buildSpecification(specification: 'Mezcalero', value: widget.product.mezcalero),
-                        buildSpecification(specification: 'Spirit Type', value: widget.product.mezcalero),
+                        buildSpecification(specification: 'Spirit Type', value: widget.categoryName),
                         buildSpecification(specification: 'Category', value: widget.categoryName),
                         buildSpecification(specification: 'Agave', value: widget.product.agave),
                         buildSpecification(specification: 'Age', value: widget.product.age),
@@ -275,6 +250,7 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                           ),
                         ),
                         const SizedBox(height: 26),
+                        ReviewsList(productId: widget.product.id),
                       ],
                     ),
                   ),

@@ -69,24 +69,46 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: widthOfScreen * 0.5,
-                  child: AutoSizeText(
-                    category.name.toUpperCase(),
-                    style: TextStyle(
-                      fontFamily: 'CircularAirPro',
-                      fontSize: heightOfScreen * 0.02,
-                      height: heightOfScreen * 0.001750,
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFFE3FF0A),
-                      overflow: TextOverflow.ellipsis,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: widthOfScreen * 0.5,
+                      child: AutoSizeText(
+                        category.name.toUpperCase(),
+                        style: TextStyle(
+                          fontFamily: 'CircularAirPro',
+                          fontSize: heightOfScreen * 0.017,
+                          height: heightOfScreen * 0.001750,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFFE3FF0A),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 18),
+                    GestureDetector(
+                      onTap: onTap,
+                      child: AutoSizeText(
+                        'View All ${category.name} Brands',
+                        style: TextStyle(
+                          fontFamily: 'InstrumentSerif',
+                          fontSize: 13,
+                          height: heightOfScreen * 0.002333,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF97805F),
+                          decorationThickness: 1,
+                          decorationColor: const Color(0xFF97805F),
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Expanded(
                   child: AutoSizeText(
-                    // "subtitle" on left
                     category.shortDescription.toUpperCase(),
                     style: TextStyle(
                       fontFamily: 'CircularXXMono',
@@ -97,27 +119,11 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
                       color: const Color(0xFFE2D7C1),
                     ),
                     overflow: TextOverflow.visible,
-                    textAlign: TextAlign.right,
+                    textAlign: TextAlign.left,
                     maxLines: 4,
                   ),
                 ),
               ],
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: AutoSizeText(
-                'View All ${category.name} Brands',
-                style: TextStyle(
-                  fontFamily: 'InstrumentSerif',
-                  fontSize: 14,
-                  height: heightOfScreen * 0.002333,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF97805F),
-                  decorationThickness: 1,
-                  decorationColor: const Color(0xFF97805F),
-                  decoration: TextDecoration.underline,
-                ),
-              ),
             ),
           ],
         ),

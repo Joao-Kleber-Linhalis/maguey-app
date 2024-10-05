@@ -160,6 +160,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final IconData? prefixIcon;
   final Function(String)? onChanged;
+  final TextInputAction? textInputAction;
 
   const CustomTextFormField({
     Key? key,
@@ -168,6 +169,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.validator,
     this.prefixIcon,
     this.onChanged,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -195,6 +197,7 @@ class CustomTextFormField extends StatelessWidget {
           horizontal: 15,
         ),
       ),
+      textInputAction: textInputAction,
       onChanged: onChanged,
       style: const TextStyle(color: Colors.white),
       validator: validator,

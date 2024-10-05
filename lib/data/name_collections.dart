@@ -7,4 +7,5 @@ class NameCollections {
   static const String shopsCollection = 'shops';
   static const String eventSuggestions = 'eventSuggestions';
   static const String productSuggestions = 'productSuggestions';
+  static const String reviewsCollection = 'reviews';
 }

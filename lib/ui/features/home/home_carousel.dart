@@ -38,7 +38,6 @@ class _HomeCarouselState extends State<HomeCarousel> {
   @override
   void initState() {
     super.initState();
-    //Monta as paginas na list _pages usando a list imagePaths como parametro
     _pages = List.generate(
       imagePaths.length,
       (index) => ImagePlaceHolder(

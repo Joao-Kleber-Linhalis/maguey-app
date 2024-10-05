@@ -64,7 +64,7 @@ class BrandScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Text(
                           '${brand.city}, ${brand.state}, ${brand.country}',
-                          style: textStyles.font_12w500.copyWith(
+                          style: textStyles.font_13w300.copyWith(
                             fontWeight: FontWeight.w400,
                             color: MyColors.brown97805F,
                           ),

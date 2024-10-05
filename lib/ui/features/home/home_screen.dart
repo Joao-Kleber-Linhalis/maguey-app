@@ -103,10 +103,10 @@ class HomeContent extends StatelessWidget {
                         alignment: WrapAlignment.center,
                         children: [
                           Text(
-                            'brand',
+                            'brand  ',
                             style: TextStyle(
                               color: const Color(0xFFEDE6D8),
-                              fontSize: 40,
+                              fontSize: 34,
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.italic,
                               height: heightOfScreen * 0.001813,
@@ -131,19 +131,7 @@ class HomeContent extends StatelessWidget {
                       const HomeCarousel(), // image carousel
                       SizedBox(height: heightOfScreen * 0.035),
                       Text(
-                        'Search for the latest in Mezcal and Agave Spirits.',
-                        style: TextStyle(
-                          color: const Color(0xFFE2D7C1),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          height: heightOfScreen * 0.0014,
-                          fontFamily: 'CircularAirPro',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: heightOfScreen * 0.011667),
-                      Text(
-                        'Explore bars, restaurants and retailers near you.',
+                        'Search for the latest in Mezcal and Agave Spirits. Explore bars, restaurants and retailers near you.',
                         style: TextStyle(
                           color: const Color(0xFFE2D7C1),
                           fontSize: 20,
