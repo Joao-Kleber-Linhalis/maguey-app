@@ -18,6 +18,12 @@
 	<string>Maguey All Day</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Need camera access to take pictures</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Need location access to show on map</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Need location access to show on map</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

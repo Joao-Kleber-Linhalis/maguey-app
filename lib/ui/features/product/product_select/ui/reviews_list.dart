@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:magueyapp/data/reviews_controller.dart';
 
 import '../../../../../entity/review_entity.dart';
+import '../../../../../provider/user_provider.dart';
 import '../../../../../theme/my_colors.dart';
 import '../../../brand_select/brand_screen.dart';
 
@@ -122,16 +123,17 @@ class _ReviewsListState extends State<ReviewsList> {
                         ),
                       ],
                     ),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.redAccent),
-                        onPressed: () async {
-                          await showDialogDelete(context, review.id);
-                        },
+                    if (review.userId == UserProvider().currentUser.id)
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.redAccent),
+                          onPressed: () async {
+                            await showDialogDelete(context, review.id);
+                          },
+                        ),
                       ),
-                    ),
                   ],
                 );
               },

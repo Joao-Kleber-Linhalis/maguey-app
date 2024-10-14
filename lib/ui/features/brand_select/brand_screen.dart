@@ -38,8 +38,8 @@ class BrandScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          categoryName,
-                          style: textStyles.font_10w400Black.copyWith(
+                          categoryName.toUpperCase(),
+                          style: textStyles.font_14w400.copyWith(
                             color: MyColors.brown97805F,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 1.5,

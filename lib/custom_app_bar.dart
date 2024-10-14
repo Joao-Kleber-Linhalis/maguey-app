@@ -15,7 +15,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Column(
         children: [
-          Image.asset(MyIcons.brandIcon, height: 50),
+          GestureDetector(
+            onTap: () {
+              /*Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+                (Route<dynamic> route) => false, // This condition removes all routes from the stack
+              );*/
+            },
+            child: Image.asset(MyIcons.brandIcon, height: 50),
+          ),
         ],
       ),
       toolbarHeight: 100,

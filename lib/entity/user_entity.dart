@@ -57,4 +57,6 @@ class UserEntity extends Entity {
       favoriteEvents: favoriteEvents ?? this.favoriteEvents,
     );
   }
+
+  UserEntity.empty() : this(id: '', email: '', profilePicture: '', createdAt: DateTime.now(), favoriteProducts: [], favoriteEvents: []);
 }

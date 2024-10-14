@@ -8,6 +8,7 @@ import 'package:magueyapp/entity/review_entity.dart';
 import 'package:path/path.dart' as path;
 
 import '../../../../custom_app_bar.dart';
+import '../../../../provider/user_provider.dart';
 import '../../../../theme/my_colors.dart';
 import '../../../../theme/text_styling.dart';
 import '../../../../widgets/LoaderElevatedButton.dart';
@@ -239,6 +240,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 rating: currentRating.toInt().toString(),
                 reviewText: reviewController.text.trim(),
                 productId: widget.productId,
+                userId: UserProvider().currentUser.id,
               );
 
               ReviewsController().addReview(eventSuggestion);

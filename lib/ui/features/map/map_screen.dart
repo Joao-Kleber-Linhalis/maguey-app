@@ -1,14 +1,77 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/dashboard_provider.dart';
 
+class LoadMap extends StatelessWidget {
+  const LoadMap({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Position>(
+      future: _fetchLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        }
+        if (snapshot.hasData) {
+          return MapPage(
+            latitude: snapshot.data?.latitude ?? 33.99788550112016,
+            longitude: snapshot.data?.longitude ?? -118.2565948739648,
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+}
+
+Future<bool> _requestPermission() async {
+  LocationPermission permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return false;
+    }
+  }
+  return permission == LocationPermission.whileInUse || permission == LocationPermission.always;
+}
+
+Future<Position> _getCurrentLocation() async {
+  if (await _requestPermission()) {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return position;
+  }
+  throw Exception('Location permission not granted');
+}
+
+Future<Position> _fetchLocation() async {
+  try {
+    Position position = await _getCurrentLocation();
+    return position;
+  } catch (e) {
+    throw Exception('Unable to fetch location: $e');
+  }
+}
+
 class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+  final double latitude;
+  final double longitude;
+  const MapPage({super.key, required this.latitude, required this.longitude});
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -49,12 +112,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng currentLocation = const LatLng(33.99788550112016, -118.2565948739648);
-
-    if (dashboardProvider.shopEventList.isNotEmpty) {
-      currentLocation = LatLng(dashboardProvider.shopEventList[0].latitude!, dashboardProvider.shopEventList[0].longitude!);
-    }
-
+    LatLng currentLocation = LatLng(widget.latitude, widget.longitude);
     double _latitude = currentLocation.latitude;
     double _longitude = currentLocation.longitude;
     return Stack(
@@ -67,7 +125,7 @@ class _MapPageState extends State<MapPage> {
               target: currentLocation,
               zoom: 12.0,
             ),
-            mapType: MapType.satellite,
+            mapType: MapType.hybrid,
             markers: markers,
             onCameraMove: (CameraPosition position) {
               setState(() {
@@ -152,7 +210,7 @@ class _MapPageState extends State<MapPage> {
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 13,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.visible,
                             ),
                           ),
                         ],

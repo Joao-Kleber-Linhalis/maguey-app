@@ -25,6 +25,11 @@ class UserProvider with ChangeNotifier {
   DashboardProvider dashboardProvider = DashboardProvider();
   UserController userController = UserController();
   String profilePicturePath = '';
+  UserEntity currentUser = UserEntity.empty();
+  setCurrentUser(UserEntity user) {
+    currentUser = user;
+    notifyListeners();
+  }
 
   UserEntity createNewUser(
       {required String userId,

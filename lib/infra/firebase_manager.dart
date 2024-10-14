@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:magueyapp/provider/user_provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../data/user_controller.dart';
@@ -45,6 +46,7 @@ class FirebaseManager {
 
       if (userCredential.user != null) {
         UserEntity user = await UserController().searchUser(userCredential.user!.uid);
+        UserProvider().setCurrentUser(user);
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) {
             return const MyHomePage();

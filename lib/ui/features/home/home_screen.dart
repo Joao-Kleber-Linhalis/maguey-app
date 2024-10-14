@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _screens = [
     const HomeContent(),
-    const MapPage(),
+    const LoadMap(),
     const EventsList(),
     const MeScreen(),
   ];

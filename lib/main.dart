@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:magueyapp/data/user_controller.dart';
 import 'package:magueyapp/provider/dashboard_provider.dart';
 import 'package:magueyapp/provider/google_sign_in_provider.dart';
 import 'package:magueyapp/provider/log_in_sign_up_provider.dart';
@@ -73,7 +74,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 if (authSnapshot.connectionState == ConnectionState.active) {
                   return authSnapshot.hasData ? const MyHomePage() : const LogInScreen();
                 }
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               },
             );
           },
@@ -92,4 +93,8 @@ Future<bool> checkInternetConnection() async {
     hasInternet = true;
   }
   return hasInternet;
+}
+
+void setCurrentUser() async {
+  UserProvider().setCurrentUser(await UserController().searchUser(FirebaseAuth.instance.currentUser!.uid));
 }

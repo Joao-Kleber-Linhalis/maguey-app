@@ -85,6 +85,7 @@ dependencies:
   rounded_loading_button: ^2.1.0
   dropdown_button2: ^2.3.9
   path: ^1.8.3
+  geolocator: ^9.0.0
 
 dev_dependencies:
   flutter_test:

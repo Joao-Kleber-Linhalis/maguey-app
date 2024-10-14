@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../custom_app_bar.dart';
 import '../../../entity/brand_entity.dart';
 import '../../../entity/category_entity.dart';
+import '../../../entity/mezcal_product.dart';
 import '../../../provider/dashboard_provider.dart';
 import '../../../theme/my_colors.dart';
 import '../../../theme/text_styling.dart';
@@ -49,7 +50,7 @@ class _SelectABrandState extends State<SelectABrand> {
           child: Column(
             children: [
               CustomTextFormField(
-                hintText: 'Search within, let the Spirits speak to you',
+                hintText: 'search brand, agave, mezcalero + more',
                 controller: controller,
                 validator: (value) {
                   return null;
@@ -57,7 +58,30 @@ class _SelectABrandState extends State<SelectABrand> {
                 onChanged: (value) {
                   setState(() {
                     filteredBrands = brands.where((brand) {
-                      return brand.name.toLowerCase().contains(value.toLowerCase());
+                      String searchValue = value.toLowerCase();
+                      if (brand.name.toLowerCase().contains(searchValue)) {
+                        return true;
+                      }
+                      List<Product> products = dashboardProvider.products.where((product) => product.brandId == brand.id).toList();
+                      for (Product product in products) {
+                        if (product.productName.toLowerCase().contains(searchValue) ||
+                            product.productDescription.toLowerCase().contains(searchValue) ||
+                            product.mezcalero.toLowerCase().contains(searchValue) ||
+                            product.maguey.toLowerCase().contains(searchValue) ||
+                            product.agave.toLowerCase().contains(searchValue) ||
+                            product.fermentation.toLowerCase().contains(searchValue) ||
+                            product.milling.toLowerCase().contains(searchValue) ||
+                            product.distillation.toLowerCase().contains(searchValue) ||
+                            product.style.toLowerCase().contains(searchValue) ||
+                            product.state.toLowerCase().contains(searchValue) ||
+                            product.town.toLowerCase().contains(searchValue) ||
+                            product.abv.toLowerCase().contains(searchValue) ||
+                            product.age.toLowerCase().contains(searchValue) ||
+                            product.year.toLowerCase().contains(searchValue)) {
+                          return true;
+                        }
+                      }
+                      return false;
                     }).toList();
                   });
                 },

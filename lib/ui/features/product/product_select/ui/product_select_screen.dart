@@ -51,8 +51,8 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                           spacing: 10,
                           children: [
                             Text(
-                              widget.categoryName,
-                              style: textStyles.font_10w400Black.copyWith(
+                              widget.categoryName.toUpperCase(),
+                              style: textStyles.font_14w400.copyWith(
                                 color: MyColors.brown97805F,
                                 fontWeight: FontWeight.w500,
                                 letterSpacing: 1.5,
@@ -62,14 +62,14 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
                             ),
                             Text(
                               '|',
-                              style: textStyles.font_10w400Black.copyWith(
+                              style: textStyles.font_14w400.copyWith(
                                 color: MyColors.brown97805F,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             Text(
-                              widget.product.brandName,
-                              style: textStyles.font_10w400Black.copyWith(
+                              widget.product.brandName.toUpperCase(),
+                              style: textStyles.font_14w400.copyWith(
                                 color: MyColors.brown97805F,
                                 fontWeight: FontWeight.w500,
                                 letterSpacing: 1.5,

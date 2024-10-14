@@ -6,6 +6,7 @@ class ReviewEntity extends Entity {
   String rating;
   String reviewText;
   String productId;
+  String userId;
 
   ReviewEntity({
     required super.id,
@@ -14,6 +15,7 @@ class ReviewEntity extends Entity {
     required this.rating,
     required this.reviewText,
     required this.productId,
+    required this.userId,
   });
 
   factory ReviewEntity.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class ReviewEntity extends Entity {
       rating: json['rating'],
       reviewText: json['reviewText'],
       productId: json['productId'],
+      userId: json['userId'],
     );
   }
 
@@ -36,6 +39,7 @@ class ReviewEntity extends Entity {
       'rating': rating,
       'reviewText': reviewText,
       'productId': productId,
+      'userId': userId,
     };
   }
 
@@ -46,6 +50,7 @@ class ReviewEntity extends Entity {
     String? rating,
     String? reviewText,
     String? productId,
+    String? userId,
   }) {
     return ReviewEntity(
       id: id ?? this.id,
@@ -54,6 +59,7 @@ class ReviewEntity extends Entity {
       rating: rating ?? this.rating,
       reviewText: reviewText ?? this.reviewText,
       productId: productId ?? this.productId,
+      userId: userId ?? this.userId,
     );
   }
 }

@@ -149,7 +149,6 @@ class _LogInScreenState extends State<LogInScreen> {
   Future<void> _onGoogleLogin(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loaderGoogle = true);
-    print("aaaaa");
     await GoogleSignInProvider().signInWithGoogle();
     setState(() => loaderGoogle = false);
   }
