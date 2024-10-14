@@ -38,7 +38,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(goesBack: true),
         backgroundColor: const Color(0xFF2B2B2B),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

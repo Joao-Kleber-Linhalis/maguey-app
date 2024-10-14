@@ -23,7 +23,7 @@ class BrandScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.black2B2B2B,
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(goesBack: true),
       body: SafeArea(
         bottom: false,
         child: Column(

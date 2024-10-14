@@ -37,7 +37,9 @@ class _ReviewsPageState extends State<ReviewsPage> {
     return Form(
       key: keyReviews,
       child: Scaffold(
-        appBar: const CustomAppBar(),
+        appBar: const CustomAppBar(
+          goesBack: true,
+        ),
         backgroundColor: MyColors.black2B2B2B,
         body: SafeArea(
           child: Padding(

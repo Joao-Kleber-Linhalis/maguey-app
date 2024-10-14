@@ -5,7 +5,8 @@ import 'theme/my_icons.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showDivider;
-  const CustomAppBar({super.key, this.showDivider = true});
+  final bool goesBack;
+  const CustomAppBar({super.key, this.showDivider = true, this.goesBack = false});
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
@@ -17,10 +18,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           GestureDetector(
             onTap: () {
-              /*Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => MyHomePage()),
-                (Route<dynamic> route) => false, // This condition removes all routes from the stack
-              );*/
+              if (goesBack) {
+                Navigator.of(context).popUntil((route) => route.isFirst || route.settings.name == '/home');
+              }
             },
             child: Image.asset(MyIcons.brandIcon, height: 50),
           ),

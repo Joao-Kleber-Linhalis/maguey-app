@@ -44,7 +44,7 @@ class _SelectABrandState extends State<SelectABrand> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: MyColors.black2B2B2B,
-        appBar: const CustomAppBar(),
+        appBar: const CustomAppBar(goesBack: true),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

@@ -27,8 +27,6 @@ class _EventsListState extends State<EventsList> {
     dashboardProvider = Provider.of<DashboardProvider>(context, listen: false);
     events = dashboardProvider.events;
     filteredEvents = events;
-
-    // Adding the listener
     eventTitleController.addListener(_filterEvents);
   }
 

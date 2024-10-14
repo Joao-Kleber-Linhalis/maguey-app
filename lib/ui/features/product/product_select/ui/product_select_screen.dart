@@ -32,7 +32,9 @@ class _ProductSelectScreenState extends State<ProductSelectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(
+        goesBack: true,
+      ),
       backgroundColor: MyColors.black2B2B2B,
       body: SafeArea(
         bottom: false,
