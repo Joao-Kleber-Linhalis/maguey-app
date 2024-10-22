@@ -158,12 +158,6 @@ class LogInSignUpProvider with ChangeNotifier {
       print(e);
     }
   }
-  //4 - User's device is not connected to the internet
-  //Problems to check
-  //////1 - User's emails is already registered
-  /////2 - User's password is wrong
-  //////3 - User's email is not registered
-  /////5 - Check mark needs to be checked
 
   Future<void> checkConditionsSignUpUser(BuildContext context) async {
     //updateLoading(true);
