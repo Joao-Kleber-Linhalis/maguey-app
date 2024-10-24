@@ -163,7 +163,7 @@ class LogInSignUpProvider with ChangeNotifier {
     //updateLoading(true);
     final formSignUp = formKeyAuthenticationSignUp.currentState!;
     if (formSignUp.validate()) {
-      if (isCheckedTerms) {
+      if (!isCheckedTerms) {
         ShowSnackBar(context: context).showErrorSnackBar(message: 'Please accept the terms and conditions.', durationInSeconds: 2);
       } else {
         await firebaseManager.registerUser(

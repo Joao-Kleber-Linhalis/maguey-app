@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -48,12 +51,14 @@ Future<bool> _requestPermission() async {
       return false;
     }
   }
-  return permission == LocationPermission.whileInUse || permission == LocationPermission.always;
+  return permission == LocationPermission.whileInUse ||
+      permission == LocationPermission.always;
 }
 
 Future<Position> _getCurrentLocation() async {
   if (await _requestPermission()) {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     return position;
   }
   throw Exception('Location permission not granted');
@@ -79,14 +84,24 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   late DashboardProvider dashboardProvider;
-  late ShopEventEntity currentShopEvent;
+  ShopEventEntity currentShopEvent = ShopEventEntity(latitude: 0, longitude: 0, link: "", name: "", townName: "", id: "", imageUrl: "", description: "", createDate: DateTime.now(), address: "", type: "");
+  String _mapStyle = '';
+
 
   @override
   void initState() {
     super.initState();
-
+    _loadMapStyle();
     dashboardProvider = Provider.of<DashboardProvider>(context, listen: false);
     populateListMarkersList();
+    
+  }
+
+  Future<void> _loadMapStyle() async {
+    String style = await rootBundle.loadString('assets/maps/map_blue_style.json');
+    setState(() {
+      _mapStyle = style;
+    });
   }
 
   Set<Marker> markers = {};
@@ -120,12 +135,13 @@ class _MapPageState extends State<MapPage> {
         Scaffold(
           body: GoogleMap(
             zoomControlsEnabled: false,
+            style: _mapStyle,
             onMapCreated: _controller.complete,
             initialCameraPosition: CameraPosition(
               target: currentLocation,
               zoom: 12.0,
             ),
-            mapType: MapType.hybrid,
+            mapType: MapType.normal,
             markers: markers,
             onCameraMove: (CameraPosition position) {
               setState(() {
@@ -198,7 +214,8 @@ class _MapPageState extends State<MapPage> {
                           ),
                           if (currentShopEvent.type == 'event')
                             Text(
-                              DateFormat('MMMM dd yyyy').format(currentShopEvent.createDate!),
+                              DateFormat('MMMM dd yyyy')
+                                  .format(currentShopEvent.createDate!),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 13,
