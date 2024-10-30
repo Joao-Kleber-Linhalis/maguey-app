@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
@@ -84,21 +83,31 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   late DashboardProvider dashboardProvider;
-  ShopEventEntity currentShopEvent = ShopEventEntity(latitude: 0, longitude: 0, link: "", name: "", townName: "", id: "", imageUrl: "", description: "", createDate: DateTime.now(), address: "", type: "");
+  ShopEventEntity currentShopEvent = ShopEventEntity(
+      latitude: 0,
+      longitude: 0,
+      link: "",
+      name: "",
+      townName: "",
+      id: "",
+      imageUrl: "",
+      description: "",
+      createDate: DateTime.now(),
+      address: "",
+      type: "");
   String _mapStyle = '';
-
 
   @override
   void initState() {
     super.initState();
-    _loadMapStyle();
     dashboardProvider = Provider.of<DashboardProvider>(context, listen: false);
+    _loadMapStyle();
     populateListMarkersList();
-    
   }
 
   Future<void> _loadMapStyle() async {
-    String style = await rootBundle.loadString('assets/maps/map_blue_style.json');
+    String style =
+        await rootBundle.loadString('assets/maps/map_blue_style.json');
     setState(() {
       _mapStyle = style;
     });
@@ -106,8 +115,13 @@ class _MapPageState extends State<MapPage> {
 
   Set<Marker> markers = {};
   void populateListMarkersList() {
+    // markers.add(Marker(
+    //     markerId: MarkerId('${widget.latitude}-${widget.longitude}_myPosition'),
+    //     position: LatLng(widget.latitude, widget.longitude)));
+
     if (dashboardProvider.shopEventList.isEmpty) return;
     List<ShopEventEntity> shopEventList = dashboardProvider.shopEventList;
+    print(shopEventList);
     currentShopEvent = shopEventList[0];
     for (int i = 0; i < shopEventList.length; i++) {
       ShopEventEntity shopEvent = shopEventList[i];
