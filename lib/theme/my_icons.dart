@@ -34,13 +34,15 @@ class MyIcons {
   // Clock Icon
   static const String clockIcon = "$_otherIconsPath/clock.svg";
   // Close Circle Icon
-  static const String closeCircleButton = "$_otherIconsPath/close_circle_button.svg";
+  static const String closeCircleButton =
+      "$_otherIconsPath/close_circle_button.svg";
 
   // -----------------Star Icons For Reviews-------------------------
   // Star Icons
   static const String starFilledIcon = "$_otherIconsPath/star_filled.svg";
   // Star Partial Filled Icons
-  static const String starPartialFilledIcon = "$_otherIconsPath/star_partial_filled.svg";
+  static const String starPartialFilledIcon =
+      "$_otherIconsPath/star_partial_filled.svg";
 
   // -------------------Bottom Navbar Icons -----------------------
   // Heart Icon
@@ -54,6 +56,8 @@ class MyIcons {
 
   // Marker Icon
   static const String markerIcon = "$_otherIconsPath/marker.png";
+  static const String markerIconWithouCenter =
+      "$_otherIconsPath/map_marker.png";
 
   // ------------------- Profile Icons ----------------------------
   static const String deleteAccount = "$_otherIconsPath/delete_account.svg";
@@ -72,7 +76,8 @@ class MyImages {
   static const String splashBg = "$_basePath/splash/splash_bg.jpg";
 
   // Used in Getting Started Screen
-  static const String startingScreenShape = "$_basePath/auth/starting_screen.png";
+  static const String startingScreenShape =
+      "$_basePath/auth/starting_screen.png";
 
   // Used in Sign In Screen
   static const String signInScreenShape = "$_basePath/auth/signin.png";
@@ -81,10 +86,12 @@ class MyImages {
   static const String signUpScreenShape = "$_basePath/auth/signup.png";
 
   // Profile Icon Image used on Homepage and Profile Screen
-  static const String profileDefaultImage = "$_profileFolderPath/profile_default.png";
+  static const String profileDefaultImage =
+      "$_profileFolderPath/profile_default.png";
 
   // Used in Homepage
-  static const String homeContainerImage = "$_othersFolderPath/home_container_image.png";
+  static const String homeContainerImage =
+      "$_othersFolderPath/home_container_image.png";
 
   // Used in Homepage
   static const String bannerImage = "$_othersFolderPath/banner.png";
@@ -97,10 +104,4 @@ class MyImages {
   // Shop Default Images
   static const String retailImage = "$_othersFolderPath/retail.jpg";
   static const String barImage = "$_othersFolderPath/bar.jpg";
-}
-
-class MyMapThemes {
-  static const String _basePath = "assets/maps";
-
-  static const String mapDefaultTheme = "$_basePath/map_default_style.json";
 }
