@@ -1,4 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SaveImage {
@@ -10,26 +11,23 @@ class SaveImage {
 
   SaveImage({required this.image, required this.path, required this.id});
 
-
-  Future<String> saveAndGetUrl() async{
-
-    final imageRef = storageRef.child(path + "/"+ id );
+  Future<String> saveAndGetUrl() async {
+    final imageRef = storageRef.child(path + "/" + id);
 
     String url = "";
-    try{
+    try {
       // final blob = await image.readAsString();
-      await imageRef.putData(image, SettableMetadata(
-        contentType: "image/jpeg",
-      ));
+      await imageRef.putData(
+          image,
+          SettableMetadata(
+            contentType: "image/jpeg",
+          ));
       url = await imageRef.getDownloadURL();
-
-
-    } catch(e){
-      print(e);
+    } catch (e) {
+      debugPrint(e.toString());
       rethrow;
     }
 
     return url;
   }
 }
-

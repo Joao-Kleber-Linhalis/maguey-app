@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/category_entity.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -29,7 +31,8 @@ class CategoryController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while signing up user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while signing up user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -40,7 +43,7 @@ class CategoryController {
         id: categoryId,
       );
     } catch (e) {
-      print("Error while deleting category: ${e.toString()}");
+      debugPrint("Error while deleting category: ${e.toString()}");
     }
   }
 
@@ -52,7 +55,8 @@ class CategoryController {
         data: category,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating category: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating category: ${e.toString()}", stackTrace);
     }
   }
 
@@ -64,14 +68,20 @@ class CategoryController {
       );
       return Category.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for category: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for category: ${e.toString()}", stackTrace);
     }
   }
 
   Future<List<Category>> searchAllCategories() async {
     try {
       final data = await _firebase.searchAllData(collection: _collection);
-      List<String> categoriesList = ["Mezcal/Agave Spirits", "Raicilla", "Bacanora", "Sotol"];
+      List<String> categoriesList = [
+        "Mezcal/Agave Spirits",
+        "Raicilla",
+        "Bacanora",
+        "Sotol"
+      ];
       List<Category> categories = [];
       for (var name in categoriesList) {
         for (var i in data) {
@@ -82,7 +92,8 @@ class CategoryController {
       }
       return categories;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for brand: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for brand: ${e.toString()}", stackTrace);
     }
   }
 }

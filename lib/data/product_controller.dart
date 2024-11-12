@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/mezcal_product.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -29,7 +31,8 @@ class MezcalProductController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while signing up user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while signing up user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -39,9 +42,8 @@ class MezcalProductController {
         collection: _collection,
         id: productId,
       );
-      print('Mezcal product deleted successfully');
     } catch (e) {
-      print("Error while deleting mezcal product: ${e.toString()}");
+      debugPrint("Error while deleting mezcal product: ${e.toString()}");
     }
   }
 
@@ -53,7 +55,8 @@ class MezcalProductController {
         data: product,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating mezcal product: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating mezcal product: ${e.toString()}", stackTrace);
     }
   }
 
@@ -65,11 +68,13 @@ class MezcalProductController {
       );
       return Product.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for mezcal product: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for mezcal product: ${e.toString()}", stackTrace);
     }
   }
 
-  Future<List<Product>> searchMezcalProductsWithCondition(String condition, String fieldName) async {
+  Future<List<Product>> searchMezcalProductsWithCondition(
+      String condition, String fieldName) async {
     List<Product> products = [];
     try {
       final data = await _firebase.searchDataWithCondition(
@@ -82,7 +87,9 @@ class MezcalProductController {
       }
       return products;
     } catch (e, stackTrace) {
-      return Future.error("Error while searching mezcal products with condition: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while searching mezcal products with condition: ${e.toString()}",
+          stackTrace);
     }
   }
 
@@ -95,7 +102,8 @@ class MezcalProductController {
       }
       return products;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for brand: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for brand: ${e.toString()}", stackTrace);
     }
   }
 }

@@ -46,7 +46,8 @@ class DashboardProvider with ChangeNotifier {
 
   Future<UserEntity> loadDataGetUserInformation() async {
     try {
-      UserEntity newUser = await userController.searchUser(firebaseController.getCurrentUser()!.uid);
+      UserEntity newUser = await userController
+          .searchUser(firebaseController.getCurrentUser()!.uid);
       events = await eventController.searchAllEvents();
       shops = await shopController.searchAllShops();
       categories = await categoryController.searchAllCategories();
@@ -56,7 +57,7 @@ class DashboardProvider with ChangeNotifier {
       initializeShopEventList();
       return newUser;
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       throw Exception('Something went wrong');
     }
   }

@@ -21,7 +21,8 @@ class UserProvider with ChangeNotifier {
     return provider;
   }
   UserProvider._internal();
-  GlobalKey<FormState> formKeyAuthenticationUpdatePassword = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyAuthenticationUpdatePassword =
+      GlobalKey<FormState>();
   DashboardProvider dashboardProvider = DashboardProvider();
   UserController userController = UserController();
   String profilePicturePath = '';
@@ -31,20 +32,20 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  UserEntity createNewUser(
-      {required String userId,
-      // required String signUpName,
-      required String signUpEmail,
-      required String profile_picture}) {
-    UserEntity new_user = UserEntity(
+  UserEntity createNewUser({
+    required String userId,
+    required String signUpEmail,
+    required String profilePicture,
+  }) {
+    final newUser = UserEntity(
         id: userId,
         //name: signUpName,
         email: signUpEmail,
-        profilePicture: profile_picture,
+        profilePicture: profilePicture,
         createdAt: DateTime.now(),
         favoriteProducts: [],
         favoriteEvents: []);
-    return new_user;
+    return newUser;
   }
 
   String getCurrentUserProfilePicture() {
@@ -52,7 +53,8 @@ class UserProvider with ChangeNotifier {
     return profilePicturePath;
   }
 
-  void goToProfileScreen({required BuildContext context, required UserEntity user}) {}
+  void goToProfileScreen(
+      {required BuildContext context, required UserEntity user}) {}
 
   final ImagePicker picker = ImagePicker();
   File? photoFile;
@@ -76,7 +78,7 @@ class UserProvider with ChangeNotifier {
       photoFile = File(pickedFile.path);
       notifyListeners();
     } else {
-      print('No image selected.');
+      debugPrint('No image selected.');
     }
   }
 
@@ -121,24 +123,31 @@ class UserProvider with ChangeNotifier {
 
   Future<String> updateUserImage({required BuildContext context}) async {
     try {
-      String? userId = await await FirebaseManager().getUserCurrentID();
+      String? userId = await FirebaseManager().getUserCurrentID();
       if (userId == null) {
         throw Exception('User not connected');
       }
-      String profilePicture = await SaveImage(image: await convertFileToUint8List(photoFile!), path: 'profile_images', id: userId).saveAndGetUrl();
+      String profilePicture = await SaveImage(
+              image: await convertFileToUint8List(photoFile!),
+              path: 'profile_images',
+              id: userId)
+          .saveAndGetUrl();
       UserEntity newUser = createNewUser(
           userId: dashboardProvider.currentUser.id,
           //signUpName: dashboardProvider.currentUser.name,
           signUpEmail: dashboardProvider.currentUser.email,
-          profile_picture: profilePicture);
+          profilePicture: profilePicture);
       await userController.updateUser(newUser);
       photoFile = null;
-      ShowSnackBar(context: context).showErrorSnackBar(message: 'Image successfully updated.', color: DSColors.primaryActionState1);
+      ShowSnackBar(context: context).showErrorSnackBar(
+        message: 'Image successfully updated.',
+        color: DSColors.primaryActionState1,
+      );
 
       notifyListeners();
       return profilePicture;
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
     return '';
   }
@@ -174,7 +183,8 @@ class UserProvider with ChangeNotifier {
   }
 
   String? validatePassword(String? value) {
-    bool regExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$').hasMatch(updatePassword.text.trim());
+    bool regExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$')
+        .hasMatch(updatePassword.text.trim());
     if (!regExp) {
       return "Your password must contain at least 6 characters,\n including upper and lower case letters and numbers.";
     } else {
@@ -199,26 +209,36 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  TextEditingController updatePasswordEmail = TextEditingController();
-  FirebaseManager firebaseManager = FirebaseManager();
-  Future<void> resetPassword({required BuildContext context, required String newEmail}) async {
+  final updatePasswordEmail = TextEditingController();
+  final firebaseManager = FirebaseManager();
+
+  Future<void> resetPassword({
+    required BuildContext context,
+    required String newEmail,
+  }) async {
     bool hasInternetAccess = await firebaseManager.hasInternetAccess();
     if (hasInternetAccess == false) {
-      ShowSnackBar(context: context).showErrorSnackBar(message: 'Please check your internet connection.');
+      ShowSnackBar(context: context)
+          .showErrorSnackBar(message: 'Please check your internet connection.');
     } else {
       await firebaseManager.resetPassword(
-          email: updatePasswordEmail.text.trim().isEmpty || updatePasswordEmail.text.trim() == null ? newEmail : updatePasswordEmail.text.trim(),
-          context: context);
-      ShowSnackBar(context: context)
-          .showErrorSnackBar(message: 'A link was sent to your email to reset your password.', color: DSColors.primaryActionState1);
+        email: updatePasswordEmail.text.trim().isEmpty
+            ? newEmail
+            : updatePasswordEmail.text.trim(),
+        context: context,
+      );
+      ShowSnackBar(context: context).showErrorSnackBar(
+          message: 'A link was sent to your email to reset your password.',
+          color: DSColors.primaryActionState1);
     }
   }
 
   Future<void> updateUserEmailAndName({required BuildContext context}) async {
-    if (
-        //updateName.text.trim() == dashboardProvider.currentUser.name &&
-        updateEmail.text.trim() == dashboardProvider.currentUser.email) {
-      ShowSnackBar(context: context).showErrorSnackBar(message: 'No Data updated.', color: DSColors.primaryActionState1);
+    if (updateEmail.text.trim() == dashboardProvider.currentUser.email) {
+      ShowSnackBar(context: context).showErrorSnackBar(
+        message: 'No Data updated.',
+        color: DSColors.primaryActionState1,
+      );
       Navigator.of(context).pop();
       return;
     } else {
@@ -226,9 +246,14 @@ class UserProvider with ChangeNotifier {
           userId: dashboardProvider.currentUser.id,
           // signUpName: updateName.text.trim(),
           signUpEmail: updateEmail.text.trim(),
-          profile_picture: photoFile == null ? dashboardProvider.currentUser.profilePicture : await updateUserImage(context: context));
+          profilePicture: photoFile == null
+              ? dashboardProvider.currentUser.profilePicture
+              : await updateUserImage(context: context));
       userController.updateUser(newUser);
-      ShowSnackBar(context: context).showErrorSnackBar(message: 'Data successfully updated.', color: DSColors.primaryActionState1);
+      ShowSnackBar(context: context).showErrorSnackBar(
+        message: 'Data successfully updated.',
+        color: DSColors.primaryActionState1,
+      );
 
       return;
     }

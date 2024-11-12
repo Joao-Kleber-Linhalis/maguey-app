@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/event_entity.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -29,7 +31,8 @@ class EventController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while adding event: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while adding event: ${e.toString()}", stackTrace);
     }
   }
 
@@ -40,7 +43,7 @@ class EventController {
         id: eventId,
       );
     } catch (e) {
-      print("Error while deleting event: ${e.toString()}");
+      debugPrint("Error while deleting event: ${e.toString()}");
     }
   }
 
@@ -52,7 +55,8 @@ class EventController {
         collection: _collection,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating event: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating event: ${e.toString()}", stackTrace);
     }
   }
 
@@ -62,9 +66,11 @@ class EventController {
         collection: _collection,
         id: eventId,
       );
-      return EventEntity.fromJson(data); // Assuming there's a fromJson constructor
+      return EventEntity.fromJson(
+          data); // Assuming there's a fromJson constructor
     } catch (e, stackTrace) {
-      return Future.error("Error searching for event: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for event: ${e.toString()}", stackTrace);
     }
   }
 
@@ -77,7 +83,8 @@ class EventController {
       }
       return events;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for events: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for events: ${e.toString()}", stackTrace);
     }
   }
 }

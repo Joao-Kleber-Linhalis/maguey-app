@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/event_suggestion.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -29,7 +31,8 @@ class EventSuggestionController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while signing up user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while signing up user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -40,7 +43,7 @@ class EventSuggestionController {
         id: eventSuggestionId,
       );
     } catch (e) {
-      print("Error while deleting event suggestion: ${e.toString()}");
+      debugPrint("Error while deleting event suggestion: ${e.toString()}");
     }
   }
 
@@ -52,11 +55,13 @@ class EventSuggestionController {
         data: eventSuggestion,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating event suggestion: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating event suggestion: ${e.toString()}", stackTrace);
     }
   }
 
-  Future<EventSuggestion> searchEventSuggestion(String eventSuggestionId) async {
+  Future<EventSuggestion> searchEventSuggestion(
+      String eventSuggestionId) async {
     try {
       final data = await _firebase.searchData(
         collection: _collection,
@@ -64,7 +69,8 @@ class EventSuggestionController {
       );
       return EventSuggestion.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for event suggestion: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for event suggestion: ${e.toString()}", stackTrace);
     }
   }
 
@@ -77,7 +83,8 @@ class EventSuggestionController {
       }
       return eventSuggestions;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for event suggestions: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for event suggestions: ${e.toString()}", stackTrace);
     }
   }
 }

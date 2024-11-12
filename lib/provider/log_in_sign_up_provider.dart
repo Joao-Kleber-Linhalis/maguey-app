@@ -20,16 +20,22 @@ class LogInSignUpProvider with ChangeNotifier {
   LogInSignUpProvider._internal();
   UserProvider userProvider = UserProvider();
 
-  RoundedLoadingButtonController bntControllerSignUp = RoundedLoadingButtonController();
-  RoundedLoadingButtonController bntControllerLogIn = RoundedLoadingButtonController();
-  RoundedLoadingButtonController bntControllerForgotPassword = RoundedLoadingButtonController();
-  RoundedLoadingButtonController bntControllerGoogleSignUp = RoundedLoadingButtonController();
-  RoundedLoadingButtonController bntControllerGoogleLogIn = RoundedLoadingButtonController();
+  RoundedLoadingButtonController bntControllerSignUp =
+      RoundedLoadingButtonController();
+  RoundedLoadingButtonController bntControllerLogIn =
+      RoundedLoadingButtonController();
+  RoundedLoadingButtonController bntControllerForgotPassword =
+      RoundedLoadingButtonController();
+  RoundedLoadingButtonController bntControllerGoogleSignUp =
+      RoundedLoadingButtonController();
+  RoundedLoadingButtonController bntControllerGoogleLogIn =
+      RoundedLoadingButtonController();
 
   GlobalKey<FormState> formKeyAuthenticationSignUp = GlobalKey<FormState>();
   GlobalKey<FormState> formKeyAuthenticationLogIn = GlobalKey<FormState>();
 
-  GlobalKey<FormState> formKeyAuthenticationResetPassword = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyAuthenticationResetPassword =
+      GlobalKey<FormState>();
 
   FirebaseManager firebaseManager = FirebaseManager();
   //TextEditingController signUpName = TextEditingController();
@@ -45,8 +51,6 @@ class LogInSignUpProvider with ChangeNotifier {
 
   bool isCheckedTerms = false;
   void updateIsCheckTerms() {
-    print(isCheckedTerms);
-
     isCheckedTerms = !isCheckedTerms;
   }
 
@@ -73,7 +77,8 @@ class LogInSignUpProvider with ChangeNotifier {
   }
 
   String? validatePasswordSignUp(String? value) {
-    bool regExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$').hasMatch(signUpPassword.text.trim());
+    bool regExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$')
+        .hasMatch(signUpPassword.text.trim());
     if (!regExp) {
       return "Your password must contain at least 6 characters,\n including upper and lower case letters and numbers.";
     } else {
@@ -99,7 +104,8 @@ class LogInSignUpProvider with ChangeNotifier {
   }
 
   String? validatePasswordLogIn(String? value) {
-    bool regExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$').hasMatch(logInPassword.text.trim());
+    bool regExp = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$')
+        .hasMatch(logInPassword.text.trim());
     if (!regExp) {
       return "Your password must contain at least 6 characters,\n including upper and lower case letters and numbers.";
     } else {
@@ -116,11 +122,12 @@ class LogInSignUpProvider with ChangeNotifier {
     }
   }
 
-  Future<void> signupUser({required String? userId, required String profile_picture}) async {
+  Future<void> signupUser(
+      {required String? userId, required String profile_picture}) async {
     UserEntity new_user = userProvider.createNewUser(
       userId: userId!,
       signUpEmail: signUpEmail.text.trim(),
-      profile_picture: profile_picture,
+      profilePicture: profile_picture,
     );
     await UserController().signUpUser(new_user);
 
@@ -144,7 +151,9 @@ class LogInSignUpProvider with ChangeNotifier {
 
       if (formLogIn.validate()) {
         if (hasInternetAccess == false) {
-          ShowSnackBar(context: context).showErrorSnackBar(message: 'Please check your internet connection.', durationInSeconds: 2);
+          ShowSnackBar(context: context).showErrorSnackBar(
+              message: 'Please check your internet connection.',
+              durationInSeconds: 2);
         } else {
           await firebaseManager.loginUser(
             email: logInEmail.text.trim(),
@@ -155,47 +164,53 @@ class LogInSignUpProvider with ChangeNotifier {
       }
       // updateLoading(false);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   Future<void> checkConditionsSignUpUser(BuildContext context) async {
-    //updateLoading(true);
-    final formSignUp = formKeyAuthenticationSignUp.currentState!;
-    if (formSignUp.validate()) {
-      if (!isCheckedTerms) {
-        ShowSnackBar(context: context).showErrorSnackBar(message: 'Please accept the terms and conditions.', durationInSeconds: 2);
-      } else {
-        await firebaseManager.registerUser(
-          email: signUpEmail.text.trim(),
-          password: signUpPassword.text.trim(),
-          context: context,
-          bntController: bntControllerSignUp,
-        );
-        String profilePicture =
-            'https://firebasestorage.googleapis.com/v0/b/spend-ninja-dev.appspot.com/o/no_profile_image.jpg?alt=media&token=228ab9ab-831c-4c3b-8935-f1d32db2366a';
-        await signupUser(
-          userId: await firebaseManager.getUserCurrentID(),
-          profile_picture: profilePicture,
-        );
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) {
-            return const MyHomePage();
-          },
-        ));
-        notifyListeners();
+    try {
+      final formSignUp = formKeyAuthenticationSignUp.currentState!;
+      if (formSignUp.validate()) {
+        if (!isCheckedTerms) {
+          ShowSnackBar(context: context).showErrorSnackBar(
+              message: 'Please accept the terms and conditions.',
+              durationInSeconds: 2);
+        } else {
+          await firebaseManager.registerUser(
+            email: signUpEmail.text.trim(),
+            password: signUpPassword.text.trim(),
+            context: context,
+            bntController: bntControllerSignUp,
+          );
+          String profilePicture =
+              'https://firebasestorage.googleapis.com/v0/b/spend-ninja-dev.appspot.com/o/no_profile_image.jpg?alt=media&token=228ab9ab-831c-4c3b-8935-f1d32db2366a';
+          await signupUser(
+            userId: await firebaseManager.getUserCurrentID(),
+            profile_picture: profilePicture,
+          );
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) {
+              return const MyHomePage();
+            },
+          ));
+          notifyListeners();
+        }
       }
+    } catch (e) {
+      debugPrint(e.toString());
     }
-    //updateLoading(false);
   }
 
   Future<void> resetPassword({required BuildContext context}) async {
     if (formKeyAuthenticationResetPassword.currentState!.validate()) {
       bool hasInternetAccess = await firebaseManager.hasInternetAccess();
       if (hasInternetAccess == false) {
-        ShowSnackBar(context: context).showErrorSnackBar(message: 'Please check your internet connection.');
+        ShowSnackBar(context: context).showErrorSnackBar(
+            message: 'Please check your internet connection.');
       } else {
-        await firebaseManager.resetPassword(email: resetPasswordEmail.text.trim(), context: context);
+        await firebaseManager.resetPassword(
+            email: resetPasswordEmail.text.trim(), context: context);
       }
     }
   }
