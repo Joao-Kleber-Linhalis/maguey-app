@@ -6,6 +6,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:magueyapp/theme/my_icons.dart';
+import 'package:magueyapp/theme/my_map_themes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/dashboard_provider.dart';
@@ -106,33 +108,132 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> _loadMapStyle() async {
-    String style =
-        await rootBundle.loadString('assets/maps/map_blue_style.json');
+    String style = await rootBundle.loadString(MyMapThemes.mapGreyTheme);
     setState(() {
       _mapStyle = style;
     });
   }
 
   Set<Marker> markers = {};
-  void populateListMarkersList() {
+  void populateListMarkersList() async {
     // markers.add(Marker(
     //     markerId: MarkerId('${widget.latitude}-${widget.longitude}_myPosition'),
     //     position: LatLng(widget.latitude, widget.longitude)));
-
     if (dashboardProvider.shopEventList.isEmpty) return;
     List<ShopEventEntity> shopEventList = dashboardProvider.shopEventList;
+    String _iconImage = MyIcons.markerIconWithouCenter;
+    final bitmapIcon = await BitmapDescriptor.asset(
+        ImageConfiguration(devicePixelRatio: 2.5, size: Size(50, 50)),
+        _iconImage);
     print(shopEventList);
     currentShopEvent = shopEventList[0];
     for (int i = 0; i < shopEventList.length; i++) {
       ShopEventEntity shopEvent = shopEventList[i];
-      markers.add(Marker(
+      markers.add(
+        Marker(
           markerId: MarkerId('${shopEvent.latitude}-${shopEvent.longitude}_$i'),
           position: LatLng(shopEvent.latitude!, shopEvent.longitude!),
           onTap: () {
             currentShopEvent = shopEvent;
-          }));
+          },
+          icon: bitmapIcon,
+        ),
+      );
     }
   }
+
+  // void populateListMarkersList() async {
+  //   // Lista de eventos mockados para teste
+  //   List<ShopEventEntity> mockShopEventList = [
+  //     ShopEventEntity(
+  //       id: '1',
+  //       name: 'Evento São Paulo',
+  //       imageUrl: 'https://example.com/image1.jpg',
+  //       createDate: DateTime.now(),
+  //       openingTime: '09:00',
+  //       closingTime: '18:00',
+  //       description: 'Evento de teste em São Paulo',
+  //       townName: 'São Paulo',
+  //       latitude: -23.550520,
+  //       longitude: -46.633308,
+  //       address: 'Av. Paulista, 1000',
+  //       contact: '(11) 1234-5678',
+  //       link: 'https://example.com/sp-event',
+  //       type: 'Festival',
+  //     ),
+  //     ShopEventEntity(
+  //       id: '2',
+  //       name: 'Evento Rio de Janeiro',
+  //       imageUrl: 'https://example.com/image2.jpg',
+  //       createDate: DateTime.now(),
+  //       openingTime: '10:00',
+  //       closingTime: '20:00',
+  //       description: 'Evento de teste no Rio de Janeiro',
+  //       townName: 'Rio de Janeiro',
+  //       latitude: -22.906847,
+  //       longitude: -43.172896,
+  //       address: 'Rua das Flores, 200',
+  //       contact: '(21) 9876-5432',
+  //       link: 'https://example.com/rj-event',
+  //       type: 'Exposição',
+  //     ),
+  //     ShopEventEntity(
+  //       id: '3',
+  //       name: 'Evento Brasília',
+  //       imageUrl: 'https://example.com/image3.jpg',
+  //       createDate: DateTime.now(),
+  //       openingTime: '08:00',
+  //       closingTime: '17:00',
+  //       description: 'Evento de teste em Brasília',
+  //       townName: 'Brasília',
+  //       latitude: -15.826691,
+  //       longitude: -47.921820,
+  //       address: 'Praça dos Três Poderes, 300',
+  //       contact: '(61) 3456-7890',
+  //       link: 'https://example.com/bsb-event',
+  //       type: 'Conferência',
+  //     ),
+  //     ShopEventEntity(
+  //       id: '4',
+  //       name: 'Evento Porto Alegre',
+  //       imageUrl: 'https://example.com/image4.jpg',
+  //       createDate: DateTime.now(),
+  //       openingTime: '07:00',
+  //       closingTime: '19:00',
+  //       description: 'Evento de teste em Porto Alegre',
+  //       townName: 'Porto Alegre',
+  //       latitude: -30.034647,
+  //       longitude: -51.217658,
+  //       address: 'Av. Borges de Medeiros, 1500',
+  //       contact: '(51) 4567-1234',
+  //       link: 'https://example.com/poa-event',
+  //       type: 'Feira',
+  //     ),
+  //   ];
+
+  //   if (mockShopEventList.isEmpty) return;
+
+  //   currentShopEvent = mockShopEventList[0];
+  //   String _iconImage = MyIcons.markerIconWithouCenter;
+  //   final bitmapIcon = await BitmapDescriptor.asset(
+  //       ImageConfiguration(devicePixelRatio: 2.5, size: Size(50, 50)),
+  //       _iconImage);
+  //   for (int i = 0; i < mockShopEventList.length; i++) {
+  //     ShopEventEntity shopEvent = mockShopEventList[i];
+  //     markers.add(
+  //       Marker(
+  //         markerId: MarkerId('${shopEvent.latitude}-${shopEvent.longitude}_$i'),
+  //         position: LatLng(shopEvent.latitude!, shopEvent.longitude!),
+  //         onTap: () {
+  //           currentShopEvent = shopEvent;
+  //         },
+  //         icon: bitmapIcon,
+  //       ),
+  //     );
+  //   }
+
+  //   print(mockShopEventList);
+  // }
 
   final Duration animationDuration = const Duration(milliseconds: 500);
   final Curve curve = Curves.fastEaseInToSlowEaseOut;
