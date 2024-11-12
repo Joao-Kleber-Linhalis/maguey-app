@@ -120,16 +120,12 @@ class _MapPageState extends State<MapPage> {
 
   Set<Marker> markers = {};
   void populateListMarkersList() async {
-    // markers.add(Marker(
-    //     markerId: MarkerId('${widget.latitude}-${widget.longitude}_myPosition'),
-    //     position: LatLng(widget.latitude, widget.longitude)));
     if (dashboardProvider.shopEventList.isEmpty) return;
     List<ShopEventEntity> shopEventList = dashboardProvider.shopEventList;
     String _iconImage = MyIcons.markerIconWithouCenter;
     final bitmapIcon = await BitmapDescriptor.asset(
         ImageConfiguration(devicePixelRatio: 2.5, size: Size(50, 50)),
         _iconImage);
-    print(shopEventList);
     currentShopEvent = shopEventList[0];
     for (int i = 0; i < shopEventList.length; i++) {
       ShopEventEntity shopEvent = shopEventList[i];
@@ -146,6 +142,7 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
+  //Para testes mockados
   // void populateListMarkersList() async {
   //   // Lista de eventos mockados para teste
   //   List<ShopEventEntity> mockShopEventList = [
