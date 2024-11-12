@@ -57,7 +57,7 @@ class DashboardProvider with ChangeNotifier {
       initializeShopEventList();
       return newUser;
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       throw Exception('Something went wrong');
     }
   }

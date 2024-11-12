@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/product_suggestion_entity.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -28,7 +30,8 @@ class ProductSuggestionController {
       }
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while adding product suggestion: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while adding product suggestion: ${e.toString()}", stackTrace);
     }
   }
 
@@ -39,11 +42,12 @@ class ProductSuggestionController {
         id: productSuggestionId,
       );
     } catch (e) {
-      print("Error while deleting product suggestion: ${e.toString()}");
+      debugPrint("Error while deleting product suggestion: ${e.toString()}");
     }
   }
 
-  Future<void> updateProductSuggestion(ProductSuggestion productSuggestion) async {
+  Future<void> updateProductSuggestion(
+      ProductSuggestion productSuggestion) async {
     try {
       await _firebase.updateData(
         collection: _collection,
@@ -51,11 +55,14 @@ class ProductSuggestionController {
         data: productSuggestion,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating product suggestion: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating product suggestion: ${e.toString()}",
+          stackTrace);
     }
   }
 
-  Future<ProductSuggestion> searchProductSuggestion(String productSuggestionId) async {
+  Future<ProductSuggestion> searchProductSuggestion(
+      String productSuggestionId) async {
     try {
       final data = await _firebase.searchData(
         collection: _collection,
@@ -63,7 +70,9 @@ class ProductSuggestionController {
       );
       return ProductSuggestion.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for product suggestion: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for product suggestion: ${e.toString()}",
+          stackTrace);
     }
   }
 
@@ -76,7 +85,9 @@ class ProductSuggestionController {
       }
       return productSuggestions;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for product suggestions: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for product suggestions: ${e.toString()}",
+          stackTrace);
     }
   }
 }

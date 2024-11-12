@@ -30,7 +30,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController? emailController, passwordController, confirmPasswordController;
+  TextEditingController? emailController,
+      passwordController,
+      confirmPasswordController;
   bool showPassword = false, loader = false;
   //var authRepo = getIt<AuthRepository>();
   late LogInSignUpProvider logInSignUpProvider;
@@ -38,8 +40,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
-    logInSignUpProvider = Provider.of<LogInSignUpProvider>(context, listen: false);
-    googleSignInProvider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    logInSignUpProvider =
+        Provider.of<LogInSignUpProvider>(context, listen: false);
+    googleSignInProvider =
+        Provider.of<GoogleSignInProvider>(context, listen: false);
     emailController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
@@ -118,7 +122,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CheckBoxWithText(
                           text: "I accept the terms",
                           onTap: (val) {
-                            setState(() => logInSignUpProvider.isCheckedTerms = !logInSignUpProvider.isCheckedTerms);
+                            setState(() => logInSignUpProvider.isCheckedTerms =
+                                !logInSignUpProvider.isCheckedTerms);
                           },
                           margin: 20.paddingLeft(context),
                           value: logInSignUpProvider.isCheckedTerms,
@@ -129,7 +134,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                           child: TextView(
                             'Terms & conditions',
-                            style: TextStyleCustom().font_14w500Black.copyWith(),
+                            style:
+                                TextStyleCustom().font_14w500Black.copyWith(),
                           ),
                         ),
                       ],

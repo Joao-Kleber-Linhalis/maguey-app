@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../entity/entity.dart';
@@ -46,7 +47,8 @@ class FirebaseController {
     return files;
   }
 
-  Future<String> saveImageGetURLBack(Uint8List image, {String id = '', String path = '', String collection = ''}) async {
+  Future<String> saveImageGetURLBack(Uint8List image,
+      {String id = '', String path = '', String collection = ''}) async {
     if (id.isEmpty || path.isEmpty) {
       return Future.error("Invalid data", StackTrace.current);
     }
@@ -66,7 +68,8 @@ class FirebaseController {
     }
   }
 
-  Future<List<Map<String, dynamic>>> searchCollection({String collection = ''}) async {
+  Future<List<Map<String, dynamic>>> searchCollection(
+      {String collection = ''}) async {
     if (collection.isEmpty) {
       return Future.error("Invalid collection to search", StackTrace.current);
     }
@@ -83,7 +86,8 @@ class FirebaseController {
     }
   }
 
-  Future<Map<String, dynamic>> searchData({String collection = '', String id = ''}) async {
+  Future<Map<String, dynamic>> searchData(
+      {String collection = '', String id = ''}) async {
     if (id.isEmpty || collection.isEmpty) {
       return Future.error("Invalid data to search", StackTrace.current);
     }
@@ -102,7 +106,8 @@ class FirebaseController {
     }
   }
 
-  Future<List<Map<String, dynamic>>> searchAllData({required String collection}) async {
+  Future<List<Map<String, dynamic>>> searchAllData(
+      {required String collection}) async {
     if (collection.isEmpty) {
       throw Exception("Invalid collection name");
     }
@@ -119,13 +124,17 @@ class FirebaseController {
     }
   }
 
-  Future<List<Map<String, dynamic>>> searchDataWithCondition({String collection = '', dynamic condName = '', String cond = ''}) async {
+  Future<List<Map<String, dynamic>>> searchDataWithCondition(
+      {String collection = '', dynamic condName = '', String cond = ''}) async {
     if (cond.isEmpty || collection.isEmpty) {
       return Future.error("Invalid data to search", StackTrace.current);
     }
     try {
       List<Map<String, dynamic>> res = [];
-      final response = await _db.collection(collection).where(condName, isEqualTo: cond).get();
+      final response = await _db
+          .collection(collection)
+          .where(condName, isEqualTo: cond)
+          .get();
       for (var element in response.docs) {
         if (element.exists) {
           Map<String, dynamic> dataWithId = {
@@ -152,46 +161,67 @@ class FirebaseController {
     }
 
     try {
-      return _db.collection(collection).where(condName, isEqualTo: cond).snapshots().map((snapshot) {
-        return snapshot.docs.where((doc) => doc.exists).map((doc) => doc.data() as Map<String, dynamic>).toList();
+      return _db
+          .collection(collection)
+          .where(condName, isEqualTo: cond)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs
+            .where((doc) => doc.exists)
+            .map((doc) => doc.data() as Map<String, dynamic>)
+            .toList();
       });
     } catch (e) {
-      print("Error streaming data: $e");
+      debugPrint("Error streaming data: $e");
 
       return Stream.empty();
     }
   }
 
-  Future<void> updateMapData({String collection = '', String id = '', Map<String, dynamic>? data}) async {
+  Future<void> updateMapData(
+      {String collection = '',
+      String id = '',
+      Map<String, dynamic>? data}) async {
     if (data == null || id.isEmpty || collection.isEmpty) {
       return Future.error("Invalid data to update", StackTrace.current);
     }
     try {
-      await _db.collection(collection).doc(id).update(data); // Use update() instead of set() for a partial update
+      await _db
+          .collection(collection)
+          .doc(id)
+          .update(data); // Use update() instead of set() for a partial update
     } catch (e, stackTrace) {
       return Future.error(e.toString(), stackTrace);
     }
   }
 
-  Future<void> updateData({String collection = '', String id = '', Entity? data}) async {
+  Future<void> updateData(
+      {String collection = '', String id = '', Entity? data}) async {
     if (data == null || id.isEmpty || collection.isEmpty) {
       return Future.error("Invalid data to update", StackTrace.current);
     }
     try {
       var json = data.toJson();
       json["updatedAt"] = DateTime.now();
-      await _db.collection(collection).doc(id).set(json, SetOptions(merge: true));
+      await _db
+          .collection(collection)
+          .doc(id)
+          .set(json, SetOptions(merge: true));
     } catch (e, stackTrace) {
       return Future.error(e.toString(), stackTrace);
     }
   }
 
-  Future<void> updateAccountData({String collection = '', String id = '', double? data}) async {
+  Future<void> updateAccountData(
+      {String collection = '', String id = '', double? data}) async {
     if (data == null || id.isEmpty || collection.isEmpty) {
       return Future.error("Invalid data to update", StackTrace.current);
     }
     try {
-      await _db.collection(collection).doc(id).update({'account_balance': data});
+      await _db
+          .collection(collection)
+          .doc(id)
+          .update({'account_balance': data});
     } catch (e, stackTrace) {
       return Future.error(e.toString(), stackTrace);
     }
@@ -223,7 +253,10 @@ class FirebaseController {
     }
   }
 
-  Future<void> updateSpecificData({String collection = '', String id = '', Map<String, Object>? data}) async {
+  Future<void> updateSpecificData(
+      {String collection = '',
+      String id = '',
+      Map<String, Object>? data}) async {
     if (data == null || id.isEmpty || collection.isEmpty) {
       return Future.error("Dados Inváidos para atualizar", StackTrace.current);
     }

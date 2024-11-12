@@ -22,7 +22,7 @@ Future<void> main() async {
   try {
     await Firebase.initializeApp();
   } catch (e) {
-    print('Failed to initialize Firebase: $e');
+    debugPrint('Failed to initialize Firebase: $e');
   }
 
   runApp(
@@ -72,7 +72,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, authSnapshot) {
                 if (authSnapshot.connectionState == ConnectionState.active) {
-                  return authSnapshot.hasData ? const MyHomePage() : const LogInScreen();
+                  return authSnapshot.hasData
+                      ? const MyHomePage()
+                      : const LogInScreen();
                 }
                 return const CircularProgressIndicator();
               },
@@ -96,5 +98,6 @@ Future<bool> checkInternetConnection() async {
 }
 
 void setCurrentUser() async {
-  UserProvider().setCurrentUser(await UserController().searchUser(FirebaseAuth.instance.currentUser!.uid));
+  UserProvider().setCurrentUser(await UserController()
+      .searchUser(FirebaseAuth.instance.currentUser!.uid));
 }

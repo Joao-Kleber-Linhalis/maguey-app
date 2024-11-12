@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 
 import '../entity/category_entity.dart';
 import '../entity/review_entity.dart';
@@ -35,7 +36,8 @@ class ReviewsController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while signing up user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while signing up user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -46,7 +48,7 @@ class ReviewsController {
         id: reviewId,
       );
     } catch (e) {
-      print("Error while deleting category: ${e.toString()}");
+      debugPrint("Error while deleting category: ${e.toString()}");
     }
   }
 
@@ -58,7 +60,8 @@ class ReviewsController {
         data: review,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating category: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating category: ${e.toString()}", stackTrace);
     }
   }
 
@@ -70,7 +73,8 @@ class ReviewsController {
       );
       return Category.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for category: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for category: ${e.toString()}", stackTrace);
     }
   }
 
@@ -84,7 +88,8 @@ class ReviewsController {
 
       return reviews;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for brand: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for brand: ${e.toString()}", stackTrace);
     }
   }
 
@@ -99,7 +104,8 @@ class ReviewsController {
   }
 
   Future<String> uploadPhoto(String path, File image, String folder) async {
-    final firebaseStorageRef = FirebaseStorage.instance.ref().child('$folder/$path');
+    final firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('$folder/$path');
     final uploadTask = firebaseStorageRef.putFile(image);
     await uploadTask.whenComplete(() {});
     return uploadTask.snapshot.ref.getDownloadURL();

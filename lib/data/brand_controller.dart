@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/brand_entity.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -29,7 +31,8 @@ class BrandController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while signing up user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while signing up user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -40,7 +43,7 @@ class BrandController {
         id: brandId,
       );
     } catch (e) {
-      print("Error while deleting brand: ${e.toString()}");
+      debugPrint("Error while deleting brand: ${e.toString()}");
     }
   }
 
@@ -52,7 +55,8 @@ class BrandController {
         data: brand,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating brand: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating brand: ${e.toString()}", stackTrace);
     }
   }
 
@@ -64,7 +68,8 @@ class BrandController {
       );
       return Brand.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for brand: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for brand: ${e.toString()}", stackTrace);
     }
   }
 
@@ -79,7 +84,8 @@ class BrandController {
       }
       return brands;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for brand: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for brand: ${e.toString()}", stackTrace);
     }
   }
 }

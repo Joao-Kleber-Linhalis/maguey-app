@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../entity/shops.dart';
 import '../infra/firebase_controller.dart';
 import 'name_collections.dart';
@@ -29,7 +31,8 @@ class ShopController {
 
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while adding shop ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while adding shop ${e.toString()}", stackTrace);
     }
   }
 
@@ -40,7 +43,7 @@ class ShopController {
         id: shopId,
       );
     } catch (e) {
-      print("Error while deleting shop: ${e.toString()}");
+      debugPrint("Error while deleting shop: ${e.toString()}");
     }
   }
 
@@ -52,7 +55,8 @@ class ShopController {
         data: shop,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating shop: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error while updating shop: ${e.toString()}", stackTrace);
     }
   }
 
@@ -64,7 +68,8 @@ class ShopController {
       );
       return ShopEntity.fromJson(data);
     } catch (e, stackTrace) {
-      return Future.error("Error searching for shop: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for shop: ${e.toString()}", stackTrace);
     }
   }
 
@@ -77,7 +82,8 @@ class ShopController {
       }
       return shops;
     } catch (e, stackTrace) {
-      return Future.error("Error searching for shops: ${e.toString()}", stackTrace);
+      return Future.error(
+          "Error searching for shops: ${e.toString()}", stackTrace);
     }
   }
 }
