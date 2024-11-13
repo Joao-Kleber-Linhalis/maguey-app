@@ -124,7 +124,7 @@ class LogInSignUpProvider with ChangeNotifier {
 
   Future<void> signupUser(
       {required String? userId, required String profile_picture}) async {
-    UserEntity new_user = userProvider.createNewUser(
+    UserEntity new_user = await userProvider.createNewUser(
       userId: userId!,
       signUpEmail: signUpEmail.text.trim(),
       profilePicture: profile_picture,
@@ -185,6 +185,7 @@ class LogInSignUpProvider with ChangeNotifier {
           );
           String profilePicture =
               'https://firebasestorage.googleapis.com/v0/b/spend-ninja-dev.appspot.com/o/no_profile_image.jpg?alt=media&token=228ab9ab-831c-4c3b-8935-f1d32db2366a';
+
           await signupUser(
             userId: await firebaseManager.getUserCurrentID(),
             profile_picture: profilePicture,

@@ -15,6 +15,7 @@ class FirebaseController {
   final auth = FirebaseAuth.instance;
 
   User? getCurrentUser() {
+    print(auth.currentUser?.uid);
     return auth.currentUser;
   }
 
@@ -101,6 +102,22 @@ class FirebaseController {
         return dataWithId;
       }
       return Future.error("Data not found in $collection", StackTrace.current);
+    } catch (e, stackTrace) {
+      return Future.error(e.toString(), stackTrace);
+    }
+  }
+
+  Future<bool> searchDataExist({String collection = '', String id = ''}) async {
+    if (id.isEmpty || collection.isEmpty) {
+      return Future.error("Invalid data to search", StackTrace.current);
+    }
+
+    try {
+      final response = await _db.collection(collection).doc(id).get();
+      if (response.exists && response.data() != null) {
+        return true;
+      }
+      return false;
     } catch (e, stackTrace) {
       return Future.error(e.toString(), stackTrace);
     }

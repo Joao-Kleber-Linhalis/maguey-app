@@ -61,4 +61,8 @@ class UserController {
       return Future.error(e.toString(), stackTrace);
     }
   }
+
+  Future<bool> userExist(String id) async {
+    return await _firebase.searchDataExist(collection: _collection, id: id);
+  }
 }
