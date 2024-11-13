@@ -26,7 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future loadAppData;
   @override
   void initState() {
-    loadAppData = Provider.of<DashboardProvider>(context, listen: false).loadDataGetUserInformation();
+    loadAppData = Provider.of<DashboardProvider>(context, listen: false)
+        .loadDataGetUserInformation();
     super.initState();
   }
 
@@ -76,13 +77,17 @@ class HomeContent extends StatelessWidget {
       bottom: false,
       child: Column(
         children: [
+          SizedBox(
+            height: 30,
+          ),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: widthOfScreen * 0.05), //20
+                  padding: EdgeInsets.symmetric(
+                      horizontal: widthOfScreen * 0.05), //20
                   child: Column(
                     children: [
                       Text(
@@ -160,7 +165,8 @@ class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<CustomBottomNavigationBar> createState() => _CustomBottomNavigationBarState();
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {

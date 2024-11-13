@@ -15,7 +15,8 @@ class UserController {
       );
       return true;
     } catch (e, stackTrace) {
-      return Future.error("Error while signing up user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while signing up user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -27,7 +28,8 @@ class UserController {
         data: user,
       );
     } catch (e, stackTrace) {
-      return Future.error("Error while updating user ${e.toString()}{", stackTrace);
+      return Future.error(
+          "Error while updating user ${e.toString()}{", stackTrace);
     }
   }
 
@@ -44,10 +46,12 @@ class UserController {
     }
   }
 
-  Future<List<UserEntity>> searchUserWithCondition(String cond, String condName) async {
+  Future<List<UserEntity>> searchUserWithCondition(
+      String cond, String condName) async {
     List<UserEntity> retorno = [];
     try {
-      final dado = await _firebase.searchDataWithCondition(collection: _collection, cond: cond, condName: condName);
+      final dado = await _firebase.searchDataWithCondition(
+          collection: _collection, cond: cond, condName: condName);
       dado.forEach((element) {
         retorno.add(UserEntity.fromJson(element));
       });

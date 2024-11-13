@@ -65,14 +65,17 @@ class _MeScreenState extends State<MeScreen> {
     return SafeArea(
       child: Column(
         children: [
-          _buildDivider(), //Maybe remove
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: heightOfScreen * 0.046667),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: heightOfScreen * 0.046667),
                   child: Column(
                     children: [
                       Stack(
@@ -82,7 +85,8 @@ class _MeScreenState extends State<MeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AutoSizeText(
@@ -98,23 +102,36 @@ class _MeScreenState extends State<MeScreen> {
                                   const SizedBox(height: 20),
                                   AutoSizeText(
                                     dashboardProvider.currentUser.email,
-                                    style: TextStyleCustom().font_12w400.copyWith(
-                                        fontWeight: FontWeight.normal, color: MyColors.yellowE2D7C1, fontSize: 16.5, fontFamily: "CircularXXMono"),
+                                    style: TextStyleCustom()
+                                        .font_12w400
+                                        .copyWith(
+                                            fontWeight: FontWeight.normal,
+                                            color: MyColors.yellowE2D7C1,
+                                            fontSize: 16.5,
+                                            fontFamily: "CircularXXMono"),
                                   ),
                                   AutoSizeText(
                                     'Created at ${DateFormat('MMMM yyyy').format(dashboardProvider.currentUser.createdAt)}', //User create data
-                                    style: TextStyleCustom().font_12w400.copyWith(
-                                        fontWeight: FontWeight.w400,
-                                        color: MyColors.yellowE2D7C1.withOpacity(0.5),
-                                        fontSize: 16.5,
-                                        letterSpacing: 1,
-                                        fontFamily: "CircularXXMono"),
+                                    style: TextStyleCustom()
+                                        .font_12w400
+                                        .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            color: MyColors.yellowE2D7C1
+                                                .withOpacity(0.5),
+                                            fontSize: 16.5,
+                                            letterSpacing: 1,
+                                            fontFamily: "CircularXXMono"),
                                   ),
                                   const SizedBox(height: 10),
                                   AutoSizeText(
                                     'This is where you can keep track of all your activity.', //Default text
-                                    style: TextStyleCustom().font_12w400.copyWith(
-                                        fontWeight: FontWeight.normal, color: MyColors.yellowE2D7C1, fontSize: 10, fontFamily: "CircularAirPro"),
+                                    style: TextStyleCustom()
+                                        .font_12w400
+                                        .copyWith(
+                                            fontWeight: FontWeight.normal,
+                                            color: MyColors.yellowE2D7C1,
+                                            fontSize: 10,
+                                            fontFamily: "CircularAirPro"),
                                   ),
                                 ],
                               ),
@@ -138,7 +155,8 @@ class _MeScreenState extends State<MeScreen> {
                             heightOfScreen: heightOfScreen,
                             widthOfScreen: widthOfScreen,
                             context: context),
-                        if (index != subScreens.length - 1) _buildDivider(), //dont build divider in the last subscreen , Maybe remove
+                        if (index != subScreens.length - 1)
+                          _buildDivider(), //dont build divider in the last subscreen , Maybe remove
                       ],
                     );
                   }, //category-> brand-> product
@@ -171,9 +189,11 @@ Widget _buildSubScreen({
         ),
         child: AutoSizeText(
           title,
-          style: TextStyleCustom()
-              .font_12w400
-              .copyWith(fontWeight: FontWeight.normal, color: MyColors.yellowE2D7C1, fontSize: 14, fontFamily: "CircularAirPro"),
+          style: TextStyleCustom().font_12w400.copyWith(
+              fontWeight: FontWeight.normal,
+              color: MyColors.yellowE2D7C1,
+              fontSize: 14,
+              fontFamily: "CircularAirPro"),
           textAlign: TextAlign.start,
         ),
       ),
