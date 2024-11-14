@@ -72,9 +72,26 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, authSnapshot) {
                 if (authSnapshot.connectionState == ConnectionState.active) {
-                  return authSnapshot.hasData
-                      ? const MyHomePage()
-                      : const LogInScreen();
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(1,
+                              0), // Direção de entrada (direita para esquerda)
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    },
+                    child: authSnapshot.hasData
+                        ? const MyHomePage(
+                            key: ValueKey('HomeScreen'),
+                            comoFromLogin: true,
+                          )
+                        : const LogInScreen(key: ValueKey('LogInScreen')),
+                  );
                 }
                 return const CircularProgressIndicator();
               },

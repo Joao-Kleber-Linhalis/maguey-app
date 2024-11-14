@@ -14,7 +14,9 @@ import 'home_carousel.dart';
 class MyHomePage extends StatefulWidget {
   static const String route = 'home-screen';
 
-  const MyHomePage({super.key});
+  final bool comoFromLogin;
+
+  const MyHomePage({super.key, this.comoFromLogin = false});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -28,6 +30,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     loadAppData = Provider.of<DashboardProvider>(context, listen: false)
         .loadDataGetUserInformation();
+    if (widget.comoFromLogin) {
+      navbarService.currentIndexNotifier.value = 0;
+    }
     super.initState();
   }
 
