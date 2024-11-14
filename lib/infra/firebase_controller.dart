@@ -15,6 +15,7 @@ class FirebaseController {
   final auth = FirebaseAuth.instance;
 
   User? getCurrentUser() {
+    print(auth.currentUser?.uid);
     return auth.currentUser;
   }
 
@@ -101,6 +102,22 @@ class FirebaseController {
         return dataWithId;
       }
       return Future.error("Data not found in $collection", StackTrace.current);
+    } catch (e, stackTrace) {
+      return Future.error(e.toString(), stackTrace);
+    }
+  }
+
+  Future<bool> searchDataExist({String collection = '', String id = ''}) async {
+    if (id.isEmpty || collection.isEmpty) {
+      return Future.error("Invalid data to search", StackTrace.current);
+    }
+
+    try {
+      final response = await _db.collection(collection).doc(id).get();
+      if (response.exists && response.data() != null) {
+        return true;
+      }
+      return false;
     } catch (e, stackTrace) {
       return Future.error(e.toString(), stackTrace);
     }
@@ -238,16 +255,23 @@ class FirebaseController {
     }
   }
 
-  Future<String> registerData({Entity? data, String? collection}) async {
-    if (data == null || collection == null || collection.isEmpty) {
-      return Future.error("Invalid data to register", StackTrace.current);
-    }
+  Future<String> registerData({
+    required Entity data,
+    required String collection,
+    String? documentId, // Adicionado para receber o ID opcional
+  }) async {
     try {
       var json = data.toJson();
       json["createdAt"] = DateTime.now();
-      final response = await _db.collection(collection).add(json);
+      final docRef = documentId != null
+          ? _db.collection(collection).doc(documentId)
+          : _db
+              .collection(collection)
+              .doc(); // Usa o ID passado ou cria um novo
 
-      return response.id;
+      await docRef.set(json);
+
+      return docRef.id;
     } catch (e, stackTrace) {
       return Future.error("Error when registering", stackTrace);
     }

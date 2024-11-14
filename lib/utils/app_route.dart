@@ -12,21 +12,21 @@ class AppRoutes {
 
   static void pushWithThen(BuildContext context, Widget page, Function() thenFunction, {bool opaque = true}) {
     Helper.closeKeyboard(context);
-    Navigator.of(context).push(new PageRouteBuilder(opaque: opaque, pageBuilder: (BuildContext context, _, __) => page)).then((value) {
+    Navigator.of(context).push(PageRouteBuilder(opaque: opaque, pageBuilder: (BuildContext context, _, __) => page)).then((value) {
       thenFunction();
     });
   }
 
   static void replace(BuildContext context, Widget page) {
     Navigator.of(context).pushReplacement(
-      new MaterialPageRoute(builder: (context) => page),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 
   static void makeFirst(BuildContext context, Widget page) {
     Navigator.of(context).popUntil((predicate) => predicate.isFirst);
     Navigator.of(context).pushReplacement(
-      new MaterialPageRoute(builder: (context) => page),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 

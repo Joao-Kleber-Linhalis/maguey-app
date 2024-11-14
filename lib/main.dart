@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'design_system/colors.dart';
 import 'theme/my_colors.dart';
 
+final globalNavigator = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
@@ -38,8 +40,6 @@ Future<void> main() async {
   );
 }
 
-final GlobalKey<NavigatorState> GlobalContext = GlobalKey<NavigatorState>();
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -47,11 +47,12 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+class _MyAppState extends State<MyApp> {
+  @override
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: GlobalContext,
+      navigatorKey: globalNavigator,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: DSColors.greyScaleWhite,
@@ -72,9 +73,26 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, authSnapshot) {
                 if (authSnapshot.connectionState == ConnectionState.active) {
-                  return authSnapshot.hasData
-                      ? const MyHomePage()
-                      : const LogInScreen();
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(1,
+                              0), // Direção de entrada (direita para esquerda)
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    },
+                    child: authSnapshot.hasData
+                        ? const MyHomePage(
+                            key: ValueKey('HomeScreen'),
+                            comoFromLogin: true,
+                          )
+                        : const LogInScreen(key: ValueKey('LogInScreen')),
+                  );
                 }
                 return const CircularProgressIndicator();
               },

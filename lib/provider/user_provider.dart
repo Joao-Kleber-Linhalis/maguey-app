@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:magueyapp/data/name_collections.dart';
+import 'package:magueyapp/infra/firebase_controller.dart';
 
 import '../data/user_controller.dart';
 import '../design_system/Text/ds_text.dart';
@@ -20,31 +22,39 @@ class UserProvider with ChangeNotifier {
   factory UserProvider() {
     return provider;
   }
-  UserProvider._internal();
+  UserProvider._internal() {
+    print("User provider");
+  }
   GlobalKey<FormState> formKeyAuthenticationUpdatePassword =
       GlobalKey<FormState>();
   DashboardProvider dashboardProvider = DashboardProvider();
   UserController userController = UserController();
   String profilePicturePath = '';
   UserEntity currentUser = UserEntity.empty();
+  final FirebaseController _firebase = FirebaseController();
   setCurrentUser(UserEntity user) {
     currentUser = user;
     notifyListeners();
   }
 
-  UserEntity createNewUser({
+  Future<UserEntity> createNewUser({
     required String userId,
     required String signUpEmail,
     required String profilePicture,
-  }) {
+  }) async {
     final newUser = UserEntity(
-        id: userId,
-        //name: signUpName,
-        email: signUpEmail,
-        profilePicture: profilePicture,
-        createdAt: DateTime.now(),
-        favoriteProducts: [],
-        favoriteEvents: []);
+      id: userId,
+      email: signUpEmail,
+      profilePicture: profilePicture,
+      createdAt: DateTime.now(),
+      favoriteProducts: [],
+      favoriteEvents: [],
+    );
+    await _firebase.registerData(
+      data: newUser,
+      collection: NameCollections.userCollection,
+      documentId: userId, // Passa o userId como documentId
+    );
     return newUser;
   }
 
@@ -132,7 +142,7 @@ class UserProvider with ChangeNotifier {
               path: 'profile_images',
               id: userId)
           .saveAndGetUrl();
-      UserEntity newUser = createNewUser(
+      UserEntity newUser = await createNewUser(
           userId: dashboardProvider.currentUser.id,
           //signUpName: dashboardProvider.currentUser.name,
           signUpEmail: dashboardProvider.currentUser.email,
@@ -242,7 +252,7 @@ class UserProvider with ChangeNotifier {
       Navigator.of(context).pop();
       return;
     } else {
-      UserEntity newUser = createNewUser(
+      UserEntity newUser = await createNewUser(
           userId: dashboardProvider.currentUser.id,
           // signUpName: updateName.text.trim(),
           signUpEmail: updateEmail.text.trim(),

@@ -20,7 +20,9 @@ class DashboardProvider with ChangeNotifier {
   factory DashboardProvider() {
     return provider;
   }
-  DashboardProvider._internal();
+  DashboardProvider._internal() {
+    print("dashbord provider");
+  }
   FirebaseController firebaseController = FirebaseController();
   UserController userController = UserController();
   EventController eventController = EventController();
@@ -62,7 +64,7 @@ class DashboardProvider with ChangeNotifier {
     }
   }
 
-  void initializeShopEventList() {
+  void initializeShopEventList() async {
     for (var shop in shops) {
       shopEventList.add(ShopEventEntity(
         name: shop.name,

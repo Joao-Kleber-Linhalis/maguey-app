@@ -4,6 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:magueyapp/theme/my_colors.dart';
 import 'package:magueyapp/theme/my_icons.dart';
 import 'package:magueyapp/theme/my_map_themes.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,9 @@ class LoadMap extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: MyColors.whiteFFFFFF,
+            ),
           );
         }
         if (snapshot.hasError) {
@@ -35,7 +38,9 @@ class LoadMap extends StatelessWidget {
           );
         }
         return const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: MyColors.whiteFFFFFF,
+          ),
         );
       },
     );
@@ -82,19 +87,25 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  TextEditingController searchController = TextEditingController();
+  bool isLoadingMap = true;
   late DashboardProvider dashboardProvider;
+  List<ShopEventEntity> shopEventList = [];
+  List<ShopEventEntity> filterShopEventList = [];
   ShopEventEntity currentShopEvent = ShopEventEntity(
-      latitude: 0,
-      longitude: 0,
-      link: "",
-      name: "",
-      townName: "",
-      id: "",
-      imageUrl: "",
-      description: "",
-      createDate: DateTime.now(),
-      address: "",
-      type: "");
+    latitude: 0,
+    longitude: 0,
+    link: "",
+    name: "",
+    townName: "",
+    id: "",
+    imageUrl: "",
+    description: "",
+    createDate: DateTime.now(),
+    address: "",
+    type: "",
+  );
+
   String _mapStyle = '';
   double latitude = 0.0;
   double longitude = 0.0;
@@ -107,8 +118,32 @@ class _MapPageState extends State<MapPage> {
     latitude = currentLocation.latitude;
     longitude = currentLocation.longitude;
     dashboardProvider = Provider.of<DashboardProvider>(context, listen: false);
+    shopEventList = dashboardProvider.shopEventList;
+    filterShopEventList = shopEventList;
     _loadMapStyle();
     populateListMarkersList();
+    searchController.addListener(_filterEvents);
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        isLoadingMap = false;
+      });
+    });
+  }
+
+  void _filterEvents() {
+    String searchTerm = searchController.text.toLowerCase();
+    setState(() {
+      // Atualiza a lista de eventos filtrados
+      filterShopEventList = shopEventList.where((event) {
+        return event.name.toLowerCase().contains(searchTerm) ||
+            event.townName.toLowerCase().contains(searchTerm) ||
+            event.address.toLowerCase().contains(searchTerm);
+      }).toList();
+
+      // Atualiza os marcadores com base na lista filtrada
+      markers.clear(); // Limpa os marcadores anteriores
+      populateListMarkersList(); // Popula os novos marcadores
+    });
   }
 
   Future<void> _loadMapStyle() async {
@@ -120,15 +155,14 @@ class _MapPageState extends State<MapPage> {
 
   Set<Marker> markers = {};
   void populateListMarkersList() async {
-    if (dashboardProvider.shopEventList.isEmpty) return;
-    List<ShopEventEntity> shopEventList = dashboardProvider.shopEventList;
+    if (filterShopEventList.isEmpty) return;
     String _iconImage = MyIcons.markerIconWithouCenter;
     final bitmapIcon = await BitmapDescriptor.asset(
         ImageConfiguration(devicePixelRatio: 2.5, size: Size(50, 50)),
         _iconImage);
-    currentShopEvent = shopEventList[0];
-    for (int i = 0; i < shopEventList.length; i++) {
-      ShopEventEntity shopEvent = shopEventList[i];
+    currentShopEvent = filterShopEventList[0];
+    for (int i = 0; i < filterShopEventList.length; i++) {
+      ShopEventEntity shopEvent = filterShopEventList[i];
       markers.add(
         Marker(
           markerId: MarkerId('${shopEvent.latitude}-${shopEvent.longitude}_$i'),
@@ -243,114 +277,147 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          body: GoogleMap(
-            zoomControlsEnabled: false,
-            style: _mapStyle,
-            onMapCreated: _controller.complete,
-            initialCameraPosition: CameraPosition(
-              target: currentLocation,
-              zoom: 12.0,
-            ),
-            mapType: MapType.normal,
-            markers: markers,
-            onCameraMove: (CameraPosition position) {
-              setState(() {
-                currentLocation = position.target;
-                latitude = currentLocation.latitude;
-                longitude = currentLocation.longitude;
-              });
-            },
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            height: 120,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
+    return Scaffold(
+      backgroundColor: MyColors.black2B2B2B,
+      body: isLoadingMap
+          ? Center(
+              child: CircularProgressIndicator(
+                color: MyColors.whiteFFFFFF,
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    height: 88,
-                    width: 88,
-                    decoration: currentShopEvent.imageUrl == ''
-                        ? const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                          )
-                        : BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                            image: DecorationImage(
-                              image: NetworkImage(currentShopEvent.imageUrl),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+            )
+          : Stack(
+              children: [
+                GoogleMap(
+                  zoomControlsEnabled: false,
+                  style: _mapStyle,
+                  onMapCreated: _controller.complete,
+                  initialCameraPosition: CameraPosition(
+                    target: currentLocation,
+                    zoom: 12.0,
                   ),
-                  const SizedBox(width: 16),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 130,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          currentShopEvent.type.toUpperCase(),
-                          style: const TextStyle(
-                            color: Color(0xFFFB5944),
-                            fontSize: 13,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                  mapType: MapType.normal,
+                  markers: markers,
+                  onCameraMove: (CameraPosition position) {
+                    setState(() {
+                      currentLocation = position.target;
+                      latitude = currentLocation.latitude;
+                      longitude = currentLocation.longitude;
+                    });
+                  },
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: MyColors.black2B2B2B,
                         ),
-                        Text(
-                          currentShopEvent.name,
-                          style: const TextStyle(
-                            color: Color(0xFF908C00),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            decoration: TextDecoration.underline,
-                          ),
+                        hintText: 'Search Restaurants, Bars, Stores near you',
+                        filled: true,
+                        fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
                         ),
-                        if (currentShopEvent.type == 'event')
-                          Text(
-                            DateFormat('MMMM dd yyyy')
-                                .format(currentShopEvent.createDate!),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        Text(
-                          currentShopEvent.address,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
+                        hintStyle: const TextStyle(color: MyColors.black2B2B2B),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                      ),
+                      controller: searchController,
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    height: 120,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (currentShopEvent.imageUrl.isNotEmpty)
+                            Container(
+                              height: 88,
+                              width: 88,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    currentShopEvent.imageUrl,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          const SizedBox(width: 16),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 130,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  currentShopEvent.type.toUpperCase(),
+                                  style: const TextStyle(
+                                    color: Color(0xFFFB5944),
+                                    fontSize: 13,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                Text(
+                                  currentShopEvent.name,
+                                  style: const TextStyle(
+                                    color: Color(0xFF908C00),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                if (currentShopEvent.type == 'event')
+                                  Text(
+                                    DateFormat('MMMM dd yyyy')
+                                        .format(currentShopEvent.createDate!),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                Text(
+                                  currentShopEvent.address,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-      ],
     );
   }
 }

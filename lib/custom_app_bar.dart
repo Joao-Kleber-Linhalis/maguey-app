@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: const Divider(
                 color: Color(0xFF908C00),
                 thickness: 0.5,
-                height: 30,
+                height: 1,
               ),
             )
           : null,
