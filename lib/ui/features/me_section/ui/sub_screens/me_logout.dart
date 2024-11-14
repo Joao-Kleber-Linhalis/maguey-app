@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magueyapp/utils/app_route.dart';
 
 import '../../../../../infra/firebase_manager.dart';
 import '../../../../../theme/my_colors.dart';
 import '../../../../../theme/text_styling.dart';
-import '../../../log_in/log_in.dart';
 
 class MeLogout extends StatelessWidget {
   const MeLogout({super.key});
@@ -58,8 +56,9 @@ class MeLogout extends StatelessWidget {
           ),
           onTap: () async {
             await FirebaseManager().signOut(context: context);
-            // Navigator.of(context).pop();
-            AppRoutes.replace(context, const LogInScreen());
+            if (context.mounted) {
+              Navigator.of(context).pop(); // Fecha o diálogo
+            }
           },
         ),
         InkWell(

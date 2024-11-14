@@ -22,7 +22,9 @@ class UserProvider with ChangeNotifier {
   factory UserProvider() {
     return provider;
   }
-  UserProvider._internal();
+  UserProvider._internal() {
+    print("User provider");
+  }
   GlobalKey<FormState> formKeyAuthenticationUpdatePassword =
       GlobalKey<FormState>();
   DashboardProvider dashboardProvider = DashboardProvider();

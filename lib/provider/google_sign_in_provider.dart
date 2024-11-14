@@ -1,14 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:magueyapp/data/name_collections.dart';
 import 'package:magueyapp/data/user_controller.dart';
-import 'package:magueyapp/entity/user_entity.dart';
-import 'package:magueyapp/infra/firebase_controller.dart';
 import 'package:magueyapp/provider/user_provider.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
-  final FirebaseController _firebase = FirebaseController();
+  static final GoogleSignInProvider provider = GoogleSignInProvider._internal();
+
+  factory GoogleSignInProvider() {
+    return provider;
+  }
+
+  GoogleSignInProvider._internal() {
+    print("Google provider");
+  }
   final UserController _userController = UserController();
   final UserProvider _userprovider = UserProvider();
 

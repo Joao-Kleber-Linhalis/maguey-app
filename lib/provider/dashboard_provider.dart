@@ -20,7 +20,9 @@ class DashboardProvider with ChangeNotifier {
   factory DashboardProvider() {
     return provider;
   }
-  DashboardProvider._internal();
+  DashboardProvider._internal(){
+    print("dashbord provider");
+  }
   FirebaseController firebaseController = FirebaseController();
   UserController userController = UserController();
   EventController eventController = EventController();

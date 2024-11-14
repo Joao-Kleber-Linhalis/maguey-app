@@ -32,9 +32,13 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   late LogInSignUpProvider logInSignUpProvider;
+  late GoogleSignInProvider googleSignInProvider;
   @override
   void initState() {
-    logInSignUpProvider = Provider.of<LogInSignUpProvider>(context, listen: false);
+    logInSignUpProvider =
+        Provider.of<LogInSignUpProvider>(context, listen: false);
+    googleSignInProvider =
+        Provider.of<GoogleSignInProvider>(context, listen: false);
     super.initState();
   }
 
@@ -89,7 +93,8 @@ class _LogInScreenState extends State<LogInScreen> {
                     onTap: (val) {
                       setState(() => showPassword = !showPassword);
                     },
-                    margin: 20.paddingLeft(context).copyWith(top: 5.pxV(context)),
+                    margin:
+                        20.paddingLeft(context).copyWith(top: 5.pxV(context)),
                     value: showPassword,
                   ),
                   MyTextButton(
@@ -149,7 +154,7 @@ class _LogInScreenState extends State<LogInScreen> {
   Future<void> _onGoogleLogin(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loaderGoogle = true);
-    await GoogleSignInProvider().signInWithGoogle();
+    await googleSignInProvider.signInWithGoogle();
     setState(() => loaderGoogle = false);
   }
 

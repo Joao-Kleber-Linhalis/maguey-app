@@ -17,7 +17,9 @@ class LogInSignUpProvider with ChangeNotifier {
   factory LogInSignUpProvider() {
     return provider;
   }
-  LogInSignUpProvider._internal();
+  LogInSignUpProvider._internal() {
+    print('LogInSignUpProvider inicializado');
+  }
   UserProvider userProvider = UserProvider();
 
   RoundedLoadingButtonController bntControllerSignUp =
