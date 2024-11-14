@@ -41,15 +41,18 @@ class UserProvider with ChangeNotifier {
     required String profilePicture,
   }) async {
     final newUser = UserEntity(
-        id: userId,
-        //name: signUpName,
-        email: signUpEmail,
-        profilePicture: profilePicture,
-        createdAt: DateTime.now(),
-        favoriteProducts: [],
-        favoriteEvents: []);
+      id: userId,
+      email: signUpEmail,
+      profilePicture: profilePicture,
+      createdAt: DateTime.now(),
+      favoriteProducts: [],
+      favoriteEvents: [],
+    );
     await _firebase.registerData(
-        data: newUser, collection: NameCollections.userCollection);
+      data: newUser,
+      collection: NameCollections.userCollection,
+      documentId: userId, // Passa o userId como documentId
+    );
     return newUser;
   }
 

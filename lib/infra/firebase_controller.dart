@@ -255,16 +255,23 @@ class FirebaseController {
     }
   }
 
-  Future<String> registerData({Entity? data, String? collection}) async {
-    if (data == null || collection == null || collection.isEmpty) {
-      return Future.error("Invalid data to register", StackTrace.current);
-    }
+  Future<String> registerData({
+    required Entity data,
+    required String collection,
+    String? documentId, // Adicionado para receber o ID opcional
+  }) async {
     try {
       var json = data.toJson();
       json["createdAt"] = DateTime.now();
-      final response = await _db.collection(collection).add(json);
+      final docRef = documentId != null
+          ? _db.collection(collection).doc(documentId)
+          : _db
+              .collection(collection)
+              .doc(); // Usa o ID passado ou cria um novo
 
-      return response.id;
+      await docRef.set(json);
+
+      return docRef.id;
     } catch (e, stackTrace) {
       return Future.error("Error when registering", stackTrace);
     }

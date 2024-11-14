@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'design_system/colors.dart';
 import 'theme/my_colors.dart';
 
+final globalNavigator = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
@@ -38,8 +40,6 @@ Future<void> main() async {
   );
 }
 
-final GlobalKey<NavigatorState> GlobalContext = GlobalKey<NavigatorState>();
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: GlobalContext,
+      navigatorKey: globalNavigator,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: DSColors.greyScaleWhite,
