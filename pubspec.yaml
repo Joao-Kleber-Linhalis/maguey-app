@@ -52,7 +52,7 @@ dependencies:
   intl: ^0.19.0
 
   #for google maps integration
-  google_maps_flutter: ^2.5.2
+  google_maps_flutter: ^2.9.0
 
   dartz: ^0.10.1
 

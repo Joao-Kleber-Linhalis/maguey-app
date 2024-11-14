@@ -47,7 +47,8 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+class _MyAppState extends State<MyApp> {
+  @override
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
