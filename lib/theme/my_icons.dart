@@ -6,6 +6,7 @@ class MyIcons {
 
   // Social Icons
   static const String googleIcon = "$_socialIconsPath/google.svg";
+  static const String appleIcon = "$_socialIconsPath/apple.svg";
   static const String mailIcon = "$_socialIconsPath/mail.svg";
 
   // Brand Icon Without Background

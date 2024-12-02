@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:magueyapp/data/user_controller.dart';
 import 'package:magueyapp/provider/dashboard_provider.dart';
-import 'package:magueyapp/provider/google_sign_in_provider.dart';
+import 'package:magueyapp/provider/external_sign_in_provider.dart';
 import 'package:magueyapp/provider/log_in_sign_up_provider.dart';
 import 'package:magueyapp/provider/user_provider.dart';
 import 'package:magueyapp/ui/features/home/home_screen.dart';
@@ -33,7 +33,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => LogInSignUpProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
-        ChangeNotifierProvider(create: (context) => GoogleSignInProvider()),
+        ChangeNotifierProvider(create: (context) => ExternalSignInProvider()),
       ],
       child: const MyApp(),
     ),

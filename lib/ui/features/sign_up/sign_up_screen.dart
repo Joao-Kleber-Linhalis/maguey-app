@@ -5,7 +5,7 @@ import 'package:magueyapp/widgets/global_padding.dart';
 import 'package:magueyapp/widgets/sized_box.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../provider/google_sign_in_provider.dart';
+import '../../../provider/external_sign_in_provider.dart';
 import '../../../../provider/log_in_sign_up_provider.dart';
 import '../../../../theme/my_icons.dart';
 import '../../../../theme/text_styling.dart';
@@ -36,14 +36,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool showPassword = false, loader = false;
   //var authRepo = getIt<AuthRepository>();
   late LogInSignUpProvider logInSignUpProvider;
-  late GoogleSignInProvider googleSignInProvider;
+  late ExternalSignInProvider externalSignInProvider;
 
   @override
   void initState() {
     logInSignUpProvider =
         Provider.of<LogInSignUpProvider>(context, listen: false);
-    googleSignInProvider =
-        Provider.of<GoogleSignInProvider>(context, listen: false);
+    externalSignInProvider =
+        Provider.of<ExternalSignInProvider>(context, listen: false);
     emailController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
@@ -166,6 +166,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onPressed: _signUpWithGoogle,
                 padding: 16.paddingH(context),
               ),
+              MyOutlineButton(
+                iconSpacing: 33.pxH(context),
+                prefixIcon: SvgPicture.asset(
+                  MyIcons.appleIcon,
+                  height: 28,
+                ),
+                text: "Continue with Apple",
+                onPressed: () async => await _signUpWithApple(),
+                padding: 16.paddingH(context),
+              ),
               const SizedBox(height: 16),
               TextButtonRow(
                 buttonText: "Login",
@@ -197,7 +207,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _signUpWithGoogle() async {
-    //googleSignInProvider.signInWithGoogle(context);
+    await externalSignInProvider.signInWithGoogle();
+
+    primaryFocus!.unfocus();
+  }
+
+  _signUpWithApple() async {
+    await externalSignInProvider.signInWithApple();
 
     primaryFocus!.unfocus();
   }

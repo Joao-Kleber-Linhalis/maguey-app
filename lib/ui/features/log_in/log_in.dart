@@ -5,7 +5,7 @@ import 'package:magueyapp/widgets/global_padding.dart';
 import 'package:magueyapp/widgets/sized_box.dart';
 import 'package:provider/provider.dart';
 
-import '../../../provider/google_sign_in_provider.dart';
+import '../../../provider/external_sign_in_provider.dart';
 import '../../../provider/log_in_sign_up_provider.dart';
 import '../../../theme/my_colors.dart';
 import '../../../theme/my_icons.dart';
@@ -32,13 +32,14 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   late LogInSignUpProvider logInSignUpProvider;
-  late GoogleSignInProvider googleSignInProvider;
+  late ExternalSignInProvider googleSignInProvider;
   @override
   void initState() {
     logInSignUpProvider =
         Provider.of<LogInSignUpProvider>(context, listen: false);
     googleSignInProvider =
-        Provider.of<GoogleSignInProvider>(context, listen: false);
+        Provider.of<ExternalSignInProvider>(context, listen: false);
+
     super.initState();
   }
 
@@ -135,6 +136,16 @@ class _LogInScreenState extends State<LogInScreen> {
                 onPressed: () async => await _onGoogleLogin(context),
                 padding: 16.paddingH(context),
               ),
+              MyOutlineButton(
+                iconSpacing: 33.pxH(context),
+                prefixIcon: SvgPicture.asset(
+                  MyIcons.appleIcon,
+                  height: 28,
+                ),
+                text: "Continue with Apple",
+                onPressed: () async => await _onAppleLogin(context),
+                padding: 16.paddingH(context),
+              ),
               const SizedBox(height: 16),
               TextButtonRow(
                 buttonText: "Register",
@@ -167,4 +178,65 @@ class _LogInScreenState extends State<LogInScreen> {
 
     setState(() => loader = false);
   }
+
+  Future<void> _onAppleLogin(BuildContext context) async {
+    primaryFocus!.unfocus();
+    setState(() => loaderGoogle = true);
+    await googleSignInProvider.signInWithGoogle();
+    setState(() => loaderGoogle = false);
+  }
+
+  // Future<void> _onAppleLogin() async {
+  //   setState(() {
+  //     isLoadingApple = true;
+  //     errorMessage = null;
+  //   });
+
+  //   try {
+  //     final credential = await SignInWithApple.getAppleIDCredential(scopes: [
+  //       AppleIDAuthorizationScopes.email,
+  //       AppleIDAuthorizationScopes.fullName,
+  //     ]);
+
+  //     final aAuthCredential = OAuthProvider('apple.com').credential(
+  //       idToken: credential.identityToken,
+  //       accessToken: credential.authorizationCode,
+  //     );
+
+  //     final userCredential = await FirebaseAuth.instance.signInWithCredential(
+  //       aAuthCredential,
+  //     );
+
+  //     if (userCredential.user != null) {
+  //       await FirebaseService.createUser();
+  //       await LocalStorage.instance.write(
+  //         key: 'userCompletedOnboarding',
+  //         value: 'true',
+  //       );
+  //       await _enterMacroScanner();
+  //     } else {
+  //       setState(() {
+  //         isLoadingApple = false;
+  //       });
+  //     }
+  //   } on SignInWithAppleAuthorizationException catch (e) {
+  //     debugPrint('Error Apple Sign In: ${e.message}');
+  //     setState(() {
+  //       isLoadingApple = false;
+  //     });
+  //   } catch (e) {
+  //     debugPrint('An error occurred. Please try again later.');
+  //     toastification.show(
+  //       title: const Text('Error:'),
+  //       type: ToastificationType.info,
+  //       alignment: Alignment.bottomCenter,
+  //       animationDuration: const Duration(milliseconds: 300),
+  //       description: const Text('An error occurred, please try again later'),
+  //       autoCloseDuration: Constants.toastAutoCloseDuration,
+  //     );
+  //     setState(() {
+  //       isLoadingApple = false;
+  //     });
+  //   }
+  // }
 }
