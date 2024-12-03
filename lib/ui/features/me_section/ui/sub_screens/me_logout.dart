@@ -55,10 +55,8 @@ class MeLogout extends StatelessWidget {
                 ),
           ),
           onTap: () async {
+            Navigator.of(context).pop();
             await FirebaseManager().signOut(context: context);
-            if (context.mounted) {
-              Navigator.of(context).pop(); // Fecha o diálogo
-            }
           },
         ),
         InkWell(

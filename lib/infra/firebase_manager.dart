@@ -88,7 +88,7 @@ class FirebaseManager {
 
   Future signOut({required BuildContext context}) async {
     try {
-      return await firebaseAuth.signOut();
+      await firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
       ShowSnackBar(context: context)
           .showErrorSnackBar(message: e.code.toString());
