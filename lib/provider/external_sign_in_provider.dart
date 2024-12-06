@@ -87,4 +87,5 @@ class ExternalSignInProvider extends ChangeNotifier {
     }
     return null;
   }
+
 }

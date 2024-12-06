@@ -182,7 +182,7 @@ class _LogInScreenState extends State<LogInScreen> {
   Future<void> _onAppleLogin(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loaderGoogle = true);
-    await googleSignInProvider.signInWithGoogle();
+    await googleSignInProvider.signInWithApple();
     setState(() => loaderGoogle = false);
   }
 
