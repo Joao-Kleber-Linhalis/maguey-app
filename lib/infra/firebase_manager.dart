@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:magueyapp/provider/user_provider.dart';
+import 'package:magueyapp/ui/features/log_in/log_in.dart';
+import 'package:magueyapp/utils/app_route.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 
 import '../data/user_controller.dart';
@@ -48,7 +51,7 @@ class FirebaseManager {
       required String password,
       required BuildContext context}) async {
     try {
-      UserCredential userCredential = await firebaseAuth
+      UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
       if (userCredential.user != null) {
@@ -57,10 +60,12 @@ class FirebaseManager {
         UserProvider().setCurrentUser(user);
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) {
-            return const MyHomePage();
+            return const MyHomePage(
+              key: ValueKey('HomeScreen'),
+              comoFromLogin: true,
+            );
           },
         ));
-
         return userCredential.user;
       }
     } on FirebaseAuthException catch (e) {
@@ -113,8 +118,6 @@ class FirebaseManager {
     if (firebaseAuth.currentUser != null) {
       try {
         await deleteAccount(context);
-        await firebaseAuth.currentUser!.delete();
-
         ShowSnackBar(context: context).showErrorSnackBar(
             message: 'Your account has been successfully deleted.');
         return true;
@@ -144,9 +147,6 @@ class FirebaseManager {
       try {
         await FirebaseFirestore.instance.collection('users').doc(uid).delete();
         await firebaseAuth.currentUser!.delete();
-
-        ShowSnackBar(context: context).showErrorSnackBar(
-            message: 'Your account has been successfully deleted.');
         return true;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'requires-recent-login') {

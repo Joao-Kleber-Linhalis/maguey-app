@@ -15,7 +15,6 @@ class FirebaseController {
   final auth = FirebaseAuth.instance;
 
   User? getCurrentUser() {
-    print(auth.currentUser?.uid);
     return auth.currentUser;
   }
 

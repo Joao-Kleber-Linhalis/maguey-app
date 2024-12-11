@@ -19,6 +19,8 @@ import 'design_system/colors.dart';
 import 'theme/my_colors.dart';
 
 final globalNavigator = GlobalKey<NavigatorState>();
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,10 +56,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
+  Future<Widget> createUser(User user) async {
+    final userExists = await UserController().userExist(user.uid);
+    if (!userExists) {
+      String profilePicture =
+          'https://firebasestorage.googleapis.com/v0/b/spend-ninja-dev.appspot.com/o/no_profile_image.jpg?alt=media&token=228ab9ab-831c-4c3b-8935-f1d32db2366a';
+
+      await UserProvider().createNewUser(
+        userId: user.uid,
+        signUpEmail: user.email ?? '',
+        profilePicture: profilePicture,
+      );
+    }
+    return const MyHomePage(
+      key: ValueKey('HomeScreen'),
+      comoFromLogin: true,
+    );
+  }
+
+  Widget _checkAndCreateUser(User user) {
+    try {
+      createUser(user);
+    } catch (e) {
+      debugPrint('Erro ao criar usuário no banco: $e');
+      return const LogInScreen(key: ValueKey('LogInScreen'));
+    }
+
+    return const LogInScreen(key: ValueKey('LogInScreen'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: scaffoldMessengerKey,
       navigatorKey: globalNavigator,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -93,9 +124,19 @@ class _MyAppState extends State<MyApp> {
                       );
                     },
                     child: authSnapshot.hasData
-                        ? const MyHomePage(
-                            key: ValueKey('HomeScreen'),
-                            comoFromLogin: true,
+                        ? FutureBuilder(
+                            future: createUser(authSnapshot.data!),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              return const MyHomePage(
+                                key: ValueKey('HomeScreen'),
+                                comoFromLogin: true,
+                              );
+                            },
                           )
                         : const LogInScreen(key: ValueKey('LogInScreen')),
                   );

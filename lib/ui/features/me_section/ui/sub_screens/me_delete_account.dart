@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magueyapp/ui/features/log_in/log_in.dart';
+import 'package:magueyapp/utils/app_route.dart';
 
 import '../../../../../infra/firebase_manager.dart';
 import '../../../../../theme/my_colors.dart';
@@ -54,10 +56,10 @@ class MeDeleteAccount extends StatelessWidget {
                   fontFamily: "CircularAirPro",
                 ),
           ),
-          onTap: () async {
+          onTap: () {
             Navigator.of(context).pop();
             FirebaseManager().deleteUser(context);
-            // AppRoutes.replace(context, const LogInScreen());
+            AppRoutes.replace(context, const LogInScreen());
           },
         ),
         InkWell(

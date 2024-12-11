@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magueyapp/main.dart';
 
 import '../../design_system/Text/ds_text.dart';
 import '../../design_system/colors.dart';
@@ -13,7 +14,7 @@ class ShowSnackBar {
   ShowSnackBar({required this.context, this.color, this.durationInSeconds, this.doesItAppearAtTheBottom = false});
 
   void showSnackBar({required String message, Color? backgroundColor}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
       padding: const EdgeInsets.all(0),
       margin: EdgeInsets.only(
         bottom: doesItAppearAtTheBottom! ? 12 : 140,

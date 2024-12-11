@@ -207,13 +207,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   _signUpWithGoogle() async {
-    await externalSignInProvider.signInWithGoogle();
+    await externalSignInProvider.signInWithGoogle(context);
 
     primaryFocus!.unfocus();
   }
 
   _signUpWithApple() async {
-    await externalSignInProvider.signInWithApple();
+    await externalSignInProvider.signInWithApple(context);
 
     primaryFocus!.unfocus();
   }

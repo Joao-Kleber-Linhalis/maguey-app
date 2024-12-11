@@ -143,7 +143,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   height: 28,
                 ),
                 text: "Continue with Apple",
-                onPressed: () async => await _onAppleLogin(context),
+                onPressed: () async => await _onAppleLogin(),
                 padding: 16.paddingH(context),
               ),
               const SizedBox(height: 16),
@@ -165,8 +165,8 @@ class _LogInScreenState extends State<LogInScreen> {
   Future<void> _onGoogleLogin(BuildContext context) async {
     primaryFocus!.unfocus();
     setState(() => loaderGoogle = true);
-    await googleSignInProvider.signInWithGoogle();
-    setState(() => loaderGoogle = false);
+    await googleSignInProvider.signInWithGoogle(context);
+    // setState(() => loaderGoogle = false);
   }
 
   Future<void> _signIn(BuildContext context) async {
@@ -175,15 +175,15 @@ class _LogInScreenState extends State<LogInScreen> {
     await logInSignUpProvider.checkConditionsLogInUser(
       context,
     );
-
     setState(() => loader = false);
   }
 
-  Future<void> _onAppleLogin(BuildContext context) async {
+  Future<void> _onAppleLogin() async {
     primaryFocus!.unfocus();
     setState(() => loaderGoogle = true);
-    await googleSignInProvider.signInWithApple();
-    setState(() => loaderGoogle = false);
+    await googleSignInProvider.signInWithApple(context);
+    
+    // setState(() => loaderGoogle = false);
   }
 
   // Future<void> _onAppleLogin() async {

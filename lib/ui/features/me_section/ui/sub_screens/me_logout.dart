@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magueyapp/ui/features/log_in/log_in.dart';
+import 'package:magueyapp/utils/app_route.dart';
 
 import '../../../../../infra/firebase_manager.dart';
 import '../../../../../theme/my_colors.dart';
@@ -57,6 +59,7 @@ class MeLogout extends StatelessWidget {
           onTap: () async {
             Navigator.of(context).pop();
             await FirebaseManager().signOut(context: context);
+            AppRoutes.replace(context, const LogInScreen());
           },
         ),
         InkWell(

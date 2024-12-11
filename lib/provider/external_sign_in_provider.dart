@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:magueyapp/data/user_controller.dart';
 import 'package:magueyapp/provider/user_provider.dart';
+import 'package:magueyapp/ui/features/home/home_screen.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class ExternalSignInProvider extends ChangeNotifier {
@@ -19,7 +20,7 @@ class ExternalSignInProvider extends ChangeNotifier {
   final UserController _userController = UserController();
   final UserProvider _userprovider = UserProvider();
 
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle(context) async {
     try {
       final googleUser = await GoogleSignIn().signIn();
 
@@ -46,6 +47,15 @@ class ExternalSignInProvider extends ChangeNotifier {
         }
       }
 
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return const MyHomePage(
+            key: ValueKey('HomeScreen'),
+            comoFromLogin: true,
+          );
+        },
+      ));
+
       return userCredential;
     } catch (e) {
       debugPrint(e.toString());
@@ -53,7 +63,7 @@ class ExternalSignInProvider extends ChangeNotifier {
     return null;
   }
 
-  Future<UserCredential?> signInWithApple() async {
+  Future<UserCredential?> signInWithApple(context) async {
     try {
       final credential = await SignInWithApple.getAppleIDCredential(scopes: [
         AppleIDAuthorizationScopes.email,
@@ -68,18 +78,27 @@ class ExternalSignInProvider extends ChangeNotifier {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(aAuthCredential);
 
-      final user = userCredential.user;
-      if (user != null) {
-        if (!await _userController.userExist(user.uid)) {
-          String profilePicture =
-              'https://firebasestorage.googleapis.com/v0/b/spend-ninja-dev.appspot.com/o/no_profile_image.jpg?alt=media&token=228ab9ab-831c-4c3b-8935-f1d32db2366a';
-          _userprovider.createNewUser(
-            userId: user.uid,
-            signUpEmail: user.email!,
-            profilePicture: profilePicture,
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return const MyHomePage(
+            key: ValueKey('HomeScreen'),
+            comoFromLogin: true,
           );
-        }
-      }
+        },
+      ));
+
+      // final user = userCredential.user;
+      // if (user != null) {
+      //   if (!await _userController.userExist(user.uid)) {
+      //     String profilePicture =
+      //         'https://firebasestorage.googleapis.com/v0/b/spend-ninja-dev.appspot.com/o/no_profile_image.jpg?alt=media&token=228ab9ab-831c-4c3b-8935-f1d32db2366a';
+      //     _userprovider.createNewUser(
+      //       userId: user.uid,
+      //       signUpEmail: user.email!,
+      //       profilePicture: profilePicture,
+      //     );
+      //   }
+      // }
 
       return userCredential;
     } catch (e) {
@@ -87,5 +106,4 @@ class ExternalSignInProvider extends ChangeNotifier {
     }
     return null;
   }
-
 }

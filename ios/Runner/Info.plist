@@ -22,27 +22,28 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- <string>com.googleusercontent.apps.584611625768-ltj3c0m6iu774gddomneu6vldm49n713</string> -->
+				<string>com.googleusercontent.apps.584611625768-gpi108joub6viu7sm12g6h6ktubcifmo</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Your location is required for use on the app</string>
-		<key>CFBundleURLTypes</key>
-		<array>
-			<dict>
-				<key>CFBundleTypeRole</key>
-				<string>Editor</string>
-				<key>CFBundleURLName</key>
-				<string>Bundle ID</string>
-				<key>CFBundleURLSchemes</key>
-				<array>
-					<string>com.googleusercontent.apps.584611625768-ltj3c0m6iu774gddomneu6vldm49n713</string>
-				</array>
-			</dict>
-		</array>
 	<key>NSCameraUsageDescription</key>
 	<string>We request access to your camera so you can capture photos to customize your profile or share images within the app.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location is required for use on the app</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your location is used to provide personalized suggestions for nearby services and improve your experience within the app.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -50,7 +51,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We request access to your photo library so you can select images to share within the app or set a profile picture.</string>
 	<key>NSUserTrackingUsageDescription</key>
-    <string>We need your permission to track your activity for better advertising experience.</string>
+	<string>We need your permission to track your activity for better advertising experience.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

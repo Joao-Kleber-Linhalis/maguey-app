@@ -180,6 +180,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584611625768:android:9c135cb5be56d0cf326e1d",
+        "android_client_info": {
+          "package_name": "com.mangueyApp.manguey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584611625768-0puhae09kok4gbee1qhorsudslh901r9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxgzG_QH5pkgcO9rLU5LAcUaLUkoshT_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584611625768-0puhae09kok4gbee1qhorsudslh901r9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584611625768-8g8ce5p8p01jbkbgbbnifqd71gmbsims.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mangueyApp"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
