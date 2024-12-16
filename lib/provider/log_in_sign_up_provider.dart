@@ -136,12 +136,12 @@ class LogInSignUpProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Uint8List? profile_picture;
+  Uint8List? profilePicture;
   Future<void> selectImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? img = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? img = await picker.pickImage(source: ImageSource.gallery);
     if (img != null) {
-      profile_picture = await img.readAsBytes();
+      profilePicture = await img.readAsBytes();
     }
   }
 
@@ -153,9 +153,10 @@ class LogInSignUpProvider with ChangeNotifier {
 
       if (formLogIn.validate()) {
         if (hasInternetAccess == false) {
-          ShowSnackBar(context: context).showErrorSnackBar(
-              message: 'Please check your internet connection.',
-              durationInSeconds: 2);
+          ShowSnackBar.showErrorSnackBar(
+            message: 'Please check your internet connection.',
+            durationInSeconds: 2,
+          );
         } else {
           await firebaseManager.loginUser(
             email: logInEmail.text.trim(),
@@ -175,7 +176,7 @@ class LogInSignUpProvider with ChangeNotifier {
       final formSignUp = formKeyAuthenticationSignUp.currentState!;
       if (formSignUp.validate()) {
         if (!isCheckedTerms) {
-          ShowSnackBar(context: context).showErrorSnackBar(
+          ShowSnackBar.showErrorSnackBar(
               message: 'Please accept the terms and conditions.',
               durationInSeconds: 2);
         } else {
@@ -209,8 +210,9 @@ class LogInSignUpProvider with ChangeNotifier {
     if (formKeyAuthenticationResetPassword.currentState!.validate()) {
       bool hasInternetAccess = await firebaseManager.hasInternetAccess();
       if (hasInternetAccess == false) {
-        ShowSnackBar(context: context).showErrorSnackBar(
-            message: 'Please check your internet connection.');
+        ShowSnackBar.showErrorSnackBar(
+          message: 'Please check your internet connection.',
+        );
       } else {
         await firebaseManager.resetPassword(
             email: resetPasswordEmail.text.trim(), context: context);

@@ -84,19 +84,26 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 _selectProfilePicture(context, '');
               },
               child: Container(
-                width: double.infinity, // Match the width of the parent container
-                height: 200, // Adjust the height to match your image's placeholder height
+                width:
+                    double.infinity, // Match the width of the parent container
+                height:
+                    200, // Adjust the height to match your image's placeholder height
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15), // Rounded corners
-                  border: Border.all(color: Colors.grey, width: 2), // Border similar to the design
-                  color: Colors.black, // Background color of the image placeholder
+                  border: Border.all(
+                      color: Colors.grey,
+                      width: 2), // Border similar to the design
+                  color:
+                      Colors.black, // Background color of the image placeholder
                 ),
                 child: _image != null
                     ? ClipRRect(
-                        borderRadius: BorderRadius.circular(15), // Rounded corners for the image
+                        borderRadius: BorderRadius.circular(
+                            15), // Rounded corners for the image
                         child: Image.file(
                           _image!,
-                          fit: BoxFit.cover, // Ensure the image covers the container nicely
+                          fit: BoxFit
+                              .cover, // Ensure the image covers the container nicely
                           width: double.infinity,
                           height: 200,
                         ),
@@ -114,8 +121,10 @@ class _ReviewsPageState extends State<ReviewsPage> {
                             "Add Image",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18, // Text size adjusted to match design
-                              fontWeight: FontWeight.bold, // Bold to match the design
+                              fontSize:
+                                  18, // Text size adjusted to match design
+                              fontWeight:
+                                  FontWeight.bold, // Bold to match the design
                             ),
                           ),
                         ],
@@ -134,7 +143,8 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 borderRadius: BorderRadius.circular(10), // Radius of 10
                 borderSide: BorderSide.none, // No border
               ),
-              hintStyle: const TextStyle(color: Colors.white), // White hint text
+              hintStyle:
+                  const TextStyle(color: Colors.white), // White hint text
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 15,
@@ -182,7 +192,8 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 borderRadius: BorderRadius.circular(10), // Radius of 10
                 borderSide: BorderSide.none, // No border
               ),
-              hintStyle: const TextStyle(color: Colors.white), // White hint text
+              hintStyle:
+                  const TextStyle(color: Colors.white), // White hint text
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 15,
@@ -199,7 +210,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 loader = true;
               });
               if (!keyReviews.currentState!.validate()) {
-                ShowSnackBar(context: context).showErrorSnackBar(
+                ShowSnackBar.showErrorSnackBar(
                   message: "Please fill in all required fields",
                   color: Colors.red,
                 );
@@ -207,7 +218,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
               }
 
               if (_filename == null || _filename!.isEmpty) {
-                ShowSnackBar(context: context).showErrorSnackBar(
+                ShowSnackBar.showErrorSnackBar(
                   message: "Please select an image",
                   color: Colors.red,
                 );
@@ -215,7 +226,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
               }
 
               if (titleController.text.trim().isEmpty) {
-                ShowSnackBar(context: context).showErrorSnackBar(
+                ShowSnackBar.showErrorSnackBar(
                   message: "Title is required",
                   color: Colors.red,
                 );
@@ -223,7 +234,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
               }
 
               if (reviewController.text.trim().isEmpty) {
-                ShowSnackBar(context: context).showErrorSnackBar(
+                ShowSnackBar.showErrorSnackBar(
                   message: "Review text cannot be empty",
                   color: Colors.red,
                 );
@@ -231,7 +242,8 @@ class _ReviewsPageState extends State<ReviewsPage> {
               }
 
               if (_filename?.isNotEmpty != null && _filename!.isNotEmpty) {
-                _imageUrl = await ReviewsController().uploadPhoto(_filename!, _image!, 'reviews');
+                _imageUrl = await ReviewsController()
+                    .uploadPhoto(_filename!, _image!, 'reviews');
                 setState(() {});
               }
 
@@ -246,7 +258,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
               );
 
               ReviewsController().addReview(eventSuggestion);
-              ShowSnackBar(context: context).showErrorSnackBar(
+              ShowSnackBar.showErrorSnackBar(
                 message: "Review Added Successfully",
                 color: MyColors.greenE3FF0A,
               );
@@ -309,11 +321,16 @@ class _ReviewsPageState extends State<ReviewsPage> {
     );
   }
 
-  Future<Map<String, dynamic>?> selectPhoto({ImageSource source = ImageSource.gallery, required bool faceDetect}) async {
+  Future<Map<String, dynamic>?> selectPhoto(
+      {ImageSource source = ImageSource.gallery,
+      required bool faceDetect}) async {
     final picker = ImagePicker();
     final tempImage = await picker.pickImage(source: source);
     if (tempImage != null) {
-      return {'image': File(tempImage.path), 'name': path.basename(tempImage.path)};
+      return {
+        'image': File(tempImage.path),
+        'name': path.basename(tempImage.path)
+      };
     }
     return null;
   }

@@ -149,7 +149,7 @@ class UserProvider with ChangeNotifier {
           profilePicture: profilePicture);
       await userController.updateUser(newUser);
       photoFile = null;
-      ShowSnackBar(context: context).showErrorSnackBar(
+      ShowSnackBar.showErrorSnackBar(
         message: 'Image successfully updated.',
         color: DSColors.primaryActionState1,
       );
@@ -228,8 +228,8 @@ class UserProvider with ChangeNotifier {
   }) async {
     bool hasInternetAccess = await firebaseManager.hasInternetAccess();
     if (hasInternetAccess == false) {
-      ShowSnackBar(context: context)
-          .showErrorSnackBar(message: 'Please check your internet connection.');
+      ShowSnackBar.showErrorSnackBar(
+          message: 'Please check your internet connection.');
     } else {
       await firebaseManager.resetPassword(
         email: updatePasswordEmail.text.trim().isEmpty
@@ -237,7 +237,7 @@ class UserProvider with ChangeNotifier {
             : updatePasswordEmail.text.trim(),
         context: context,
       );
-      ShowSnackBar(context: context).showErrorSnackBar(
+      ShowSnackBar.showErrorSnackBar(
           message: 'A link was sent to your email to reset your password.',
           color: DSColors.primaryActionState1);
     }
@@ -245,7 +245,7 @@ class UserProvider with ChangeNotifier {
 
   Future<void> updateUserEmailAndName({required BuildContext context}) async {
     if (updateEmail.text.trim() == dashboardProvider.currentUser.email) {
-      ShowSnackBar(context: context).showErrorSnackBar(
+      ShowSnackBar.showErrorSnackBar(
         message: 'No Data updated.',
         color: DSColors.primaryActionState1,
       );
@@ -260,7 +260,7 @@ class UserProvider with ChangeNotifier {
               ? dashboardProvider.currentUser.profilePicture
               : await updateUserImage(context: context));
       userController.updateUser(newUser);
-      ShowSnackBar(context: context).showErrorSnackBar(
+      ShowSnackBar.showErrorSnackBar(
         message: 'Data successfully updated.',
         color: DSColors.primaryActionState1,
       );

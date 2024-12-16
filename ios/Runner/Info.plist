@@ -31,7 +31,7 @@
 			<string>Bundle ID</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!-- <string>com.googleusercontent.apps.584611625768-ltj3c0m6iu774gddomneu6vldm49n713</string> -->
+				<string>com.googleusercontent.apps.584611625768-ltj3c0m6iu774gddomneu6vldm49n713</string>
 				<string>com.googleusercontent.apps.584611625768-gpi108joub6viu7sm12g6h6ktubcifmo</string>
 			</array>
 		</dict>

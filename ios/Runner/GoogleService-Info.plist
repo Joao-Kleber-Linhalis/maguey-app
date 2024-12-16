@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>584611625768-gpi108joub6viu7sm12g6h6ktubcifmo.apps.googleusercontent.com</string>
+	<string>584611625768-ltj3c0m6iu774gddomneu6vldm49n713.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.584611625768-gpi108joub6viu7sm12g6h6ktubcifmo</string>
+	<string>com.googleusercontent.apps.584611625768-ltj3c0m6iu774gddomneu6vldm49n713</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>584611625768-0f8fs0lmiahkbeh2s0ou7ljbq10ummpq.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mangueyApp.manguey</string>
+	<string>com.magueyallday.magueyapp</string>
 	<key>PROJECT_ID</key>
 	<string>maguey-all-day-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:584611625768:ios:da54bb73d2c3506b326e1d</string>
+	<string>1:584611625768:ios:429b244b9929d02d326e1d</string>
 </dict>
 </plist>

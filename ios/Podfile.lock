@@ -1506,7 +1506,7 @@ SPEC CHECKSUMS:
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   BoringSSL-GRPC: ca6a8e5d04812fce8ffd6437810c2d46f925eaeb
   cloud_firestore: 3fafe78d755b01fe1fd267a87bb52e80b7dacacc
-  connectivity_plus: 4c41c08fc6d7c91f63bc7aec70ffe3730b04f563
+  connectivity_plus: 18382e7311ba19efcaee94442b23b32507b20695
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
   firebase_auth: c4bdd9d7b338ac004008cb5024a643584e0ec03f
   firebase_core: 418aed674e9a0b8b6088aec16cde82a811f6261f
@@ -1548,4 +1548,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4b88a785cc6deb89beb92a5823e035943533a6c6
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.14.3

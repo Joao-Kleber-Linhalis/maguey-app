@@ -9,7 +9,7 @@ import '../../../theme/text_styling.dart';
 import '../../../widgets/LoaderElevatedButton.dart';
 
 class SuggestAProduct extends StatefulWidget {
-  const SuggestAProduct({Key? key}) : super(key: key);
+  const SuggestAProduct({super.key});
 
   @override
   State<SuggestAProduct> createState() => _SuggestAProductState();
@@ -115,9 +115,12 @@ class _SuggestAProductState extends State<SuggestAProduct> {
                 description: descriptionController.text,
                 id: '',
               );
-              ProductSuggestionController().addProductSuggestion(productSuggestion);
+              ProductSuggestionController()
+                  .addProductSuggestion(productSuggestion);
 
-              ShowSnackBar(context: context).showErrorSnackBar(message: "Product suggestion sent successfully", color: MyColors.greenE3FF0A);
+              ShowSnackBar.showErrorSnackBar(
+                  message: "Product suggestion sent successfully",
+                  color: MyColors.greenE3FF0A);
             }
             Navigator.pop(context);
           },

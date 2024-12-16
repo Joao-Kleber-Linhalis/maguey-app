@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:magueyapp/provider/user_provider.dart';
-import 'package:magueyapp/ui/features/log_in/log_in.dart';
-import 'package:magueyapp/utils/app_route.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 
 import '../data/user_controller.dart';
@@ -39,17 +36,19 @@ class FirebaseManager {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        ShowSnackBar(context: context)
-            .showErrorSnackBar(message: 'Email already in use');
+        ShowSnackBar.showErrorSnackBar(
+          message: 'Email already in use',
+        );
         bntController.reset();
       }
     }
   }
 
-  Future<User?> loginUser(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
+  Future<User?> loginUser({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -70,13 +69,13 @@ class FirebaseManager {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ShowSnackBar(context: context)
-            .showErrorSnackBar(message: 'No user found for that email.');
+        ShowSnackBar.showErrorSnackBar(
+            message: 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        ShowSnackBar(context: context).showErrorSnackBar(
+        ShowSnackBar.showErrorSnackBar(
             message: 'Wrong password provided for that user.');
       } else if (e.code == 'too-many-requests') {
-        ShowSnackBar(context: context).showErrorSnackBar(
+        ShowSnackBar.showErrorSnackBar(
             message: 'Too many requests, please try again later.');
       }
     }
@@ -95,8 +94,7 @@ class FirebaseManager {
     try {
       await firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
-      ShowSnackBar(context: context)
-          .showErrorSnackBar(message: e.code.toString());
+      ShowSnackBar.showErrorSnackBar(message: e.code.toString());
       return null;
     }
   }
@@ -105,12 +103,11 @@ class FirebaseManager {
       {required String email, required BuildContext context}) async {
     try {
       await firebaseAuth.sendPasswordResetEmail(email: email);
-      ShowSnackBar(context: context).showErrorSnackBar(
+      ShowSnackBar.showErrorSnackBar(
           message: 'A link was sent to your email to reset your password.',
           color: DSColors.primaryActionState1);
     } on FirebaseAuthException catch (e) {
-      ShowSnackBar(context: context)
-          .showErrorSnackBar(message: e.code.toString());
+      ShowSnackBar.showErrorSnackBar(message: e.code.toString());
     }
   }
 
@@ -118,24 +115,24 @@ class FirebaseManager {
     if (firebaseAuth.currentUser != null) {
       try {
         await deleteAccount(context);
-        ShowSnackBar(context: context).showErrorSnackBar(
+        ShowSnackBar.showErrorSnackBar(
             message: 'Your account has been successfully deleted.');
         return true;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'requires-recent-login') {
-          ShowSnackBar(context: context).showErrorSnackBar(
+          ShowSnackBar.showErrorSnackBar(
               message:
                   'Please sign in again to confirm your identity for account deletion.');
         } else {
-          ShowSnackBar(context: context).showErrorSnackBar(
+          ShowSnackBar.showErrorSnackBar(
               message:
                   'An error occurred while deleting your account: ${e.message}');
         }
         return false;
       }
     } else {
-      ShowSnackBar(context: context)
-          .showErrorSnackBar(message: 'No user is currently signed in.');
+      ShowSnackBar.showErrorSnackBar(
+          message: 'No user is currently signed in.');
       return false;
     }
   }
@@ -150,23 +147,23 @@ class FirebaseManager {
         return true;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'requires-recent-login') {
-          ShowSnackBar(context: context).showErrorSnackBar(
+          ShowSnackBar.showErrorSnackBar(
               message:
                   'Please sign in again to confirm your identity for account deletion.');
         } else {
-          ShowSnackBar(context: context).showErrorSnackBar(
+          ShowSnackBar.showErrorSnackBar(
               message:
                   'An error occurred while deleting your account: ${e.message}');
         }
         return false;
       } catch (e) {
-        ShowSnackBar(context: context).showErrorSnackBar(
+        ShowSnackBar.showErrorSnackBar(
             message: 'Failed to delete user data: ${e.toString()}');
         return false;
       }
     } else {
-      ShowSnackBar(context: context)
-          .showErrorSnackBar(message: 'No user is currently signed in.');
+      ShowSnackBar.showErrorSnackBar(
+          message: 'No user is currently signed in.');
       return false;
     }
   }

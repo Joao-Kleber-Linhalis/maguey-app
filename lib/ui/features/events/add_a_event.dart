@@ -141,7 +141,9 @@ class _SuggestEventState extends State<SuggestEvent> {
               );
               EventSuggestionController().addEventSuggestion(eventSuggestion);
 
-              ShowSnackBar(context: context).showErrorSnackBar(message: "Event suggestion sent successfully", color: MyColors.greenE3FF0A);
+              ShowSnackBar.showErrorSnackBar(
+                  message: "Event suggestion sent successfully",
+                  color: MyColors.greenE3FF0A);
             }
             Navigator.pop(context);
             Navigator.pop(context);

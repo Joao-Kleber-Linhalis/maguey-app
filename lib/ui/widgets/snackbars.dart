@@ -6,14 +6,15 @@ import '../../design_system/colors.dart';
 import '../../theme/my_colors.dart';
 
 class ShowSnackBar {
-  int? durationInSeconds;
-  BuildContext context;
-  Color? color;
-  bool? doesItAppearAtTheBottom;
+  const ShowSnackBar._();
 
-  ShowSnackBar({required this.context, this.color, this.durationInSeconds, this.doesItAppearAtTheBottom = false});
-
-  void showSnackBar({required String message, Color? backgroundColor}) {
+  static void showSnackBar({
+    required String message,
+    Color? backgroundColor,
+    int? durationInSeconds,
+    Color? color,
+    bool doesItAppearAtTheBottom = false,
+  }) {
     scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
       padding: const EdgeInsets.all(0),
       margin: EdgeInsets.only(
@@ -33,7 +34,9 @@ class ShowSnackBar {
       ),
       backgroundColor: DSColors.transparent,
       dismissDirection: DismissDirection.horizontal,
-      duration: durationInSeconds == null ? const Duration(seconds: 5) : Duration(seconds: durationInSeconds!),
+      duration: durationInSeconds == null
+          ? const Duration(seconds: 5)
+          : Duration(seconds: durationInSeconds!),
       behavior: SnackBarBehavior.floating,
       /*action: SnackBarAction(
             textColor: DSColors.whiteColor,
@@ -45,7 +48,11 @@ class ShowSnackBar {
     ));
   }
 
-  void showErrorSnackBar({required String message, Color? color, int? durationInSeconds}) {
+  static void showErrorSnackBar({
+    required String message,
+    Color? color,
+    int? durationInSeconds,
+  }) {
     showSnackBar(
       message: message,
       backgroundColor: color ?? MyColors.black2B2B2B,
