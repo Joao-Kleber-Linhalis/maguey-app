@@ -59,7 +59,14 @@ class MeDeleteAccount extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pop();
             FirebaseManager().deleteUser(context);
-            AppRoutes.replace(context, const LogInScreen());
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const LogInScreen();
+                },
+              ),
+              (route) => false,
+            );
           },
         ),
         InkWell(

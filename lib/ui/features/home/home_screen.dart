@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:magueyapp/infra/firebase_manager.dart';
+import 'package:magueyapp/provider/dashboard_provider.dart';
+import 'package:magueyapp/ui/features/log_in/log_in.dart';
 import 'package:provider/provider.dart';
 
 import '../../../custom_app_bar.dart';
-import '../../../provider/dashboard_provider.dart';
 import '../../../service/custom_bottom_navigation_bar.dart';
 import '../../../theme/my_colors.dart';
 import '../events/events_list.dart';
@@ -28,12 +30,13 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future loadAppData;
   @override
   void initState() {
-    loadAppData = Provider.of<DashboardProvider>(context, listen: false)
-        .loadDataGetUserInformation();
+    super.initState();
+    loadAppData = Future.sync(() => 
+    Provider.of<DashboardProvider>(context, listen: false)
+        .loadDataGetUserInformation());
     if (widget.comoFromLogin) {
       navbarService.currentIndexNotifier.value = 0;
     }
-    super.initState();
   }
 
   final List<Widget> _screens = [
@@ -177,6 +180,24 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   final store = CustomBottomNavigationBarService.instance;
 
+  Future<bool> _isUserLoggedIn() async {
+    final user = FirebaseManager();
+    return await user.getUserCurrentID() != null;
+  }
+
+  void _onTabTapped(int index) async {
+    if (index == 1 || index == 2 || index == 3) {
+      bool isLoggedIn = await _isUserLoggedIn();
+      if (!isLoggedIn) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const LogInScreen(),
+        ));
+        return;
+      }
+    }
+    store.setCurrentIndex(index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -210,9 +231,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   label: 'ME',
                 ),
               ],
-              onTap: (index) {
-                store.setCurrentIndex(index);
-              },
+              onTap: _onTabTapped,
               backgroundColor: const Color(0xFF2B2B2B),
               selectedItemColor: const Color(0xFFE3FF0A),
               unselectedItemColor: const Color(0xFF908C00),

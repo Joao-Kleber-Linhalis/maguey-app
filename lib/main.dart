@@ -111,35 +111,22 @@ class _MyAppState extends State<MyApp> {
               builder: (context, authSnapshot) {
                 if (authSnapshot.connectionState == ConnectionState.active) {
                   return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(1,
-                              0), // Direção de entrada (direita para esquerda)
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    child: authSnapshot.hasData
-                        ? FutureBuilder(
-                            future: createUser(authSnapshot.data!),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
-                              return const MyHomePage(
-                                key: ValueKey('HomeScreen'),
-                                comoFromLogin: true,
-                              );
-                            },
-                          )
-                        : const LogInScreen(key: ValueKey('LogInScreen')),
-                  );
+                      duration: const Duration(milliseconds: 500),
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                        return SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(1,
+                                0), // Direção de entrada (direita para esquerda)
+                            end: Offset.zero,
+                          ).animate(animation),
+                          child: child,
+                        );
+                      },
+                      child: const MyHomePage(
+                        key: ValueKey('HomeScreen'),
+                        comoFromLogin: true,
+                      ));
                 }
                 return const CircularProgressIndicator();
               },

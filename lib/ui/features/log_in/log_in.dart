@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:magueyapp/ui/features/home/home_screen.dart';
 import 'package:magueyapp/utils/extention.dart';
 import 'package:magueyapp/widgets/global_padding.dart';
 import 'package:magueyapp/widgets/sized_box.dart';
@@ -59,6 +60,24 @@ class _LogInScreenState extends State<LogInScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            color: MyColors.black2B2B2B,
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) {
+                  return const MyHomePage(
+                    key: ValueKey('HomeScreen'),
+                    comoFromLogin: true,
+                  );
+                },
+              ));
+            },
+          ),
+        ),
         body: Form(
           key: logInSignUpProvider.formKeyAuthenticationLogIn,
           child: Column(
@@ -182,7 +201,7 @@ class _LogInScreenState extends State<LogInScreen> {
     primaryFocus!.unfocus();
     setState(() => loaderGoogle = true);
     await googleSignInProvider.signInWithApple(context);
-    
+
     // setState(() => loaderGoogle = false);
   }
 

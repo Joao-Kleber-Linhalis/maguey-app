@@ -16,11 +16,7 @@ class FirebaseManager {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Future<String?> getUserCurrentID() async {
-    if (firebaseAuth.currentUser != null) {
-      return firebaseAuth.currentUser!.uid;
-    } else {
-      return null;
-    }
+    return firebaseAuth.currentUser?.uid;
   }
 
   Future<void> registerUser({
