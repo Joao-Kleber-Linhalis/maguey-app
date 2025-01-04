@@ -104,7 +104,6 @@ Widget _buildListItem({
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AutoSizeText(
-            //Title on right
             title,
             style: TextStyle(
               fontFamily: 'CircularAirPro',

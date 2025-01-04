@@ -8,7 +8,7 @@ import 'add_a_event.dart';
 
 class EventsScreen extends StatelessWidget {
   final EventEntity event;
-  const EventsScreen({Key? key, required this.event}) : super(key: key);
+  const EventsScreen({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,6 @@ class EventsScreen extends StatelessWidget {
                 child: Image.network(
                   event.imageUrl,
                   fit: BoxFit.cover,
-                  height: 200,
                   width: double.infinity,
                 ),
               ),
@@ -108,7 +107,8 @@ class EventsScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute<void>(
-                          builder: (BuildContext context) => const SuggestEvent(),
+                          builder: (BuildContext context) =>
+                              const SuggestEvent(),
                         ),
                       );
                     },
